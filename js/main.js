@@ -173,6 +173,12 @@
     });
   });
 
+  // „Ką paprastai atliekame“: telefone suskleista (mažiau teksto), didesniame ekrane atidaryta
+  var smallMq = window.matchMedia("(max-width: 639px)");
+  function syncDetails() { $$(".prob-more").forEach(function (d) { d.open = !smallMq.matches; }); }
+  syncDetails();
+  if (smallMq.addEventListener) smallMq.addEventListener("change", syncDetails); else smallMq.addListener(syncDetails);
+
   /* ==========================================================================
      3 žingsnių užklausa
      ========================================================================== */

@@ -649,3 +649,51 @@ html:not(.js) .wiz-nav [data-submit] { display: inline-flex !important; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* ==========================================================================
+   v4.1 — šviesesnis ritmas ir švelnesnė tipografija
+   Didžiosios raidės paliktos tik hero antraštei (prekės ženklo akcentas),
+   etiketėms ir mygtukams. Kitos antraštės — įprastu sakinio registru.
+   ========================================================================== */
+.sec-title {
+  text-transform: none; font-stretch: 88%; font-weight: 800;
+  font-size: clamp(2.1rem, 1.2rem + 3.4vw, 4.1rem); line-height: 1; letter-spacing: -0.025em;
+}
+.prob-title, .svc-name, .step h3, .shot figcaption strong, .wiz-title, .lightbox-title, .legal h1 {
+  text-transform: none; font-stretch: 90%; letter-spacing: -0.02em;
+}
+.prob-title { line-height: 1.05; }
+.svc-name { font-size: clamp(1.45rem, 1.05rem + 2vw, 2.6rem); line-height: 1.02; }
+.step h3 { font-size: 1.35rem; line-height: 1.1; }
+.wiz-title { line-height: 1.05; }
+@media (max-width: 1099px) { .nav-list a { text-transform: none; font-stretch: 88%; letter-spacing: -0.015em; } }
+
+/* Darbų pavyzdžiai — šviesus fonas (tamsios lieka tik problemos, užklausa ir poraštė) */
+.projects { background: var(--white); color: var(--text); }
+.projects .sec-index { color: var(--muted); }
+.projects .sec-index span { color: var(--accent-text); }
+.projects .demo-note { background: var(--accent-tint); color: var(--text); }
+.projects .demo-note strong { color: var(--text); }
+.projects .demo-note .icon { color: var(--accent-text); }
+.shot-img { background: var(--paper-2); }
+.shot figcaption { color: var(--muted); }
+.shot figcaption .label { color: var(--accent-text); }
+.shot figcaption strong { color: var(--graphite); }
+
+/* Problemų skiltis: „Ką paprastai atliekame“ telefone suskleidžiama */
+.prob-more > summary { list-style: none; cursor: default; }
+.prob-more > summary::-webkit-details-marker { display: none; }
+@media (max-width: 639px) {
+  .prob-more { border-top: 1px solid var(--line-dark); padding-top: 4px; }
+  .prob-more > summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 48px; margin: 0; cursor: pointer;
+  }
+  .prob-more > summary::after {
+    content: "+"; font-family: var(--font-head); font-size: 1.4rem; line-height: 1; color: #fff;
+    transition: transform .3s var(--ease);
+  }
+  .prob-more[open] > summary::after { transform: rotate(45deg); }
+  .prob-more[open] > summary { margin-bottom: 10px; }
+}
+@media (min-width: 640px) { .prob-more > summary { pointer-events: none; } }
