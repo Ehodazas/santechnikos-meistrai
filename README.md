@@ -11,7 +11,7 @@ privatumo-politika.html  Privatumo politikos šablonas
 404.html                 Klaidos puslapis (GitHub Pages jį naudoja automatiškai)
 css/styles.css           Visi stiliai; spalvos ir tarpai — :root kintamieji
 js/config.js             ĮMONĖS DUOMENYS: telefonas, el. paštas, teritorija, darbo laikas, rekvizitai
-js/main.js               Meniu, DUK akordeonas, galerijos lightbox, formos validacija, animacijos
+js/main.js               Meniu, paslaugų sąrašas, DUK, galerija, užklausos asistentas, animacijos
 assets/favicon.svg       Svetainės ikona
 .nojekyll, robots.txt    GitHub Pages ir paieškos sistemų failai
 ```
@@ -40,11 +40,13 @@ Tada atidarykite <http://localhost:8000>.
 4. **Privatumo politika** — užpildykite laukelius `[...]` faile `privatumo-politika.html`.
 5. **Tekstai** — paslaugų aprašymai ir DUK atsakymai yra realistiški, bet bendro pobūdžio. Pritaikykite juos savo veiklai ir neskelbkite to, ko negalite patvirtinti.
 
-## Užklausos forma
+## Užklausos forma (asistentas)
 
-Svetainė neturi serverio, todėl forma **nesiunčia** duomenų pati. Patikrinusi laukus, ji atidaro lankytojo el. pašto programą su užpildytu laišku (`mailto:`) adresu iš `config.js` ir pasiūlo nukopijuoti tekstą, jei programa neatsidaro. Tai aiškiai paaiškinta formos viršuje.
+Forma veikia kaip trumpas asistentas: lankytojas pasirenka sritį (vandentiekis, kanalizacija, šildymas, montavimas, kita), atsako į 1–2 tai sričiai skirtus klausimus, nurodo skubumą ir vietovę, tada kontaktus. Iš atsakymų suformuojama struktūrizuota užklausa.
 
-Norėdami tikro siuntimo, prijunkite formų paslaugą (pvz., Formspree, Netlify Forms, Basin) arba savo serverį: `js/main.js` dalyje `form.addEventListener("submit", ...)` vietoje `window.location.href = mailto` atlikite `fetch()` užklausą ir atnaujinkite paaiškinimo tekstą formoje.
+**Numatytasis režimas (be serverio):** forma **nesiunčia** duomenų pati. Patikrinusi laukus, ji atidaro lankytojo el. pašto programą su užpildytu laišku adresu iš `js/config.js` ir pasiūlo laišką atidaryti dar kartą arba nukopijuoti tekstą. Tai aiškiai parašyta formos viršuje.
+
+**Tiesioginis siuntimas (neprivaloma):** `js/config.js` lauke `formEndpoint` įrašykite formų paslaugos adresą (pvz., Formspree). Tada forma siųs užklausą `POST` (JSON) ir sėkmės pranešimą rodys **tik** gavusi sėkmingą serverio atsakymą; nepavykus pasiūlys el. laiško alternatyvą. Prieš įjungdami atnaujinkite privatumo politiką.
 
 ## Paskelbimas GitHub Pages
 

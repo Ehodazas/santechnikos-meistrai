@@ -20,5 +20,12 @@ window.SITE_CONFIG = {
   workingHours: "[Nurodykite darbo laiką]",
 
   // Rekvizitai poraštėje.
-  legalLine: "[Įmonės pavadinimas], įm. k. [000000000]"
+  legalLine: "[Įmonės pavadinimas], įm. k. [000000000]",
+
+  // Užklausų siuntimas.
+  // Tuščia reikšmė — forma paruošia laišką lankytojo el. pašto programoje (mailto), nieko nesiunčia pati.
+  // Įrašius formų paslaugos adresą (pvz., „https://formspree.io/f/xxxxxxx“), forma siųs užklausą
+  // tiesiogiai (POST, JSON) ir sėkmės pranešimą rodys TIK gavusi sėkmingą serverio atsakymą.
+  // Prieš įjungdami atnaujinkite privatumo politiką (duomenis tvarkys ir ta paslauga).
+  formEndpoint: ""
 };

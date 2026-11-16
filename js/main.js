@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Santechnikos Meistrai — sąsaja ir animacijos (v2)
+   Santechnikos Meistrai — sąsaja ir animacijos (v3)
    Viskas veikia ir be GSAP / Lenis: bibliotekos tik prideda judesį.
    ========================================================================== */
 (function () {
@@ -13,6 +13,7 @@
   var ST = window.ScrollTrigger;
   var Split = window.SplitText;
   var lenis = null;
+  var motion = !!(gsap && !reduce);
 
   function $(sel, ctx) { return (ctx || doc).querySelector(sel); }
   function $$(sel, ctx) { return Array.prototype.slice.call((ctx || doc).querySelectorAll(sel)); }
@@ -39,7 +40,7 @@
 
   /* ---------- Sklandus slinkimas (Lenis) ---------- */
   if (window.Lenis && !reduce) {
-    lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true, syncTouch: false });
+    lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, syncTouch: false });
     if (gsap && ST) {
       ST.config({ ignoreMobileResize: true });
       lenis.on("scroll", ST.update);
@@ -54,17 +55,16 @@
     doc.body.classList.toggle("is-locked", on);
     if (lenis) { if (on) lenis.stop(); else lenis.start(); }
   }
-
   function scrollToEl(el, done, instant) {
     if (!el) return;
     // Absoliuti pozicija pagal tikrą window.scrollY (Lenis būsena gali atsilikti po naršyklės šuolio)
     var y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - (headerH() + 8));
     if (lenis) {
       if (instant) { lenis.scrollTo(y, { immediate: true, force: true }); if (done) done(); }
-      else lenis.scrollTo(y, { duration: 1.3, onComplete: done });
+      else lenis.scrollTo(y, { duration: 1.2, onComplete: done });
     } else {
       window.scrollTo({ top: y, behavior: reduce || instant ? "auto" : "smooth" });
-      if (done) setTimeout(done, reduce ? 0 : 700);
+      if (done) setTimeout(done, reduce || instant ? 0 : 700);
     }
   }
 
@@ -72,9 +72,8 @@
   var header = $(".site-header");
   var bar = $(".scroll-progress");
   var lastY = window.scrollY;
-  // Puslapio aukštį skaitome tik keičiantis dydžiui, ne kiekvieno slinkimo metu
   var maxScroll = 1;
-  function measure() { maxScroll = Math.max(1, doc.documentElement.scrollHeight - window.innerHeight); }
+  function measure() { maxScroll = Math.max(1, root.scrollHeight - window.innerHeight); }
   measure();
   window.addEventListener("resize", measure);
   window.addEventListener("load", measure);
@@ -118,7 +117,7 @@
     if (!nav) return;
     if (desktopMq.matches) {
       nav.removeAttribute("inert");
-      if (nav.classList.contains("is-open")) { setMenu(false); lockScroll(false); }
+      if (nav.classList.contains("is-open")) setMenu(false);
     } else if (!nav.classList.contains("is-open")) nav.setAttribute("inert", "");
   }
   if (toggle && nav) {
@@ -136,58 +135,71 @@
     syncNav();
   }
 
-  /* ---------- Darbų katalogo skirtukai ---------- */
-  var tabsRoot = $("[data-tabs]");
-  var tabs = tabsRoot ? $$("[role=tab]", tabsRoot) : [];
-  var indicator = tabsRoot ? $(".cat-tab-indicator", tabsRoot) : null;
+  /* ---------- Išskleidžiami blokai (paslaugos ir DUK) ---------- */
+  function setRegion(btn, open, animate) {
+    var panel = doc.getElementById(btn.getAttribute("aria-controls"));
+    if (!panel) return;
+    var isOpen = btn.getAttribute("aria-expanded") === "true";
+    if (isOpen === open && panel.hidden === !open) return;
+    btn.setAttribute("aria-expanded", String(open));
+    var item = btn.closest(".acc-item, .svc-row");
+    if (item) item.classList.toggle("is-open", open);
+    if (!motion || animate === false) {
+      panel.hidden = !open;
+      if (gsap) gsap.set(panel, { clearProps: "height" });
+      return;
+    }
+    if (open) {
+      panel.hidden = false;
+      gsap.fromTo(panel, { height: 0 }, { height: "auto", duration: 0.6, ease: "power3.out", overwrite: true,
+        onComplete: function () { gsap.set(panel, { clearProps: "height" }); if (ST) ST.refresh(); } });
+      gsap.fromTo(panel.firstElementChild, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55, delay: 0.08, ease: "power3.out", overwrite: true });
+    } else {
+      gsap.to(panel, { height: 0, duration: 0.45, ease: "power3.inOut", overwrite: true,
+        onComplete: function () { panel.hidden = true; gsap.set(panel, { clearProps: "height" }); if (ST) ST.refresh(); } });
+    }
+  }
+  function arrowNav(list, i, e) {
+    var n = null;
+    if (e.key === "ArrowDown") n = list[(i + 1) % list.length];
+    else if (e.key === "ArrowUp") n = list[(i - 1 + list.length) % list.length];
+    else if (e.key === "Home") n = list[0];
+    else if (e.key === "End") n = list[list.length - 1];
+    if (n) { e.preventDefault(); n.focus(); }
+  }
 
-  function moveIndicator(tab) {
-    if (!indicator || !tab) return;
-    indicator.style.transform = "translateY(" + tab.offsetTop + "px)";
-    indicator.style.height = tab.offsetHeight + "px";
-  }
-  function activateTab(tab, opts) {
-    opts = opts || {};
-    tabs.forEach(function (t) {
-      var on = t === tab;
-      t.setAttribute("aria-selected", String(on));
-      t.tabIndex = on ? 0 : -1;
-      var panel = doc.getElementById(t.getAttribute("aria-controls"));
-      if (panel) panel.hidden = !on;
-    });
-    moveIndicator(tab);
-    if (tab.scrollIntoView && tab.parentElement.scrollWidth > tab.parentElement.clientWidth) {
-      tab.parentElement.scrollTo({ left: tab.offsetLeft - 16, behavior: reduce ? "auto" : "smooth" });
-    }
-    var panelEl = doc.getElementById(tab.getAttribute("aria-controls"));
-    if (gsap && !reduce && opts.animate !== false && panelEl) {
-      gsap.fromTo([$(".cat-panel-head", panelEl)].concat($$(".job-list li", panelEl), [$(".btn", panelEl)]),
-        { y: 18, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out", stagger: 0.045, overwrite: true });
-      gsap.fromTo($(".cat-icon", panelEl), { scale: 0.6, rotate: -25 }, { scale: 1, rotate: 0, duration: 0.7, ease: "back.out(2)" });
-    }
-    if (opts.focus) tab.focus();
-  }
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener("click", function () { activateTab(tab); });
-    tab.addEventListener("keydown", function (e) {
-      var n = null;
-      if (e.key === "ArrowDown" || e.key === "ArrowRight") n = tabs[(i + 1) % tabs.length];
-      else if (e.key === "ArrowUp" || e.key === "ArrowLeft") n = tabs[(i - 1 + tabs.length) % tabs.length];
-      else if (e.key === "Home") n = tabs[0];
-      else if (e.key === "End") n = tabs[tabs.length - 1];
-      if (n) { e.preventDefault(); activateTab(n, { focus: true }); }
+  // DUK: kiekvienas klausimas atsidaro atskirai
+  $$("[data-accordion]").forEach(function (acc) {
+    var triggers = $$(".acc-trigger", acc);
+    triggers.forEach(function (btn, i) {
+      btn.addEventListener("click", function () { setRegion(btn, btn.getAttribute("aria-expanded") !== "true"); });
+      btn.addEventListener("keydown", function (e) { arrowNav(triggers, i, e); });
     });
   });
-  if (tabs.length) {
-    moveIndicator(tabs[0]);
-    window.addEventListener("resize", function () {
-      moveIndicator(tabs.filter(function (t) { return t.getAttribute("aria-selected") === "true"; })[0]);
+
+  // Paslaugos: vienu metu atidaryta viena; nuotrauka kairėje seka atidarytą paslaugą
+  var svcList = $("[data-svc-list]");
+  var svcTriggers = svcList ? $$(".svc-trigger", svcList) : [];
+  var svcImgs = $$(".svc-img");
+  var svcCount = $("[data-svc-count]");
+  function showSvcImage(i) {
+    svcImgs.forEach(function (img, j) { img.classList.toggle("is-active", j === i); });
+    if (svcCount) svcCount.textContent = (i < 9 ? "0" : "") + (i + 1);
+  }
+  function openService(btn, opts) {
+    opts = opts || {};
+    var idx = svcTriggers.indexOf(btn);
+    svcTriggers.forEach(function (b) { if (b !== btn) setRegion(b, false, opts.animate); });
+    setRegion(btn, true, opts.animate);
+    if (idx > -1) showSvcImage(idx);
+  }
+  svcTriggers.forEach(function (btn, i) {
+    btn.addEventListener("click", function () {
+      if (btn.getAttribute("aria-expanded") === "true") setRegion(btn, false);
+      else openService(btn);
     });
-  }
-  function tabForPanelId(id) {
-    return tabs.filter(function (t) { return t.getAttribute("aria-controls") === id; })[0] || null;
-  }
+    btn.addEventListener("keydown", function (e) { arrowNav(svcTriggers, i, e); });
+  });
 
   /* ---------- Vidinės nuorodos ---------- */
   function goToHash(hash, push, instant) {
@@ -195,10 +207,11 @@
     if (!id) return false;
     var el = doc.getElementById(id);
     if (!el) return false;
-    var tab = tabForPanelId(id);
-    if (tab) { activateTab(tab, { animate: true }); el = doc.getElementById("paslaugu-aprasymai"); }
+    if (el.classList.contains("svc-row")) openService($(".svc-trigger", el), { animate: !instant });
     if (push && history.pushState) history.pushState(null, "", "#" + id);
-    scrollToEl(el, null, instant);
+    // Paslaugos eilutė atsidaro animuotai — palaukiame, kol aukštis nusistovės
+    var delay = el.classList.contains("svc-row") && !instant && motion ? 480 : 0;
+    setTimeout(function () { scrollToEl(el, null, instant); }, delay);
     return true;
   }
   doc.addEventListener("click", function (e) {
@@ -206,7 +219,6 @@
     if (!a) return;
     var hash = a.getAttribute("href");
     if (hash.length < 2) return;
-    // Paslaugos nuoroda užpildo formą
     var svc = a.getAttribute("data-service");
     if (svc) setService(svc);
     var menuWasOpen = nav && nav.classList.contains("is-open");
@@ -220,8 +232,8 @@
   /* ---------- Aktyvi navigacijos nuoroda ---------- */
   var navLinks = $$(".nav-list a");
   var sectionMap = {
-    "pradzia": "pradzia", "paslaugos": "paslaugos", "paslaugu-aprasymai": "paslaugos",
-    "apie-mus": "apie-mus", "atlikti-darbai": "atlikti-darbai", "kaip-dirbame": "atlikti-darbai",
+    "pradzia": "pradzia", "paslaugos": "paslaugos", "apie-mus": "apie-mus",
+    "atlikti-darbai": "atlikti-darbai", "kaip-dirbame": "atlikti-darbai",
     "duk": "duk", "kontaktai": "kontaktai"
   };
   if ("IntersectionObserver" in window && navLinks.length) {
@@ -238,38 +250,6 @@
     Object.keys(sectionMap).forEach(function (id) { var s = doc.getElementById(id); if (s) io.observe(s); });
   }
 
-  /* ---------- DUK akordeonas ---------- */
-  $$("[data-accordion]").forEach(function (acc) {
-    var triggers = $$(".acc-trigger", acc);
-    triggers.forEach(function (btn, i) {
-      var panel = doc.getElementById(btn.getAttribute("aria-controls"));
-      var item = btn.closest(".acc-item");
-      btn.addEventListener("click", function () {
-        var open = btn.getAttribute("aria-expanded") === "true";
-        btn.setAttribute("aria-expanded", String(!open));
-        item.classList.toggle("is-open", !open);
-        if (!gsap || reduce) { panel.hidden = open; return; }
-        if (open) {
-          gsap.to(panel, { height: 0, duration: 0.5, ease: "power3.inOut", overwrite: true,
-            onComplete: function () { panel.hidden = true; gsap.set(panel, { clearProps: "height" }); } });
-        } else {
-          panel.hidden = false;
-          gsap.fromTo(panel, { height: 0 }, { height: "auto", duration: 0.6, ease: "power3.out", overwrite: true,
-            onComplete: function () { gsap.set(panel, { clearProps: "height" }); } });
-          gsap.fromTo($(".acc-inner", panel), { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, delay: 0.1 });
-        }
-      });
-      btn.addEventListener("keydown", function (e) {
-        var n = null;
-        if (e.key === "ArrowDown") n = triggers[(i + 1) % triggers.length];
-        else if (e.key === "ArrowUp") n = triggers[(i - 1 + triggers.length) % triggers.length];
-        else if (e.key === "Home") n = triggers[0];
-        else if (e.key === "End") n = triggers[triggers.length - 1];
-        if (n) { e.preventDefault(); n.focus(); }
-      });
-    });
-  });
-
   /* ---------- Galerija + lightbox ---------- */
   var dialog = $("#lightbox");
   var galleryBtns = $$(".gallery-btn");
@@ -284,9 +264,9 @@
     img.alt = thumb ? thumb.alt : "";
     $(".lightbox-title", dialog).textContent = btn.getAttribute("data-title") || "";
     $(".lightbox-count", dialog).textContent = (current + 1) + " / " + galleryBtns.length;
-    if (gsap && !reduce) {
-      gsap.fromTo(img, { x: (dir || 0) * 60, autoAlpha: 0, scale: dir ? 1 : 0.94 },
-        { x: 0, autoAlpha: 1, scale: 1, duration: 0.7, ease: "power3.out", overwrite: true });
+    if (motion) {
+      gsap.fromTo(img, { x: (dir || 0) * 50, autoAlpha: 0, scale: dir ? 1 : 0.95 },
+        { x: 0, autoAlpha: 1, scale: 1, duration: 0.6, ease: "power3.out", overwrite: true });
     }
   }
   function openLightbox(i) {
@@ -298,7 +278,6 @@
     dialog.showModal();
     showSlide(i, 0);
     lockScroll(true);
-    if (gsap && !reduce) gsap.fromTo(dialog, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35 });
     $(".lb-close", dialog).focus();
   }
   function closeLightbox() { if (dialog && dialog.open) dialog.close(); }
@@ -329,137 +308,193 @@
     });
   }
 
-  /* ---------- Formos ---------- */
+  /* ==========================================================================
+     Užklausos asistentas
+     ========================================================================== */
   var form = $("#uzklausa");
-  var serviceSelect = $("#f-paslauga");
+  var status = $("#form-status");
+  var endpoint = (cfg.formEndpoint || "").trim();
+  var submitBtn = form ? $("[data-submit]", form) : null;
+  var submitLabel = form ? $("[data-submit-label]", form) : null;
+
+  function catInputs() { return form ? $$("input[name=kategorija]", form) : []; }
+  function currentCat() { var c = catInputs().filter(function (i) { return i.checked; })[0]; return c || null; }
+
+  // Rodomas tik pasirinktai sričiai skirtas patikslinimas; žingsnių numeriai persiskaičiuoja
+  function updateFollowups(animate) {
+    if (!form) return;
+    var cat = currentCat();
+    var value = cat ? cat.value : "";
+    var shown = null;
+    $$(".followup", form).forEach(function (fs) {
+      var on = fs.getAttribute("data-for") === value;
+      if (on) shown = fs;
+      if (fs.hidden === !on) return;
+      fs.hidden = !on;
+      $$("input, select, textarea", fs).forEach(function (el) { el.disabled = !on; });
+    });
+    if (shown && animate && motion) {
+      gsap.fromTo(shown, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" });
+    }
+    var n2 = $("[data-step-n]", form), n3 = $("[data-step-n2]", form);
+    if (n2) n2.textContent = shown ? "3" : "2";
+    if (n3) n3.textContent = shown ? "4" : "3";
+    // „Kita“ — tada žinutė privaloma, kad suprastume, ko reikia
+    var needMsg = value === "kita";
+    var opt = $("[data-msg-optional]", form), req = $("[data-msg-required]", form);
+    if (opt) opt.hidden = needMsg;
+    if (req) req.hidden = !needMsg;
+    var msg = form.zinute;
+    if (msg) { msg.required = needMsg; if (!needMsg) clearError(msg); }
+  }
 
   function setService(value) {
-    if (!serviceSelect || !value) return;
-    serviceSelect.value = value;
-    if (serviceSelect.value !== value) serviceSelect.value = "";
-    clearError(serviceSelect);
+    if (!form || !value) return;
+    var parts = String(value).split(":");
+    var legacy = { prietaisai: "montavimas", diagnostika: "kita", vamzdynai: "vandentiekis" };
+    var cat = legacy[parts[0]] || parts[0];
+    var detail = parts[1] || (parts[0] === "vamzdynai" ? "vamzdynai" : "");
+    var input = catInputs().filter(function (i) { return i.value === cat; })[0];
+    if (!input) return;
+    input.checked = true;
+    updateFollowups(false);
+    clearError(input);
+    if (detail) {
+      var fs = $('.followup[data-for="' + cat + '"]', form);
+      var sel = fs && $("select", fs);
+      if (sel) sel.value = detail;
+    }
   }
 
-  // Greitos užklausos kortelė hero dalyje
-  var quick = $("[data-quick-form]");
-  if (quick) {
-    quick.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var checked = $("input[name=paslauga]:checked", quick);
-      if (checked) setService(checked.value);
-      scrollToEl($("#kontaktai"), function () { var f = $("#f-vardas"); if (f) f.focus({ preventScroll: true }); });
-    });
-  }
-  // Be JS greitoji forma nuveda su ?paslauga=... — užpildome pasirinkimą
+  // Be JS galima perduoti ?paslauga=... (pvz., iš senų nuorodų)
   try {
     var qs = new URLSearchParams(window.location.search).get("paslauga");
     if (qs) setService(qs);
   } catch (err) { /* nieko */ }
 
+  /* --- Validacija --- */
   var messages = {
-    vardas: { valueMissing: "Įrašykite savo vardą.", tooShort: "Vardas turi būti bent 2 simbolių." },
-    telefonas: { valueMissing: "Įrašykite telefono numerį, kad galėtume su jumis susisiekti.", invalid: "Patikrinkite numerį. Pavyzdžiui: +370 612 34567 arba 8 612 34567." },
-    elpastas: { invalid: "Patikrinkite el. pašto adresą. Pavyzdžiui: vardas@pavyzdys.lt." },
-    paslauga: { valueMissing: "Pasirinkite paslaugą arba „Kita / nesu tikras“." },
-    zinute: { valueMissing: "Trumpai aprašykite, ką reikia atlikti.", tooShort: "Parašykite šiek tiek daugiau: bent 10 simbolių." },
-    sutikimas: { valueMissing: "Norėdami tęsti, pažymėkite sutikimą dėl duomenų naudojimo." }
+    kategorija: "Pasirinkite, kokios pagalbos reikia. Jei nesate tikri, rinkitės „Kita / nežinau“.",
+    vardas: { missing: "Įrašykite savo vardą.", short: "Vardas turi būti bent 2 raidžių." },
+    telefonas: { missing: "Įrašykite telefono numerį, kad galėtume paskambinti.", invalid: "Numeris atrodo neišsamus. Pavyzdžiui: +370 612 34567 arba 8 612 34567." },
+    elpastas: "El. pašto adresas atrodo neteisingas. Pavyzdžiui: vardas@pavyzdys.lt.",
+    zinute: { missing: "Trumpai aprašykite, ko reikia, nes pasirinkote „Kita“.", short: "Parašykite šiek tiek daugiau, bent 10 simbolių." },
+    sutikimas: "Pažymėkite sutikimą, kad galėtume naudoti jūsų duomenis atsakydami į užklausą."
   };
-  function fieldOf(input) { return input.closest(".field"); }
-  function errEl(input) { return doc.getElementById(input.id + "-err"); }
+  function holderOf(input) { return input.closest(".field, .step"); }
+  function errFor(input) {
+    var id = input.name === "kategorija" ? "f-kategorija-err" : input.id + "-err";
+    return doc.getElementById(id);
+  }
   function setError(input, msg) {
-    fieldOf(input).classList.add("has-error");
-    input.setAttribute("aria-invalid", "true");
-    errEl(input).textContent = msg;
+    var h = holderOf(input), e = errFor(input);
+    if (h) h.classList.add("has-error");
+    if (input.name === "kategorija") catInputs().forEach(function (i) { i.setAttribute("aria-invalid", "true"); });
+    else input.setAttribute("aria-invalid", "true");
+    if (e) e.textContent = msg;
   }
   function clearError(input) {
-    fieldOf(input).classList.remove("has-error");
-    input.removeAttribute("aria-invalid");
-    errEl(input).textContent = "";
+    var h = holderOf(input), e = errFor(input);
+    if (h) h.classList.remove("has-error");
+    if (input.name === "kategorija") catInputs().forEach(function (i) { i.removeAttribute("aria-invalid"); });
+    else input.removeAttribute("aria-invalid");
+    if (e) e.textContent = "";
   }
-  function validPhone(v) { return /^(\+370\d{8}|8\d{8}|\+\d{8,15})$/.test(v.replace(/[\s\-()]/g, "")); }
+  function normPhone(v) { return v.replace(/[\s\-().]/g, ""); }
+  function validPhone(v) { return /^(\+370\d{8}|8\d{8}|\+\d{8,15})$/.test(normPhone(v)); }
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
   function validate(input) {
-    var name = input.name, m = messages[name] || {};
-    var v = input.type === "checkbox" ? input.checked : input.value.trim();
-    if (input.required && !v) { setError(input, m.valueMissing); return false; }
-    if (name === "vardas" && v.length < 2) { setError(input, m.tooShort); return false; }
-    if (name === "zinute" && v.length < 10) { setError(input, m.tooShort); return false; }
-    if (name === "telefonas" && !validPhone(v)) { setError(input, m.invalid); return false; }
-    if (name === "elpastas" && v && !validEmail(v)) { setError(input, m.invalid); return false; }
+    var v;
+    switch (input.name) {
+      case "kategorija":
+        if (!currentCat()) { setError(input, messages.kategorija); return false; }
+        break;
+      case "vardas":
+        v = input.value.trim();
+        if (!v) { setError(input, messages.vardas.missing); return false; }
+        if (v.length < 2) { setError(input, messages.vardas.short); return false; }
+        break;
+      case "telefonas":
+        v = input.value.trim();
+        if (!v) { setError(input, messages.telefonas.missing); return false; }
+        if (!validPhone(v)) { setError(input, messages.telefonas.invalid); return false; }
+        break;
+      case "elpastas":
+        v = input.value.trim();
+        if (v && !validEmail(v)) { setError(input, messages.elpastas); return false; }
+        break;
+      case "zinute":
+        v = input.value.trim();
+        if (input.required && !v) { setError(input, messages.zinute.missing); return false; }
+        if (input.required && v.length < 10) { setError(input, messages.zinute.short); return false; }
+        break;
+      case "sutikimas":
+        if (!input.checked) { setError(input, messages.sutikimas); return false; }
+        break;
+    }
     clearError(input);
     return true;
   }
 
-  if (form) {
-    var inputs = $$("input, select, textarea", form);
-    var status = $("#form-status");
-
-    inputs.forEach(function (input) {
-      input.addEventListener("blur", function () {
-        if (input.type === "checkbox") return;
-        if (input.value.trim() || fieldOf(input).classList.contains("has-error")) validate(input);
-      });
-      input.addEventListener(input.type === "checkbox" || input.tagName === "SELECT" ? "change" : "input", function () {
-        if (fieldOf(input).classList.contains("has-error")) validate(input);
-      });
+  /* --- Struktūrizuota užklausa --- */
+  function collect() {
+    var cat = currentCat();
+    var lines = [];
+    var data = { kategorija: cat ? cat.getAttribute("data-label") : "" };
+    lines.push("Pagalbos sritis: " + data.kategorija);
+    // Matomo patikslinimo, skubumo ir vietovės atsakymai
+    $$("[data-q]", form).forEach(function (el) {
+      if (el.closest("[hidden]")) return;
+      var q = el.getAttribute("data-q"), a = "";
+      if (el.tagName === "SELECT") a = el.value ? el.options[el.selectedIndex].text : "";
+      else if (el.tagName === "INPUT") a = el.value.trim();
+      else a = $$("input:checked", el).map(function (i) { return i.value; }).join(", ");
+      if (a) { lines.push(q + ": " + a); data[q] = a; }
     });
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var firstInvalid = null;
-      inputs.forEach(function (input) { if (!validate(input) && !firstInvalid) firstInvalid = input; });
-
-      if (firstInvalid) {
-        status.hidden = false;
-        status.className = "form-status is-error";
-        status.textContent = "Formoje yra klaidų. Pataisykite pažymėtus laukus ir bandykite dar kartą.";
-        if (gsap && !reduce) gsap.fromTo(form, { x: -8 }, { x: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
-        firstInvalid.focus();
-        return;
-      }
-
-      var data = {
-        vardas: form.vardas.value.trim(),
-        telefonas: form.telefonas.value.trim(),
-        elpastas: form.elpastas.value.trim(),
-        paslauga: serviceSelect.options[serviceSelect.selectedIndex].text,
-        zinute: form.zinute.value.trim()
-      };
-      var subject = "Užklausa: " + data.paslauga;
-      var body =
-        "Sveiki,\n\n" + data.zinute + "\n\n" +
-        "Paslauga: " + data.paslauga + "\n" +
-        "Vardas: " + data.vardas + "\n" +
-        "Telefonas: " + data.telefonas + "\n" +
-        (data.elpastas ? "El. paštas: " + data.elpastas + "\n" : "") +
-        "\nSutinku, kad mano duomenys būtų naudojami atsakant į šią užklausą.";
-      var to = cfg.email || "info@jusu-imone.lt";
-      var mailto = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-      status.hidden = false;
-      status.className = "form-status";
-      status.innerHTML =
-        '<h4><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Laiškas paruoštas</h4>' +
-        "<p>Jūsų el. pašto programoje turėtų atsidaryti užpildytas laiškas adresu <strong></strong>. Kad užklausa pasiektų mus, laišką išsiųskite patys.</p>" +
-        "<p>Jei programa neatsidarė, nukopijuokite tekstą ir išsiųskite jį bet kuriuo el. paštu.</p>" +
-        '<div class="status-actions">' +
-        '<a class="btn btn-ink" data-mailto>Atidaryti dar kartą</a>' +
-        '<button class="btn btn-outline" type="button" data-copy>Kopijuoti laiško tekstą</button>' +
-        "</div>";
-      $("strong", status).textContent = to;
-      $("[data-mailto]", status).setAttribute("href", mailto);
-      var copyBtn = $("[data-copy]", status);
-      copyBtn.addEventListener("click", function () {
-        var text = "Kam: " + to + "\nTema: " + subject + "\n\n" + body;
-        var done = function () { copyBtn.textContent = "Nukopijuota"; };
-        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
-        else { fallbackCopy(text); done(); }
-      });
-      if (gsap && !reduce) gsap.fromTo(status, { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" });
-      status.focus({ preventScroll: true });
-      window.location.href = mailto;
-    });
+    data.vardas = form.vardas.value.trim();
+    data.telefonas = form.telefonas.value.trim();
+    data.elpastas = form.elpastas.value.trim();
+    data.zinute = form.zinute.value.trim();
+    var body = "Sveiki,\n\n" + lines.join("\n") +
+      (data.zinute ? "\n\nPapildoma informacija:\n" + data.zinute : "") +
+      "\n\nVardas: " + data.vardas +
+      "\nTelefonas: " + data.telefonas +
+      (data.elpastas ? "\nEl. paštas: " + data.elpastas : "") +
+      "\n\nSutinku, kad mano duomenys būtų naudojami atsakant į šią užklausą.";
+    return { data: data, subject: "Užklausa: " + data.kategorija, body: body };
   }
+
+  function mailtoFor(msg) {
+    var to = cfg.email || "info@jusu-imone.lt";
+    return { to: to, href: "mailto:" + to + "?subject=" + encodeURIComponent(msg.subject) + "&body=" + encodeURIComponent(msg.body) };
+  }
+
+  function showStatus(kind, html) {
+    status.hidden = false;
+    status.className = "form-status" + (kind === "error" ? " is-error" : "");
+    status.innerHTML = html;
+    if (motion) gsap.fromTo(status, { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" });
+    status.focus({ preventScroll: true });
+  }
+
+  function mailtoActions(msg, mt) {
+    var actions = doc.createElement("div");
+    actions.className = "status-actions";
+    var open = doc.createElement("a");
+    open.className = "btn btn-ink"; open.href = mt.href; open.textContent = "Atidaryti el. laišką";
+    var copy = doc.createElement("button");
+    copy.type = "button"; copy.className = "btn btn-outline"; copy.textContent = "Kopijuoti tekstą";
+    copy.addEventListener("click", function () {
+      var text = "Kam: " + mt.to + "\nTema: " + msg.subject + "\n\n" + msg.body;
+      var done = function () { copy.textContent = "Nukopijuota"; };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });
+      else { fallbackCopy(text); done(); }
+    });
+    actions.appendChild(open); actions.appendChild(copy);
+    return actions;
+  }
+
   function fallbackCopy(text) {
     var ta = doc.createElement("textarea");
     ta.value = text; ta.setAttribute("readonly", "");
@@ -469,40 +504,117 @@
     ta.remove();
   }
 
-  /* ---------- Bėganti juosta: greitis pagal slinkimą ---------- */
-  // Juosta sukasi visada (nesustoja nei sustojus slinkti, nei užvedus pelę);
-  // slenkant ji tik laikinai pagreitėja ir sklandžiai grįžta į įprastą greitį.
+  if (form) {
+    // Režimas: tiesioginis siuntimas (jei nurodytas formEndpoint) arba el. laiško paruošimas
+    if (endpoint) {
+      var ex = $("[data-form-explainer]");
+      if (ex) ex.innerHTML = "<strong>Kaip veikia forma:</strong> užklausa siunčiama tiesiogiai mums. Jei siuntimas nepavyktų, pasiūlysime ją išsiųsti el. paštu.";
+      if (submitLabel) submitLabel.textContent = "Siųsti užklausą";
+    }
+
+    updateFollowups(false);
+    catInputs().forEach(function (i) {
+      i.addEventListener("change", function () { updateFollowups(true); validate(i); });
+    });
+    var urgentHint = $("[data-urgent-hint]", form);
+    $$("input[name=skubumas]", form).forEach(function (i) {
+      i.addEventListener("change", function () { if (urgentHint) urgentHint.hidden = !(i.checked && i.value.indexOf("Skubu") === 0); });
+    });
+
+    var validated = ["vardas", "telefonas", "elpastas", "zinute", "sutikimas"].map(function (n) { return form[n]; });
+    validated.forEach(function (input) {
+      input.addEventListener("blur", function () {
+        if (input.type === "checkbox") return;
+        if (input.value.trim() || holderOf(input).classList.contains("has-error")) validate(input);
+      });
+      input.addEventListener(input.type === "checkbox" ? "change" : "input", function () {
+        if (holderOf(input).classList.contains("has-error")) validate(input);
+      });
+    });
+    // Telefono numeris: leidžiami tik skaičiai, tarpai ir +
+    form.telefonas.addEventListener("input", function () {
+      var clean = form.telefonas.value.replace(/[^\d+\s\-()]/g, "");
+      if (clean !== form.telefonas.value) form.telefonas.value = clean;
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var checks = [catInputs()[0]].concat(validated);
+      var firstInvalid = null;
+      checks.forEach(function (input) { if (!validate(input) && !firstInvalid) firstInvalid = input; });
+
+      if (firstInvalid) {
+        var count = $$(".has-error", form).length;
+        showStatus("error", "Užklausos dar negalime paruošti: " + (count === 1 ? "pataisykite pažymėtą lauką." : "pataisykite pažymėtus laukus (" + count + ")."));
+        firstInvalid.focus();
+        var holder = holderOf(firstInvalid);
+        if (holder && holder.getBoundingClientRect().top < headerH()) scrollToEl(holder);
+        return;
+      }
+
+      var msg = collect();
+      var mt = mailtoFor(msg);
+
+      if (!endpoint) {
+        showStatus("ok",
+          '<h4><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Laiškas paruoštas, bet dar neišsiųstas</h4>' +
+          "<p>Jūsų el. pašto programoje turėtų atsidaryti užpildytas laiškas adresu <strong data-to></strong>. Kad užklausa pasiektų mus, laišką išsiųskite patys.</p>" +
+          "<p>Jei programa neatsidarė, atidarykite laišką mygtuku arba nukopijuokite tekstą.</p>");
+        $("[data-to]", status).textContent = mt.to;
+        status.appendChild(mailtoActions(msg, mt));
+        window.location.href = mt.href;
+        return;
+      }
+
+      // Tiesioginis siuntimas: sėkmė rodoma tik gavus sėkmingą atsakymą
+      submitBtn.setAttribute("aria-busy", "true");
+      submitLabel.textContent = "Siunčiama…";
+      fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(Object.assign({ _subject: msg.subject, tekstas: msg.body }, msg.data))
+      }).then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        showStatus("ok", '<h4><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Užklausa gauta</h4><p>Ačiū. Susisieksime nurodytu telefonu.</p>');
+        form.reset();
+        updateFollowups(false);
+      }).catch(function () {
+        showStatus("error", "<p>Užklausos išsiųsti nepavyko. Galite ją išsiųsti el. paštu arba paskambinti.</p>");
+        status.appendChild(mailtoActions(msg, mt));
+      }).then(function () {
+        submitBtn.removeAttribute("aria-busy");
+        submitLabel.textContent = "Siųsti užklausą";
+      });
+    });
+  }
+
+  /* ---------- Bėganti juosta: sukasi visada, slenkant pagreitėja ---------- */
   var tickerTrack = $("[data-ticker]");
-  if (tickerTrack && !reduce && gsap) {
+  if (tickerTrack && motion) {
     tickerTrack.classList.add("is-gsap");
     var loop = gsap.to(tickerTrack, { xPercent: -50, duration: 42, ease: "none", repeat: -1, force3D: true });
     if (ST) {
       var boost = 1;
       ST.create({
         start: 0, end: "max",
-        onUpdate: function (self) {
-          boost = Math.max(boost, 1 + Math.min(Math.abs(self.getVelocity()) / 350, 4));
-        }
+        onUpdate: function (self) { boost = Math.max(boost, 1 + Math.min(Math.abs(self.getVelocity()) / 350, 4)); }
       });
-      gsap.ticker.add(function () {
-        boost += (1 - boost) * 0.04;
-        loop.timeScale(boost);
-      });
+      gsap.ticker.add(function () { boost += (1 - boost) * 0.04; loop.timeScale(boost); });
     }
   }
 
   /* ---------- Magnetiniai mygtukai ir žymeklis ---------- */
-  if (gsap && finePointer && !reduce) {
+  if (motion && finePointer) {
     $$(".btn-magnetic").forEach(function (btn) {
       var xTo = gsap.quickTo(btn, "x", { duration: 0.6, ease: "power3.out" });
       var yTo = gsap.quickTo(btn, "y", { duration: 0.6, ease: "power3.out" });
       btn.addEventListener("mousemove", function (e) {
         var r = btn.getBoundingClientRect();
-        xTo((e.clientX - r.left - r.width / 2) * 0.25);
-        yTo((e.clientY - r.top - r.height / 2) * 0.35);
+        xTo((e.clientX - r.left - r.width / 2) * 0.2);
+        yTo((e.clientY - r.top - r.height / 2) * 0.3);
       });
       btn.addEventListener("mouseleave", function () {
-        gsap.to(btn, { x: 0, y: 0, duration: 0.9, ease: "elastic.out(1, 0.4)", overwrite: true });
+        gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.45)", overwrite: true });
       });
     });
 
@@ -520,9 +632,17 @@
   }
 
   /* ==========================================================================
-     GSAP scenarijai
+     GSAP scenarijai — tik transform / opacity
      ========================================================================== */
   function endIntro() { root.classList.remove("intro"); }
+
+  function handleInitialHash() {
+    if (!location.hash) return;
+    var go = function () {
+      setTimeout(function () { if (ST) ST.refresh(); goToHash(location.hash, false, true); }, 150);
+    };
+    if (doc.readyState === "complete") go(); else window.addEventListener("load", go);
+  }
 
   if (!gsap || !ST || reduce) { endIntro(); handleInitialHash(); return; }
 
@@ -537,42 +657,35 @@
   function initMotion() {
     var mm = gsap.matchMedia();
 
-    /* --- Hero įžanga --- */
-    var heroTitle = $("[data-split-hero]");
+    /* --- Hero: klausimai, tada atsakymas, vamzdis nubrėžiamas po žodžiu --- */
+    var heroLines = $$(".hero-title .hl > span");
     var heroItems = $$(".hero [data-hero-item]");
-    gsap.set(heroItems, { autoAlpha: 0, y: 30 });
+    var pipePath = $(".hero-pipe path");
+    gsap.set(heroItems, { autoAlpha: 0, y: 24 });
+    gsap.set(heroLines, { yPercent: 110 });
+    if (pipePath) gsap.set(pipePath, { strokeDasharray: 1, strokeDashoffset: 1 });
     endIntro();
-    // Tik transform/opacity — jas naršyklė piešia vaizdo plokštėje, be perpiešimo
     var intro = gsap.timeline({ defaults: { ease: "expo.out" } });
     intro
-      .fromTo(".hero-frame", { scale: 0.88, y: 30 }, { scale: 1, y: 0, duration: 1.6, ease: "expo.inOut", force3D: true }, 0)
-      .from(".hero-media img", { scale: 1.35, duration: 2.2, ease: "expo.out" }, 0)
-      .from(".site-header .logo, .site-header .header-cta, .site-header .menu-toggle, .nav-list li", { y: -30, opacity: 0, duration: 1, stagger: 0.05, clearProps: "transform,opacity" }, 0.5)
-      .to(heroItems, { y: 0, autoAlpha: 1, duration: 1.1, stagger: 0.1 }, 1.0);
-    if (heroTitle && Split) {
-      Split.create(heroTitle, {
-        type: "lines", mask: "lines", linesClass: "split-line", autoSplit: true,
-        onSplit: function (self) {
-          return gsap.from(self.lines, { yPercent: 110, duration: 1.2, ease: "expo.out", stagger: 0.09, delay: 0.75 });
-        }
-      });
-    }
+      .from(".hero-photo", { clipPath: "inset(0% 0% 0% 100%)", duration: 1.4, ease: "expo.inOut" }, 0)
+      .from(".hero-photo img", { scale: 1.25, duration: 2, ease: "expo.out" }, 0.1)
+      .to(heroItems[0], { autoAlpha: 1, y: 0, duration: 0.9 }, 0.2)
+      .to(heroLines.slice(0, 2), { yPercent: 0, duration: 1.1, stagger: 0.12 }, 0.3)
+      .to(heroLines.slice(2), { yPercent: 0, duration: 1.3 }, 0.75)
+      .to(pipePath, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, 1.25)
+      .to(heroItems.slice(1), { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1 }, 1.0)
+      .from("[data-hero-tip]", { y: 40, autoAlpha: 0, duration: 1 }, 1.2)
+      .from(".site-header .logo, .site-header .header-cta, .site-header .menu-toggle, .nav-list li",
+        { y: -24, opacity: 0, duration: 0.9, stagger: 0.04, clearProps: "transform,opacity" }, 0.3)
+      .add(function () { gsap.set(".hero-photo", { clearProps: "clipPath" }); });
 
-    /* --- Slenkant hero kortelė švelniai „atsitraukia“, nuotrauka juda lėčiau --- */
-    gsap.fromTo(".hero-frame", { scale: 1 }, {
-      scale: 0.94, ease: "none", immediateRender: false, force3D: true,
+    // Nuotrauka slenkant juda lėčiau už puslapį
+    gsap.to(".hero-photo img", {
+      yPercent: 8, ease: "none",
       scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
     });
-    gsap.to(".hero-media img", {
-      yPercent: 14, ease: "none",
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
-    });
-    gsap.to(".hero-inner", {
-      y: -60, autoAlpha: 0.2, ease: "none",
-      scrollTrigger: { trigger: ".hero", start: "40% top", end: "bottom top", scrub: true }
-    });
 
-    /* --- Sekcijų antraštės: eilutės kyla iš kaukės --- */
+    /* --- Sekcijų antraštės --- */
     $$("[data-split]").forEach(function (el) {
       splitLines(el, {
         yPercent: 110, duration: 1.1, ease: "expo.out", stagger: 0.08,
@@ -581,51 +694,22 @@
     });
     $$(".eyebrow, .section-intro").forEach(function (el) {
       if (el.closest(".hero")) return;
-      gsap.from(el, { y: 20, autoAlpha: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
+      gsap.from(el, { y: 18, autoAlpha: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
     });
 
-    /* --- Paslaugos: horizontali juosta kompiuteryje, kortelės telefone --- */
-    var services = $(".services");
-    var track = $("[data-services-track]");
-    var pin = $("[data-services-pin]");
-    var sBar = $("[data-services-bar]");
-    mm.add("(min-width: 1100px)", function () {
-      services.classList.add("is-horizontal");
-      var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
-      var tween = gsap.to(track, {
-        x: function () { return -dist(); }, ease: "none",
-        scrollTrigger: {
-          trigger: pin, pin: true, start: "top top",
-          end: function () { return "+=" + dist(); },
-          scrub: 0.8, invalidateOnRefresh: true, anticipatePin: 1,
-          onUpdate: function (self) { if (sBar) sBar.style.transform = "scaleX(" + self.progress + ")"; }
-        }
-      });
-      // Kortelių nuotraukos „atsidaro“ joms įvažiuojant
-      $$(".svc", track).forEach(function (card) {
-        gsap.from($(".svc-media img", card), {
-          scale: 1.35, ease: "none",
-          scrollTrigger: { trigger: card, containerAnimation: tween, start: "left right", end: "left 40%", scrub: true }
-        });
-      });
-      return function () { services.classList.remove("is-horizontal"); gsap.set(track, { clearProps: "transform" }); };
+    /* --- Paslaugos --- */
+    ST.batch(".svc-row", {
+      start: "top 90%", once: true,
+      onEnter: function (els) { gsap.from(els, { y: 36, autoAlpha: 0, duration: 0.9, ease: "expo.out", stagger: 0.07 }); }
     });
-    mm.add("(max-width: 1099px)", function () {
-      ST.batch(".svc", {
-        start: "top 88%", once: true,
-        onEnter: function (els) {
-          gsap.fromTo(els, { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: "expo.out", stagger: 0.1 });
-        }
+    mm.add("(min-width: 1024px)", function () {
+      gsap.from(".svc-frame", {
+        clipPath: "inset(18% 12% 18% 12% round 28px)", duration: 1.4, ease: "expo.out", clearProps: "clipPath",
+        scrollTrigger: { trigger: ".svc-layout", start: "top 80%", once: true }
       });
     });
 
-    /* --- Katalogas --- */
-    gsap.from(".catalog-grid", {
-      y: 80, autoAlpha: 0, duration: 1.2, ease: "expo.out",
-      scrollTrigger: { trigger: ".catalog-grid", start: "top 85%", once: true }
-    });
-
-    /* --- Apie mus: žodžiai ryškėja slenkant, nuotrauka su paralakse --- */
+    /* --- Apie mus --- */
     var statement = $("[data-reveal-words]");
     if (statement && Split) {
       Split.create(statement, {
@@ -644,35 +728,30 @@
         scrollTrigger: { trigger: img.closest("[data-parallax-wrap]") || img, start: "top bottom", end: "bottom top", scrub: true }
       });
     });
-    gsap.from(".about-photo", {
-      clipPath: "inset(30% 10% 30% 10% round 28px)", duration: 1.6, ease: "expo.out",
-      scrollTrigger: { trigger: ".about-photo", start: "top 85%", once: true }
-    });
     gsap.from(".about-block", {
-      y: 80, rotate: -4, autoAlpha: 0, duration: 1.2, ease: "expo.out",
+      y: 70, autoAlpha: 0, duration: 1.1, ease: "expo.out",
       scrollTrigger: { trigger: ".about-block", start: "top 95%", once: true }
     });
     ST.batch(".principle", {
       start: "top 88%", once: true,
-      onEnter: function (els) { gsap.from(els, { y: 50, autoAlpha: 0, duration: 1, ease: "expo.out", stagger: 0.12 }); }
+      onEnter: function (els) { gsap.from(els, { y: 40, autoAlpha: 0, duration: 0.9, ease: "expo.out", stagger: 0.1 }); }
     });
 
-    /* --- Galerija: kortelės atsiveria iš apačios --- */
+    /* --- Galerija --- */
     ST.batch(".gallery-item, .gallery-cta", {
       start: "top 90%", once: true,
       onEnter: function (els) {
         els.forEach(function (el, i) {
-          var tl = gsap.timeline({ delay: i * 0.1 });
+          var tl = gsap.timeline({ delay: i * 0.08 });
           tl.fromTo(el, { clipPath: "inset(100% 0% 0% 0% round 18px)" },
-            { clipPath: "inset(0% 0% 0% 0% round 18px)", duration: 1.3, ease: "expo.inOut", clearProps: "clipPath" });
-          // Animuojamas apvalkalas, ne pati nuotrauka — jos hover perėjimas nesikerta su GSAP
+            { clipPath: "inset(0% 0% 0% 0% round 18px)", duration: 1.2, ease: "expo.inOut", clearProps: "clipPath" });
           var wrap = $(".gallery-img", el);
-          if (wrap) tl.fromTo(wrap, { scale: 1.35 }, { scale: 1, duration: 1.6, ease: "expo.out", clearProps: "transform" }, 0.15);
+          if (wrap) tl.fromTo(wrap, { scale: 1.3 }, { scale: 1, duration: 1.5, ease: "expo.out", clearProps: "transform" }, 0.15);
         });
       }
     });
 
-    /* --- Darbo eiga: vanduo teka vamzdžiu --- */
+    /* --- Darbo eiga: vanduo vamzdyje --- */
     var pipeline = $("[data-pipeline]");
     if (pipeline) {
       var steps = $$("[data-step]", pipeline);
@@ -683,14 +762,11 @@
       var trackH = pTrack.offsetHeight;
       ST.addEventListener("refresh", function () { trackH = pTrack.offsetHeight; });
       pipeline.classList.add("is-ready");
-      // Rašome tik transform/opacity tiesiai į elementus — be maketo perskaičiavimo
       var setFill = gsap.quickSetter(pFill, "scaleY");
       var setDrop = gsap.quickSetter(pDrop, "y", "px");
       setFill(0);
       ST.create({
-        trigger: pipeline, start: "top 62%",
-        endTrigger: lastStep, end: "top 62%",
-        scrub: 0.6,
+        trigger: pipeline, start: "top 62%", endTrigger: lastStep, end: "top 62%", scrub: 0.6,
         onUpdate: function (self) {
           setFill(self.progress);
           setDrop(self.progress * trackH);
@@ -706,49 +782,33 @@
       });
     }
 
-    /* --- DUK ir kontaktai --- */
+    /* --- DUK, kontaktai, poraštė --- */
     ST.batch(".acc-item", {
       start: "top 92%", once: true,
-      onEnter: function (els) { gsap.from(els, { y: 40, autoAlpha: 0, duration: 0.9, ease: "expo.out", stagger: 0.07 }); }
+      onEnter: function (els) { gsap.from(els, { y: 30, autoAlpha: 0, duration: 0.8, ease: "expo.out", stagger: 0.06 }); }
     });
     gsap.from(".form-card", {
-      y: 100, autoAlpha: 0, duration: 1.3, ease: "expo.out",
+      y: 80, autoAlpha: 0, duration: 1.2, ease: "expo.out",
       scrollTrigger: { trigger: ".form-card", start: "top 90%", once: true }
     });
-    ST.batch(".contact-list li", {
-      start: "top 92%", once: true,
-      onEnter: function (els) { gsap.from(els, { x: -30, autoAlpha: 0, duration: 0.9, ease: "expo.out", stagger: 0.08 }); }
-    });
-
-    /* --- Poraštė: didelis užrašas kyla raidėmis --- */
     var mark = $("[data-footer-mark]");
     if (mark && Split) {
       Split.create(mark, {
         type: "chars", mask: "chars", autoSplit: true,
         onSplit: function (self) {
           return gsap.from(self.chars, {
-            yPercent: 100, duration: 1.1, ease: "expo.out", stagger: 0.025,
+            yPercent: 100, duration: 1, ease: "expo.out", stagger: 0.025,
             scrollTrigger: { trigger: ".footer-mark", start: "top 98%", once: true }
           });
         }
       });
     }
 
-    // Kai pasikrauna paveikslėliai — perskaičiuojame pozicijas
     window.addEventListener("load", function () { ST.refresh(); });
   }
 
   var started = false;
   function start() { if (started) return; started = true; initMotion(); handleInitialHash(); }
-  function handleInitialHash() {
-    if (!location.hash) return;
-    var tab = tabForPanelId(location.hash.slice(1));
-    if (tab) activateTab(tab, { animate: false });
-    var go = function () {
-      setTimeout(function () { if (ST) ST.refresh(); goToHash(location.hash, false, true); }, 150);
-    };
-    if (doc.readyState === "complete") go(); else window.addEventListener("load", go);
-  }
   if (doc.fonts && doc.fonts.ready) {
     doc.fonts.ready.then(start);
     setTimeout(start, 1500);
