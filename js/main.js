@@ -39,8 +39,9 @@
 
   /* ---------- Sklandus slinkimas (Lenis) ---------- */
   if (window.Lenis && !reduce) {
-    lenis = new window.Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
+    lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 1, smoothWheel: true, syncTouch: false });
     if (gsap && ST) {
+      ST.config({ ignoreMobileResize: true });
       lenis.on("scroll", ST.update);
       gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
       gsap.ticker.lagSmoothing(0);
@@ -71,6 +72,13 @@
   var header = $(".site-header");
   var bar = $(".scroll-progress");
   var lastY = window.scrollY;
+  // Puslapio aukštį skaitome tik keičiantis dydžiui, ne kiekvieno slinkimo metu
+  var maxScroll = 1;
+  function measure() { maxScroll = Math.max(1, doc.documentElement.scrollHeight - window.innerHeight); }
+  measure();
+  window.addEventListener("resize", measure);
+  window.addEventListener("load", measure);
+  if (ST) ST.addEventListener("refresh", measure);
   function onScroll() {
     var y = window.scrollY;
     if (header) {
@@ -79,10 +87,7 @@
       if (!menuOpen && y > 400 && y > lastY + 4) header.classList.add("is-hidden");
       else if (y < lastY - 4 || y < 400) header.classList.remove("is-hidden");
     }
-    if (bar) {
-      var max = doc.documentElement.scrollHeight - window.innerHeight;
-      bar.style.transform = "scaleX(" + (max > 0 ? Math.min(y / max, 1) : 0) + ")";
-    }
+    if (bar) bar.style.transform = "scaleX(" + Math.min(y / maxScroll, 1) + ")";
     lastY = y;
   }
   window.addEventListener("scroll", onScroll, { passive: true });
@@ -465,18 +470,25 @@
   }
 
   /* ---------- Bėganti juosta: greitis pagal slinkimą ---------- */
+  // Juosta sukasi visada (nesustoja nei sustojus slinkti, nei užvedus pelę);
+  // slenkant ji tik laikinai pagreitėja ir sklandžiai grįžta į įprastą greitį.
   var tickerTrack = $("[data-ticker]");
-  if (tickerTrack && !reduce && tickerTrack.getAnimations) {
-    var tickerAnim = tickerTrack.getAnimations()[0];
-    var rate = 1, prevY = window.scrollY;
-    var tick = function () {
-      var y = window.scrollY, v = y - prevY; prevY = y;
-      var target = 1 + Math.max(-3, Math.min(6, v * 0.25));
-      rate += (target - rate) * 0.08;
-      if (tickerAnim) tickerAnim.playbackRate = Math.abs(rate) < 0.15 ? 0.15 * Math.sign(rate || 1) : rate;
-      requestAnimationFrame(tick);
-    };
-    if (tickerAnim) requestAnimationFrame(tick);
+  if (tickerTrack && !reduce && gsap) {
+    tickerTrack.classList.add("is-gsap");
+    var loop = gsap.to(tickerTrack, { xPercent: -50, duration: 42, ease: "none", repeat: -1, force3D: true });
+    if (ST) {
+      var boost = 1;
+      ST.create({
+        start: 0, end: "max",
+        onUpdate: function (self) {
+          boost = Math.max(boost, 1 + Math.min(Math.abs(self.getVelocity()) / 350, 4));
+        }
+      });
+      gsap.ticker.add(function () {
+        boost += (1 - boost) * 0.04;
+        loop.timeScale(boost);
+      });
+    }
   }
 
   /* ---------- Magnetiniai mygtukai ir žymeklis ---------- */
@@ -530,14 +542,10 @@
     var heroItems = $$(".hero [data-hero-item]");
     gsap.set(heroItems, { autoAlpha: 0, y: 30 });
     endIntro();
-    var rootCss = getComputedStyle(root);
-    var fx = parseFloat(rootCss.getPropertyValue("--frame-x")) || 16;
-    var fr = parseFloat(rootCss.getPropertyValue("--frame-r")) || 28;
+    // Tik transform/opacity — jas naršyklė piešia vaizdo plokštėje, be perpiešimo
     var intro = gsap.timeline({ defaults: { ease: "expo.out" } });
     intro
-      .fromTo(".hero-frame",
-        { "--frame-x": Math.round(window.innerWidth * 0.12) + "px", "--frame-r": "60px" },
-        { "--frame-x": fx + "px", "--frame-r": fr + "px", duration: 1.6, ease: "expo.inOut" }, 0)
+      .fromTo(".hero-frame", { scale: 0.88, y: 30 }, { scale: 1, y: 0, duration: 1.6, ease: "expo.inOut", force3D: true }, 0)
       .from(".hero-media img", { scale: 1.35, duration: 2.2, ease: "expo.out" }, 0)
       .from(".site-header .logo, .site-header .header-cta, .site-header .menu-toggle, .nav-list li", { y: -30, opacity: 0, duration: 1, stagger: 0.05, clearProps: "transform,opacity" }, 0.5)
       .to(heroItems, { y: 0, autoAlpha: 1, duration: 1.1, stagger: 0.1 }, 1.0);
@@ -550,10 +558,10 @@
       });
     }
 
-    /* --- Hero rėmas išsiplečia slenkant, nuotrauka juda lėčiau --- */
-    gsap.fromTo(".hero-frame", { "--frame-x": fx + "px", "--frame-r": fr + "px" }, {
-      "--frame-x": "0px", "--frame-r": "0px", ease: "none", immediateRender: false,
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "+=55%", scrub: true }
+    /* --- Slenkant hero kortelė švelniai „atsitraukia“, nuotrauka juda lėčiau --- */
+    gsap.fromTo(".hero-frame", { scale: 1 }, {
+      scale: 0.94, ease: "none", immediateRender: false, force3D: true,
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
     });
     gsap.to(".hero-media img", {
       yPercent: 14, ease: "none",
@@ -657,8 +665,9 @@
           var tl = gsap.timeline({ delay: i * 0.1 });
           tl.fromTo(el, { clipPath: "inset(100% 0% 0% 0% round 18px)" },
             { clipPath: "inset(0% 0% 0% 0% round 18px)", duration: 1.3, ease: "expo.inOut", clearProps: "clipPath" });
-          var img = $(".gallery-img img", el);
-          if (img) tl.fromTo(img, { scale: 1.4 }, { scale: 1, duration: 1.6, ease: "expo.out", clearProps: "transform" }, 0.15);
+          // Animuojamas apvalkalas, ne pati nuotrauka — jos hover perėjimas nesikerta su GSAP
+          var wrap = $(".gallery-img", el);
+          if (wrap) tl.fromTo(wrap, { scale: 1.35 }, { scale: 1, duration: 1.6, ease: "expo.out", clearProps: "transform" }, 0.15);
         });
       }
     });
@@ -668,15 +677,24 @@
     if (pipeline) {
       var steps = $$("[data-step]", pipeline);
       var lastStep = steps[steps.length - 1];
+      var pTrack = $(".pipe-track", pipeline);
+      var pFill = $("[data-pipe-fill]", pipeline);
+      var pDrop = $("[data-pipe-drop]", pipeline);
+      var trackH = pTrack.offsetHeight;
+      ST.addEventListener("refresh", function () { trackH = pTrack.offsetHeight; });
       pipeline.classList.add("is-ready");
-      pipeline.style.setProperty("--p", 0);
+      // Rašome tik transform/opacity tiesiai į elementus — be maketo perskaičiavimo
+      var setFill = gsap.quickSetter(pFill, "scaleY");
+      var setDrop = gsap.quickSetter(pDrop, "y", "px");
+      setFill(0);
       ST.create({
         trigger: pipeline, start: "top 62%",
         endTrigger: lastStep, end: "top 62%",
         scrub: 0.6,
         onUpdate: function (self) {
-          pipeline.style.setProperty("--p", self.progress.toFixed(4));
-          pipeline.style.setProperty("--drop-o", self.progress > 0.001 && self.progress < 0.999 ? 1 : 0);
+          setFill(self.progress);
+          setDrop(self.progress * trackH);
+          pDrop.style.opacity = self.progress > 0.001 && self.progress < 0.999 ? 1 : 0;
         }
       });
       steps.forEach(function (step) {

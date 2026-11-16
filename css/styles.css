@@ -157,8 +157,7 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
 .btn-ink, .btn-primary { --bg: var(--ink); --hover-bg: var(--ink-4); }
 .btn-blue { --bg: var(--blue); --dot-bg: #fff; --dot-fg: var(--blue); --hover-bg: var(--blue-600); }
 .btn-glass {
-  --bg: rgba(255,255,255,.1); --bd: rgba(255,255,255,.35); --hover-bg: rgba(255,255,255,.2);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  --bg: rgba(255,255,255,.16); --bd: rgba(255,255,255,.35); --hover-bg: rgba(255,255,255,.2);
 }
 .btn-outline { --bg: transparent; --fg: var(--ink); --bd: var(--ink); --hover-bg: var(--ink); }
 .btn-outline:hover { --fg: #fff; }
@@ -229,8 +228,7 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
 }
 .site-header::before {
   content: ""; position: absolute; inset: 0; z-index: -2;
-  background: rgba(241, 239, 233, .82);
-  backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px);
+  background: rgba(241, 239, 233, .96);
   border-bottom: 1px solid transparent;
   opacity: 0; transition: opacity .35s, border-color .35s;
 }
@@ -342,7 +340,6 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   .nav-list {
     display: flex; gap: 2px; padding: 5px;
     background: rgba(255,255,255,.7); border: 1px solid var(--line); border-radius: 999px;
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   }
   .nav-list li { border: 0; overflow: visible; }
   .nav-list li a, .main-nav.is-open .nav-list li a { transform: none; transition: color .3s, background-color .3s; }
@@ -363,7 +360,8 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   display: flex; align-items: flex-end;
   color: #fff;
   background: var(--ink);
-  clip-path: inset(0 var(--frame-x) 0 var(--frame-x) round var(--frame-r));
+  margin-inline: var(--frame-x); border-radius: var(--frame-r); overflow: hidden;
+  transform-origin: 50% 0; isolation: isolate;
 }
 .hero-media { position: absolute; inset: 0; overflow: hidden; }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
@@ -377,14 +375,13 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   position: relative; z-index: 1;
   display: grid; gap: 28px;
   padding-top: 120px; padding-bottom: 28px;
-  padding-inline: calc(var(--gutter) + var(--frame-x));
+  padding-inline: var(--gutter);
 }
 .hero-kicker {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 8px 14px 8px 12px; margin-bottom: 22px;
   font-size: .88rem; font-weight: 600;
   background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
 .pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #6f95ff; }
 .pulse::after {
@@ -447,8 +444,7 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   padding: 26px 0; margin-top: 8px;
   background: var(--ink); color: #fff;
 }
-.ticker-track { display: flex; width: max-content; animation: ticker 48s linear infinite; }
-.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker-track { display: flex; width: max-content; will-change: transform; animation: ticker 48s linear infinite; }
 .ticker-group { display: flex; align-items: center; gap: 32px; padding-right: 32px; flex-shrink: 0; }
 .ticker-group span {
   font-family: var(--font-head); font-stretch: 118%; font-weight: 800;
@@ -656,7 +652,6 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   padding: 5px 10px; border-radius: 999px;
   font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
 }
 .gallery-name {
   flex-basis: 100%;
@@ -754,7 +749,7 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   transform-origin: top; transform: scaleY(var(--p));
 }
 .pipe-drop {
-  position: absolute; left: 50%; top: calc(var(--p) * 100%);
+  position: absolute; left: 50%; top: 0; will-change: transform;
   width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
   background: var(--blue); box-shadow: 0 0 0 6px rgba(36,88,242,.18), 0 0 24px rgba(36,88,242,.55);
   opacity: var(--drop-o, 0);
@@ -986,3 +981,11 @@ code { font-size: .88em; background: rgba(127,127,127,.16); padding: .1em .4em; 
   .ticker-track { animation: none; }
   .cursor { display: none; }
 }
+
+/* ---------- Sklandumo pataisos ---------- */
+/* GSAP valdo šių nuotraukų transformaciją slenkant — CSS perėjimas jai trukdytų */
+.services.is-horizontal .svc-media img { transition: none; }
+.services.is-horizontal .services-track { will-change: transform; }
+/* Kai juostą suka GSAP, CSS animacija išjungiama */
+.ticker-track.is-gsap { animation: none; }
+.hero-media img { will-change: transform; }
