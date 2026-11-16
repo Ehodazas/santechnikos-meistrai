@@ -35,7 +35,7 @@ Tada atidarykite <http://localhost:8000>.
 ## Ką pakeisti prieš skelbiant
 
 1. **Kontaktai** — `js/config.js`: `phone`, `phoneHref`, `email`, `serviceArea`, `workingHours`, `legalLine`. Įrašę tikrus duomenis, nustatykite `demo: false` (dings įspėjimas „pavyzdiniai duomenys“). Tas pačias reikšmes verta įrašyti ir `index.html` (jos rodomos, jei JavaScript išjungtas).
-2. **Domenas** — `index.html` faile pakeiskite `https://example.com/` (`canonical`, `og:url`, JSON-LD `url`).
+2. **Domenas** — prijungę savo domeną, `index.html` faile pakeiskite `https://ehodazas.github.io/santechnikos-meistrai/` (`canonical`, `og:url`, JSON-LD `url`), taip pat `sitemap.xml` ir `robots.txt`.
 3. **Nuotraukos** — skiltyje „Atlikti darbai“ dabar yra iliustracinės „Unsplash“ nuotraukos su žyma „Pavyzdys“. Pakeiskite jas savo objektų nuotraukomis (pvz., `assets/img/...`), tada pašalinkite pastabą `.demo-note` ir žymes `.gallery-tag`. Lightbox didelį vaizdą ima iš mygtuko atributo `data-full`.
 4. **Privatumo politika** — užpildykite laukelius `[...]` faile `privatumo-politika.html`.
 5. **Tekstai** — paslaugų aprašymai ir DUK atsakymai yra realistiški, bet bendro pobūdžio. Pritaikykite juos savo veiklai ir neskelbkite to, ko negalite patvirtinti.

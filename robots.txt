@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://ehodazas.github.io/santechnikos-meistrai/sitemap.xml
