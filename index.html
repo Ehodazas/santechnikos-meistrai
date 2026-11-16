@@ -5,22 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://images.unsplash.com data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>Santechnikos Meistrai — vandentiekio, kanalizacijos ir šildymo darbai</title>
-  <meta name="description" content="Vandentiekio, kanalizacijos, šildymo sistemų ir santechnikos prietaisų montavimo bei remonto darbai. Aiški komunikacija, suderinta kaina ir tvarkinga darbo eiga.">
-  <meta name="theme-color" content="#0b1320">
+  <title>Santechnikos Meistrai — vamzdžiai, šildymas, vandentiekis</title>
+  <meta name="description" content="Vandentiekio, kanalizacijos ir šildymo sistemų montavimas, remontas ir renovacija namams bei verslui. Pasirinkite problemą ir aprašykite ją per minutę.">
+  <meta name="theme-color" content="#1d1f22">
   <link rel="canonical" href="https://ehodazas.github.io/santechnikos-meistrai/">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="lt_LT">
   <meta property="og:site_name" content="Santechnikos Meistrai">
-  <meta property="og:title" content="Santechnikos Meistrai — patikimi santechnikos sprendimai jūsų namams">
-  <meta property="og:description" content="Vandentiekio, kanalizacijos, šildymo sistemų montavimo ir remonto darbai.">
+  <meta property="og:title" content="Vamzdžiai, šildymas, vandentiekis. Sutvarkysime.">
+  <meta property="og:description" content="Santechnikos montavimo, remonto ir renovacijos darbai namams bei verslui.">
   <meta property="og:url" content="https://ehodazas.github.io/santechnikos-meistrai/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=1200&h=630&fit=crop&auto=format&q=75">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=1200&h=630&fit=crop&auto=format&q=75">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/archivo-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
@@ -30,7 +29,6 @@
   <script src="js/config.js" defer></script>
   <script src="js/vendor/gsap.min.js" defer></script>
   <script src="js/vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/vendor/SplitText.min.js" defer></script>
   <script src="js/main.js" defer></script>
 
   <script type="application/ld+json">
@@ -38,70 +36,56 @@
     "@context": "https://schema.org",
     "@type": "Plumber",
     "name": "Santechnikos Meistrai",
-    "description": "Vandentiekio, kanalizacijos, šildymo sistemų montavimo ir remonto darbai.",
-    "url": "https://ehodazas.github.io/santechnikos-meistrai/",
-    "areaServed": "LT"
+    "description": "Vandentiekio, kanalizacijos ir šildymo sistemų montavimas, remontas ir renovacija.",
+    "url": "https://ehodazas.github.io/santechnikos-meistrai/"
   }
   </script>
 </head>
 <body>
   <a class="skip-link" href="#turinys">Pereiti prie turinio</a>
-  <div class="scroll-progress" aria-hidden="true"></div>
 
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
     <defs>
-      <symbol id="i-tap" viewBox="0 0 24 24"><path d="M4 10h7a3 3 0 0 1 3 3v1"/><path d="M4 7v6"/><path d="M8 7V5h6"/><path d="M11 5V3"/><path d="M14 17.5c0 1.1-.9 2-2 2s-2-.9-2-2c0-1.2 2-3.5 2-3.5s2 2.3 2 3.5z"/><path d="M14 10h6"/></symbol>
-      <symbol id="i-drain" viewBox="0 0 24 24"><path d="M4 4h6v7a3 3 0 0 0 3 3h7"/><path d="M4 8h2"/><path d="M20 10v8"/><path d="M8 18h4"/><path d="M10 16l2 2-2 2"/></symbol>
-      <symbol id="i-heat" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M7.5 6v12M12 6v12M16.5 6v12"/><path d="M5 18v2M19 18v2"/><path d="M9 3c.6.6.6 1.4 0 2M14 3c.6.6.6 1.4 0 2"/></symbol>
-      <symbol id="i-sink" viewBox="0 0 24 24"><path d="M3 11h18v1a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6v-1z"/><path d="M12 11V5a2 2 0 0 1 4 0"/><path d="M10 18v3h4v-3"/></symbol>
-      <symbol id="i-pipe" viewBox="0 0 24 24"><path d="M3 7h9a5 5 0 0 1 5 5v9"/><path d="M3 11h9a1 1 0 0 1 1 1v9"/><path d="M3 5v8M15 21h4"/><path d="M19 3l2 2-2 2M21 5h-5"/></symbol>
-      <symbol id="i-gauge" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 13l3.5-3.5"/><path d="M8 17h8"/><path d="M12 5V3M9 3h6"/></symbol>
-      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5z"/><path d="M8 9h8M8 12h5"/></symbol>
-      <symbol id="i-tune" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
-      <symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="M4 6l1.5 1.5L8 5M4 12l1.5 1.5L8 11M4 18l1.5 1.5L8 17"/></symbol>
-      <symbol id="i-level" viewBox="0 0 24 24"><rect x="2" y="8" width="20" height="8" rx="1.5"/><rect x="9" y="10" width="6" height="4" rx="2"/><path d="M12 10v4"/></symbol>
-      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
-      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7l9 6 9-6"/></symbol>
-      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
-      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-      <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4v15M6 13l6 6 6-6"/></symbol>
       <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
       <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
       <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
       <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
       <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
-      <symbol id="i-elbow" viewBox="0 0 24 24"><path d="M3 8h8a6 6 0 0 1 6 6v7"/><path d="M3 4v8M13 21h8"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 7l9 6 9-6"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
     </defs>
   </svg>
 
   <!-- ============ ANTRAŠTĖ ============ -->
-  <header class="site-header" id="virsus">
+  <header class="site-header">
     <div class="container header-inner">
       <a class="logo" href="#pradzia" aria-label="Santechnikos Meistrai — į pradžią">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 32 32"><path d="M6 6h9a7 7 0 0 1 7 7v13" /><path d="M6 12h8a2 2 0 0 1 2 2v12" /></svg>
-        </span>
+        <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h10a8 8 0 0 1 8 8v12"/><path d="M5 13h9a3 3 0 0 1 3 3v11"/></svg></span>
         <span class="logo-text">Santechnikos <strong>Meistrai</strong></span>
       </a>
 
       <nav class="main-nav" id="pagrindinis-meniu" aria-label="Pagrindinė navigacija">
         <ul class="nav-list">
-          <li><a href="#pradzia"><span class="nav-idx" aria-hidden="true">01</span>Pradžia</a></li>
+          <li><a href="#problema"><span class="nav-idx" aria-hidden="true">01</span>Problemos</a></li>
           <li><a href="#paslaugos"><span class="nav-idx" aria-hidden="true">02</span>Paslaugos</a></li>
-          <li><a href="#apie-mus"><span class="nav-idx" aria-hidden="true">03</span>Apie mus</a></li>
-          <li><a href="#atlikti-darbai"><span class="nav-idx" aria-hidden="true">04</span>Atlikti darbai</a></li>
+          <li><a href="#darbai"><span class="nav-idx" aria-hidden="true">03</span>Darbų pavyzdžiai</a></li>
+          <li><a href="#kaip-dirbame"><span class="nav-idx" aria-hidden="true">04</span>Kaip dirbame</a></li>
           <li><a href="#duk"><span class="nav-idx" aria-hidden="true">05</span>DUK</a></li>
           <li><a href="#kontaktai"><span class="nav-idx" aria-hidden="true">06</span>Kontaktai</a></li>
         </ul>
         <div class="nav-mobile-foot">
-          <a class="btn btn-blue btn-lg" href="#kontaktai"><span class="btn-roll"><span>Gauti pasiūlymą</span></span></a>
+          <a class="btn btn-accent btn-block" href="#kontaktai">Aprašyti problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <p class="nav-mobile-contact"><a data-config-link="phone" data-config="phone" href="tel:+37060000000">+370 600 00000</a><a data-config-link="email" data-config="email" href="mailto:info@jusu-imone.lt">info@jusu-imone.lt</a></p>
         </div>
       </nav>
 
-      <a class="btn btn-ink header-cta" href="#kontaktai"><span class="btn-roll"><span>Gauti pasiūlymą</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up"/></svg></span></a>
+      <a class="btn btn-dark header-cta" href="#kontaktai">Užklausa <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="pagrindinis-meniu">
         <span class="menu-toggle-label" aria-hidden="true">Meniu</span>
@@ -115,389 +99,421 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="pradzia" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="hero-kicker" data-hero-item><span class="pulse" aria-hidden="true"></span>Santechnika ir šildymas namams</p>
+      <div class="container hero-grid">
+        <p class="hero-meta label" data-hero-item><span>Santechnika</span><span>Šildymas</span><span>Vandentiekis</span></p>
+
+        <div class="hero-text">
           <h1 id="hero-title" class="hero-title">
-            <span class="hl hl-q"><span>Prateka vamzdis?</span></span>
-            <span class="hl hl-q"><span>Reikia naujos šildymo sistemos?</span></span>
-            <span class="hl hl-a"><span class="hl-a-word">Padėsime<span class="hl-dot">.</span><svg class="hero-pipe" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M3 14 H360 a12 12 0 0 0 12 -11" pathLength="1"/></svg></span></span>
+            <span class="hl"><span>Vamzdžiai,</span></span>
+            <span class="hl"><span>šildymas,</span></span>
+            <span class="hl"><span>vandentiekis.</span></span>
+            <span class="hl hl-accent"><span>Sutvarkysime.</span></span>
           </h1>
-          <div class="hero-bottom" data-hero-item>
-            <p class="hero-lead">Vandentiekio, kanalizacijos ir šildymo sistemų montavimo bei remonto paslaugos.</p>
-            <div class="hero-actions">
-              <a class="btn btn-blue btn-lg btn-magnetic" href="#kontaktai"><span class="btn-roll"><span>Gauti pasiūlymą</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up"/></svg></span></a>
-              <a class="btn btn-outline btn-lg" href="#paslaugos"><span class="btn-roll"><span>Peržiūrėti paslaugas</span></span></a>
-            </div>
-          </div>
         </div>
 
-        <div class="hero-visual">
-          <div class="hero-photo" data-hero-photo>
-            <img
-              src="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=1200&h=1400&fit=crop&auto=format&q=75"
-              srcset="https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=700&h=520&fit=crop&auto=format&q=72 700w,
-                      https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=1000&h=1200&fit=crop&auto=format&q=75 1000w,
-                      https://images.unsplash.com/photo-1676210134188-4c05dd172f89?w=1400&h=1600&fit=crop&auto=format&q=72 1400w"
-              sizes="(min-width: 1024px) 46vw, 100vw" width="1200" height="1400"
-              alt="Santechnikas tvarko vamzdžių jungtį po kriaukle"
-              fetchpriority="high">
+        <figure class="hero-photo frame" data-hero-photo>
+          <img
+            src="https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=1000&h=1250&fit=crop&auto=format&q=75"
+            srcset="https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=640&h=520&fit=crop&auto=format&q=72 640w,
+                    https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=1000&h=1250&fit=crop&auto=format&q=75 1000w,
+                    https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=1400&h=1750&fit=crop&auto=format&q=72 1400w"
+            sizes="(min-width: 1024px) 34vw, 100vw" width="1000" height="1250"
+            alt="Santechnikas su darbo pirštinėmis montuoja įrangą prie plytelėmis išklotos sienos"
+            fetchpriority="high">
+          <figcaption class="frame-tag label">Montavimo darbai</figcaption>
+        </figure>
+
+        <div class="hero-side" data-hero-item>
+          <p class="hero-lead">Santechnikos montavimo, remonto ir renovacijos darbai namams bei verslui.</p>
+          <div class="hero-actions">
+            <a class="btn btn-accent btn-lg" href="#problema">Aprašyti problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"/></svg></a>
+            <a class="btn btn-line btn-lg" href="#paslaugos">Visos paslaugos</a>
           </div>
-          <aside class="hero-tip" aria-labelledby="hero-tip-title" data-hero-tip>
-            <p class="hero-tip-title" id="hero-tip-title">Prateka dabar?</p>
-            <p>Užsukite pagrindinį vandens ventilį, o jei vanduo pasiekė elektros instaliaciją, atjunkite elektrą. Tada skambinkite.</p>
-            <a class="hero-tip-phone" data-config-link="phone" href="tel:+37060000000"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span data-config="phone">+370 600 00000</span></a>
-          </aside>
+        </div>
+      </div>
+
+      <!-- Vamzdžio linija veda į problemų pasirinkimą -->
+      <div class="container hero-link" aria-hidden="true">
+        <svg class="hero-pipe" viewBox="0 0 200 120" preserveAspectRatio="none"><path d="M2 0 V70 a16 16 0 0 0 16 16 H198" pathLength="1"/></svg>
+        <span class="label">Pradėkite nuo problemos</span>
+      </div>
+    </section>
+
+    <!-- ============ PROBLEMŲ PASIRINKIMAS ============ -->
+    <section class="section problems" id="problema" aria-labelledby="problema-title">
+      <div class="container">
+        <div class="sec-head">
+          <p class="sec-index label"><span>01</span>Problemos</p>
+          <h2 id="problema-title" class="sec-title">Kokia santechnikos problema jus užklupo?</h2>
+          <p class="sec-intro">Pasirinkite situaciją: parodysime, ką galite padaryti iš karto, ką paprastai atliekame ir kurią paslaugą rinktis.</p>
+        </div>
+
+        <div class="prob-grid" data-problems>
+          <div class="prob-list" role="tablist" aria-label="Santechnikos problemos" aria-orientation="vertical">
+            <button class="prob-tab" role="tab" id="pt-pratekejimas" aria-controls="pp-pratekejimas" aria-selected="true" data-problem-key="pratekejimas"><span class="prob-n">A</span><span class="prob-name">Prateka vamzdis</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <button class="prob-tab" role="tab" id="pt-uzsikimsimas" aria-controls="pp-uzsikimsimas" aria-selected="false" tabindex="-1" data-problem-key="uzsikimsimas"><span class="prob-n">B</span><span class="prob-name">Užsikimšo kanalizacija</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <button class="prob-tab" role="tab" id="pt-radiatoriai" aria-controls="pp-radiatoriai" aria-selected="false" tabindex="-1" data-problem-key="radiatoriai"><span class="prob-n">C</span><span class="prob-name">Nešyla radiatoriai</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <button class="prob-tab" role="tab" id="pt-nauja" aria-controls="pp-nauja" aria-selected="false" tabindex="-1" data-problem-key="nauja"><span class="prob-n">D</span><span class="prob-name">Reikia naujos santechnikos</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <button class="prob-tab" role="tab" id="pt-renovacija" aria-controls="pp-renovacija" aria-selected="false" tabindex="-1" data-problem-key="renovacija"><span class="prob-n">E</span><span class="prob-name">Planuoju renovaciją</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            <button class="prob-tab" role="tab" id="pt-kita" aria-controls="pp-kita" aria-selected="false" tabindex="-1" data-problem-key="kita"><span class="prob-n">F</span><span class="prob-name">Kita problema</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+
+          <div class="prob-panels">
+            <article class="prob-panel" id="pp-pratekejimas" role="tabpanel" aria-labelledby="pt-pratekejimas" tabindex="0">
+              <h3 class="prob-title">Prateka vamzdis</h3>
+              <div class="prob-cols">
+                <div>
+                  <p class="prob-sub label">Ką padaryti dabar</p>
+                  <ol class="prob-steps">
+                    <li>Užsukite ventilį prieš pažeistą vietą. Jei jo nėra, užsukite pagrindinį vandens įvado ventilį.</li>
+                    <li>Jei vanduo pasiekė elektros instaliaciją, atjunkite elektrą tame kambaryje.</li>
+                    <li>Nufotografuokite pratekėjimo vietą: nuotrauka padės įvertinti darbus.</li>
+                  </ol>
+                </div>
+                <div>
+                  <p class="prob-sub label">Ką paprastai atliekame</p>
+                  <ul class="prob-work">
+                    <li>Randame tikslią pratekėjimo vietą</li>
+                    <li>Keičiame pažeistą jungtį, ventilį ar vamzdžio atkarpą</li>
+                    <li>Jei vamzdynas senas ir gedimai kartojasi, pasiūlome jį keisti</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prob-foot">
+                <p class="prob-related"><span class="label">Susijusios paslaugos</span><a href="#paslauga-vandentiekis">01 / Vandentiekis</a><a href="#paslauga-vamzdynai">05 / Vamzdynų renovacija</a></p>
+                <a class="btn btn-accent" href="#kontaktai" data-problem="pratekejimas">Aprašyti šią problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+
+            <article class="prob-panel" id="pp-uzsikimsimas" role="tabpanel" aria-labelledby="pt-uzsikimsimas" tabindex="0" hidden>
+              <h3 class="prob-title">Užsikimšo kanalizacija</h3>
+              <div class="prob-cols">
+                <div>
+                  <p class="prob-sub label">Ką padaryti dabar</p>
+                  <ol class="prob-steps">
+                    <li>Nebenaudokite vandens prietaise, kuris užsikimšo, kad vanduo neišsilietų.</li>
+                    <li>Atkreipkite dėmesį, ar užsikimšo vienas prietaisas, ar keli. Tai padeda rasti, kur yra kliūtis.</li>
+                    <li>Jei vanduo stovi, nepilkite cheminių valiklių: jie gali pažeisti vamzdžius ir apsunkinti valymą.</li>
+                  </ol>
+                </div>
+                <div>
+                  <p class="prob-sub label">Ką paprastai atliekame</p>
+                  <ul class="prob-work">
+                    <li>Išvalome užsikimšusią atkarpą</li>
+                    <li>Ieškome priežasties: nuolydžio, nuosėdų, netinkamų jungčių</li>
+                    <li>Pertvarkome atkarpas, kurios užsikemša pakartotinai</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prob-foot">
+                <p class="prob-related"><span class="label">Susijusios paslaugos</span><a href="#paslauga-kanalizacija">02 / Kanalizacija</a><a href="#paslauga-diagnostika">06 / Gedimų šalinimas</a></p>
+                <a class="btn btn-accent" href="#kontaktai" data-problem="uzsikimsimas">Aprašyti šią problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+
+            <article class="prob-panel" id="pp-radiatoriai" role="tabpanel" aria-labelledby="pt-radiatoriai" tabindex="0" hidden>
+              <h3 class="prob-title">Nešyla radiatoriai</h3>
+              <div class="prob-cols">
+                <div>
+                  <p class="prob-sub label">Ką patikrinti patiems</p>
+                  <ol class="prob-steps">
+                    <li>Ar atsukti radiatoriaus ventiliai ir termostatinė galvutė.</li>
+                    <li>Kokį slėgį rodo katilo ar sistemos manometras. Leistinos ribos nurodytos įrangos instrukcijoje.</li>
+                    <li>Kurie radiatoriai šalti: visi, keli ar tik viršutinė dalis. Užsirašykite.</li>
+                  </ol>
+                </div>
+                <div>
+                  <p class="prob-sub label">Ką paprastai atliekame</p>
+                  <ul class="prob-work">
+                    <li>Išleidžiame orą ir patikriname cirkuliaciją</li>
+                    <li>Subalansuojame sistemą, kad šiltų visi radiatoriai</li>
+                    <li>Praplauname sistemą ir keičiame netinkamai veikiančius vožtuvus</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prob-foot">
+                <p class="prob-related"><span class="label">Susijusios paslaugos</span><a href="#paslauga-sildymas">03 / Šildymo sistemos</a><a href="#paslauga-diagnostika">06 / Gedimų šalinimas</a></p>
+                <a class="btn btn-accent" href="#kontaktai" data-problem="radiatoriai">Aprašyti šią problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+
+            <article class="prob-panel" id="pp-nauja" role="tabpanel" aria-labelledby="pt-nauja" tabindex="0" hidden>
+              <h3 class="prob-title">Reikia naujos santechnikos</h3>
+              <div class="prob-cols">
+                <div>
+                  <p class="prob-sub label">Ką paruošti iš anksto</p>
+                  <ol class="prob-steps">
+                    <li>Surašykite, ką reikia sumontuoti: klozetą, praustuvą, dušą, vandens šildytuvą ar kt.</li>
+                    <li>Pažymėkite, ar prietaisai jau nupirkti. Jei dar ne, pasitarkite prieš pirkdami.</li>
+                    <li>Nufotografuokite vietą, kur bus montuojama, ir esamus vamzdžių išvadus.</li>
+                  </ol>
+                </div>
+                <div>
+                  <p class="prob-sub label">Ką paprastai atliekame</p>
+                  <ul class="prob-work">
+                    <li>Montuojame klozetus, potinkinius rėmus, praustuvus, dušus ir vonias</li>
+                    <li>Montuojame vandens šildytuvus ir prijungiame buitinę techniką</li>
+                    <li>Jei reikia, perkeliame vandentiekio ir kanalizacijos išvadus</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prob-foot">
+                <p class="prob-related"><span class="label">Susijusios paslaugos</span><a href="#paslauga-prietaisai">04 / Santechnikos montavimas</a></p>
+                <a class="btn btn-accent" href="#kontaktai" data-problem="nauja">Aprašyti šią problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+
+            <article class="prob-panel" id="pp-renovacija" role="tabpanel" aria-labelledby="pt-renovacija" tabindex="0" hidden>
+              <h3 class="prob-title">Planuoju renovaciją</h3>
+              <div class="prob-cols">
+                <div>
+                  <p class="prob-sub label">Ką verta žinoti</p>
+                  <ol class="prob-steps">
+                    <li>Santechniką verta kviesti prieš apdailos darbus, kol sienos ir grindys dar atviros.</li>
+                    <li>Turėkite planą su prietaisų vietomis, net jei jis pieštas ranka.</li>
+                    <li>Daugiabutyje darbus stovuose reikia suderinti su bendrija ar administratoriumi.</li>
+                  </ol>
+                </div>
+                <div>
+                  <p class="prob-sub label">Ką paprastai atliekame</p>
+                  <ul class="prob-work">
+                    <li>Keičiame senus vandentiekio ir kanalizacijos vamzdynus</li>
+                    <li>Įrengiame naujas trasas pagal planą</li>
+                    <li>Pertvarkome šildymą: radiatorius, grindinį šildymą, kolektorius</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prob-foot">
+                <p class="prob-related"><span class="label">Susijusios paslaugos</span><a href="#paslauga-vamzdynai">05 / Vamzdynų renovacija</a><a href="#paslauga-vandentiekis">01 / Vandentiekis</a></p>
+                <a class="btn btn-accent" href="#kontaktai" data-problem="renovacija">Aprašyti šią problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+
+            <article class="prob-panel" id="pp-kita" role="tabpanel" aria-labelledby="pt-kita" tabindex="0" hidden>
+              <h3 class="prob-title">Kita problema</h3>
+              <div class="prob-cols">
+                <div>
+                  <p class="prob-sub label">Ką aprašyti</p>
+                  <ol class="prob-steps">
+                    <li>Ką pastebėjote: drėgmę, kvapą, triukšmą vamzdžiuose ar silpną vandens slėgį.</li>
+                    <li>Nuo kada tai vyksta ir ar problema nuolatinė, ar pasikartojanti.</li>
+                    <li>Kurioje vietoje: virtuvėje, vonioje, katilinėje, rūsyje.</li>
+                  </ol>
+                </div>
+                <div>
+                  <p class="prob-sub label">Ką paprastai atliekame</p>
+                  <ul class="prob-work">
+                    <li>Nustatome priežastį ir ją paaiškiname</li>
+                    <li>Pasiūlome sprendimą ir suderiname jo kainą</li>
+                    <li>Remontuojame tik jums pritarus</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prob-foot">
+                <p class="prob-related"><span class="label">Susijusios paslaugos</span><a href="#paslauga-diagnostika">06 / Gedimų šalinimas</a></p>
+                <a class="btn btn-accent" href="#kontaktai" data-problem="kita">Aprašyti šią problemą <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ JUOSTA ============ -->
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track" data-ticker>
-        <div class="ticker-group">
-          <span>Vandentiekis</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span class="is-outline">Kanalizacija</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span>Šildymo sistemos</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span class="is-outline">Prietaisų montavimas</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span>Vamzdynų keitimas</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span class="is-outline">Gedimų šalinimas</span><svg class="icon"><use href="#i-elbow"/></svg>
-        </div>
-        <div class="ticker-group">
-          <span>Vandentiekis</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span class="is-outline">Kanalizacija</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span>Šildymo sistemos</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span class="is-outline">Prietaisų montavimas</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span>Vamzdynų keitimas</span><svg class="icon"><use href="#i-elbow"/></svg>
-          <span class="is-outline">Gedimų šalinimas</span><svg class="icon"><use href="#i-elbow"/></svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- ============ PASLAUGOS (vienas sąrašas) ============ -->
+    <!-- ============ PASLAUGOS ============ -->
     <section class="section services" id="paslaugos" aria-labelledby="paslaugos-title">
       <div class="container">
-        <div class="section-head">
+        <div class="sec-head sec-head--split">
           <div>
-            <p class="eyebrow">Paslaugos</p>
-            <h2 id="paslaugos-title" class="section-title" data-split>Ką galime padaryti jūsų namuose</h2>
+            <p class="sec-index label"><span>02</span>Paslaugos</p>
+            <h2 id="paslaugos-title" class="sec-title">Ką atliekame</h2>
           </div>
-          <p class="section-intro">Išskleiskite paslaugą ir pamatysite, kokie darbai į ją įeina. Jei nežinote, kuri sritis tinka, užklausos formoje rinkitės „Kita“.</p>
+          <p class="sec-intro">Šeši darbų tipai. Išskleiskite eilutę ir pamatysite konkrečius darbus.</p>
         </div>
 
-        <div class="svc-layout">
-          <div class="svc-visual" aria-hidden="true">
-            <div class="svc-frame">
-              <img class="svc-img is-active" src="https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1669725341213-7379ff6c90d5?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1775359924006-557dba8c862b?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1768321918210-a775e4c88f08?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1761758674188-2b8e4c89c5e2?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-            </div>
-            <p class="svc-counter"><span data-svc-count>01</span> / 06</p>
-          </div>
+        <div class="svc-list" data-svc-list>
+          <article class="svc-row" id="paslauga-vandentiekis">
+            <h3 class="svc-heading"><button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p1" id="svc-t1">
+              <span class="svc-num">01 /</span><span class="svc-name">Vandentiekis</span><span class="svc-short">Šalto ir karšto vandens tiekimas: įrengimas, pratekėjimai, jungtys.</span><span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+            </button></h3>
+            <div class="svc-panel" id="svc-p1" role="region" aria-labelledby="svc-t1" hidden><div class="svc-panel-inner">
+              <ul class="svc-items">
+                <li>Vandens įvado ir skaitiklio mazgo įrengimas</li>
+                <li>Šalto ir karšto vandens trasų montavimas</li>
+                <li>Pratekėjimų paieška ir šalinimas</li>
+                <li>Ventilių, filtrų ir slėgio reduktorių keitimas</li>
+                <li>Vandens filtrų sistemų prijungimas</li>
+              </ul>
+              <a class="btn btn-dark" href="#kontaktai" data-service="vandentiekis">Užklausa dėl vandentiekio <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div></div>
+          </article>
 
-          <div class="svc-list" data-svc-list>
-            <article class="svc-row" id="paslauga-vandentiekis">
-              <h3 class="svc-heading">
-                <button class="svc-trigger" type="button" aria-expanded="true" aria-controls="svc-p1" id="svc-t1">
-                  <span class="svc-num" aria-hidden="true">01</span>
-                  <span class="svc-name">Vandentiekio įrengimas ir remontas</span>
-                  <span class="svc-short">Pratekėjimai, jungtys, naujos trasos</span>
-                  <span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-                </button>
-              </h3>
-              <div class="svc-panel" id="svc-p1" role="region" aria-labelledby="svc-t1">
-                <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Meistras sandarina vandentiekio jungtį po kriaukle">
-                  <p class="svc-desc">Šalto ir karšto vandens tiekimas butuose ir namuose: nuo varvančios jungties iki visų trasų naujame būste.</p>
-                  <ul class="job-list">
-                    <li>Vandens įvado ir skaitiklio mazgo įrengimas</li>
-                    <li>Šalto ir karšto vandens trasų montavimas</li>
-                    <li>Pratekėjimų paieška ir šalinimas</li>
-                    <li>Ventilių, filtrų ir slėgio reduktorių keitimas</li>
-                    <li>Vandens filtrų sistemų prijungimas</li>
-                  </ul>
-                  <a class="btn btn-ink" href="#kontaktai" data-service="vandentiekis"><span class="btn-roll"><span>Užklausti dėl vandentiekio</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-                </div>
-              </div>
-            </article>
+          <article class="svc-row" id="paslauga-kanalizacija">
+            <h3 class="svc-heading"><button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p2" id="svc-t2">
+              <span class="svc-num">02 /</span><span class="svc-name">Kanalizacija</span><span class="svc-short">Vidaus nuotekų vamzdynai, nuolydžiai, užsikimšimų šalinimas.</span><span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+            </button></h3>
+            <div class="svc-panel" id="svc-p2" role="region" aria-labelledby="svc-t2" hidden><div class="svc-panel-inner">
+              <ul class="svc-items">
+                <li>Vidaus kanalizacijos vamzdynų įrengimas</li>
+                <li>Prijungimas prie esamų stovų ir išvadų</li>
+                <li>Revizijų ir vėdinimo vožtuvų montavimas</li>
+                <li>Užsikimšusių vamzdžių valymas</li>
+                <li>Nuotekų siurblių prijungimas, kai savitakos nėra</li>
+              </ul>
+              <a class="btn btn-dark" href="#kontaktai" data-service="kanalizacija">Užklausa dėl kanalizacijos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div></div>
+          </article>
 
-            <article class="svc-row" id="paslauga-kanalizacija">
-              <h3 class="svc-heading">
-                <button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p2" id="svc-t2">
-                  <span class="svc-num" aria-hidden="true">02</span>
-                  <span class="svc-name">Kanalizacijos įrengimas</span>
-                  <span class="svc-short">Vamzdynai, nuolydžiai, užsikimšimai</span>
-                  <span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-                </button>
-              </h3>
-              <div class="svc-panel" id="svc-p2" role="region" aria-labelledby="svc-t2" hidden>
-                <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Santechnikas remontuoja vamzdyną vonios kambaryje">
-                  <p class="svc-desc">Vidaus kanalizacija, kuri veikia tyliai ir be kvapų: tinkami nuolydžiai, sandarios jungtys ir revizijos vėlesnei priežiūrai.</p>
-                  <ul class="job-list">
-                    <li>Vidaus kanalizacijos vamzdynų įrengimas</li>
-                    <li>Prijungimas prie esamų stovų ir išvadų</li>
-                    <li>Revizijų ir vėdinimo vožtuvų montavimas</li>
-                    <li>Užsikimšusių vamzdžių valymas</li>
-                    <li>Nuotekų siurblių prijungimas, kai savitakos nėra</li>
-                  </ul>
-                  <a class="btn btn-ink" href="#kontaktai" data-service="kanalizacija"><span class="btn-roll"><span>Užklausti dėl kanalizacijos</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-                </div>
-              </div>
-            </article>
+          <article class="svc-row" id="paslauga-sildymas">
+            <h3 class="svc-heading"><button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p3" id="svc-t3">
+              <span class="svc-num">03 /</span><span class="svc-name">Šildymo sistemos</span><span class="svc-short">Radiatoriai, grindinis šildymas, katilų ir šilumos siurblių prijungimas.</span><span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+            </button></h3>
+            <div class="svc-panel" id="svc-p3" role="region" aria-labelledby="svc-t3" hidden><div class="svc-panel-inner">
+              <ul class="svc-items">
+                <li>Radiatorių montavimas ir keitimas</li>
+                <li>Grindinio šildymo kontūrų ir kolektorių įrengimas</li>
+                <li>Katilų ir šilumos siurblių vidaus dalies prijungimas</li>
+                <li>Sistemos praplovimas, užpildymas ir paleidimas</li>
+                <li>Hidraulinis sistemos balansavimas</li>
+              </ul>
+              <a class="btn btn-dark" href="#kontaktai" data-service="sildymas">Užklausa dėl šildymo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div></div>
+          </article>
 
-            <article class="svc-row" id="paslauga-sildymas">
-              <h3 class="svc-heading">
-                <button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p3" id="svc-t3">
-                  <span class="svc-num" aria-hidden="true">03</span>
-                  <span class="svc-name">Šildymo sistemų montavimas</span>
-                  <span class="svc-short">Radiatoriai, grindinis šildymas, katilinė</span>
-                  <span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-                </button>
-              </h3>
-              <div class="svc-panel" id="svc-p3" role="region" aria-labelledby="svc-t3" hidden>
-                <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1669725341213-7379ff6c90d5?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Baltas plokštinis radiatorius kambaryje">
-                  <p class="svc-desc">Radiatorinio ir grindinio šildymo sistemos, katilų bei šilumos siurblių prijungimas. Darbą baigiame sistemos užpildymu, paleidimu ir patikra.</p>
-                  <ul class="job-list">
-                    <li>Radiatorių montavimas ir keitimas</li>
-                    <li>Grindinio šildymo kontūrų ir kolektorių įrengimas</li>
-                    <li>Katilų ir šilumos siurblių vidaus dalies prijungimas</li>
-                    <li>Sistemos praplovimas ir užpildymas</li>
-                    <li>Hidraulinis sistemos balansavimas</li>
-                  </ul>
-                  <a class="btn btn-ink" href="#kontaktai" data-service="sildymas"><span class="btn-roll"><span>Užklausti dėl šildymo</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-                </div>
-              </div>
-            </article>
+          <article class="svc-row" id="paslauga-prietaisai">
+            <h3 class="svc-heading"><button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p4" id="svc-t4">
+              <span class="svc-num">04 /</span><span class="svc-name">Santechnikos montavimas</span><span class="svc-short">Klozetai, praustuvai, dušai, vonios, vandens šildytuvai.</span><span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+            </button></h3>
+            <div class="svc-panel" id="svc-p4" role="region" aria-labelledby="svc-t4" hidden><div class="svc-panel-inner">
+              <ul class="svc-items">
+                <li>Klozetų ir potinkinių rėmų montavimas</li>
+                <li>Praustuvų, plautuvių ir maišytuvų montavimas</li>
+                <li>Dušo kabinų, padėklų ir vonių montavimas</li>
+                <li>Vandens šildytuvų (boilerių) montavimas</li>
+                <li>Skalbimo ir indaplovės mašinų prijungimas</li>
+              </ul>
+              <a class="btn btn-dark" href="#kontaktai" data-service="prietaisai">Užklausa dėl montavimo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div></div>
+          </article>
 
-            <article class="svc-row" id="paslauga-prietaisai">
-              <h3 class="svc-heading">
-                <button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p4" id="svc-t4">
-                  <span class="svc-num" aria-hidden="true">04</span>
-                  <span class="svc-name">Santechnikos prietaisų montavimas</span>
-                  <span class="svc-short">Klozetai, dušai, maišytuvai, boileriai</span>
-                  <span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-                </button>
-              </h3>
-              <div class="svc-panel" id="svc-p4" role="region" aria-labelledby="svc-t4" hidden>
-                <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1775359924006-557dba8c862b?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Šiuolaikinė virtuvės plautuvė su juodu maišytuvu">
-                  <p class="svc-desc">Sumontuojame ir prijungiame prietaisus bei buitinę techniką. Jei prietaisą perkate patys, pasitarkite su mumis prieš pirkdami: patikrinsime, ar jis tinka montavimo vietai.</p>
-                  <ul class="job-list">
-                    <li>Klozetų ir potinkinių rėmų montavimas</li>
-                    <li>Praustuvų, plautuvių ir maišytuvų montavimas</li>
-                    <li>Dušo kabinų, padėklų ir vonių montavimas</li>
-                    <li>Vandens šildytuvų (boilerių) montavimas</li>
-                    <li>Skalbimo ir indaplovės mašinų prijungimas</li>
-                  </ul>
-                  <a class="btn btn-ink" href="#kontaktai" data-service="montavimas"><span class="btn-roll"><span>Užklausti dėl montavimo</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-                </div>
-              </div>
-            </article>
+          <article class="svc-row" id="paslauga-vamzdynai">
+            <h3 class="svc-heading"><button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p5" id="svc-t5">
+              <span class="svc-num">05 /</span><span class="svc-name">Vamzdynų renovacija</span><span class="svc-short">Senų metalinių vamzdynų keitimas, darbai renovuojant būstą.</span><span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+            </button></h3>
+            <div class="svc-panel" id="svc-p5" role="region" aria-labelledby="svc-t5" hidden><div class="svc-panel-inner">
+              <ul class="svc-items">
+                <li>Esamos vamzdynų būklės įvertinimas</li>
+                <li>Metalinių vamzdynų keitimas plastikiniais ar daugiasluoksniais</li>
+                <li>Šildymo stovų atšakų keitimas</li>
+                <li>Naujos trasos renovuojant butą ar namą</li>
+                <li>Darbų derinimas su bendrija ar administratoriumi</li>
+              </ul>
+              <a class="btn btn-dark" href="#kontaktai" data-service="vamzdynai">Užklausa dėl renovacijos <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div></div>
+          </article>
 
-            <article class="svc-row" id="paslauga-vamzdynai">
-              <h3 class="svc-heading">
-                <button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p5" id="svc-t5">
-                  <span class="svc-num" aria-hidden="true">05</span>
-                  <span class="svc-name">Vamzdynų keitimas</span>
-                  <span class="svc-short">Seni metaliniai vamzdžiai, renovacija</span>
-                  <span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-                </button>
-              </h3>
-              <div class="svc-panel" id="svc-p5" role="region" aria-labelledby="svc-t5" hidden>
-                <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1768321918210-a775e4c88f08?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Nauji vamzdynai atviroje sienoje renovacijos metu">
-                  <p class="svc-desc">Kai gedimai kartojasi arba vyksta renovacija, senus vamzdynus keičiame naujais. Medžiagas parenkame pagal sistemą ir montavimo sąlygas.</p>
-                  <ul class="job-list">
-                    <li>Esamos vamzdynų būklės įvertinimas</li>
-                    <li>Metalinių vamzdynų keitimas plastikiniais ar daugiasluoksniais</li>
-                    <li>Šildymo stovų atšakų keitimas</li>
-                    <li>Vamzdynų keitimas renovuojant butą ar namą</li>
-                    <li>Darbų derinimas su bendrija ar administratoriumi</li>
-                  </ul>
-                  <a class="btn btn-ink" href="#kontaktai" data-service="vandentiekis:vamzdynai"><span class="btn-roll"><span>Užklausti dėl vamzdynų</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="svc-row" id="paslauga-diagnostika">
-              <h3 class="svc-heading">
-                <button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p6" id="svc-t6">
-                  <span class="svc-num" aria-hidden="true">06</span>
-                  <span class="svc-name">Gedimų diagnostika ir šalinimas</span>
-                  <span class="svc-short">Slėgis, drėgmė, kvapai, triukšmas</span>
-                  <span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-                </button>
-              </h3>
-              <div class="svc-panel" id="svc-p6" role="region" aria-labelledby="svc-t6" hidden>
-                <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1761758674188-2b8e4c89c5e2?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Raudonas ventilis su slėgio manometru">
-                  <p class="svc-desc">Kai sistema veikia netinkamai, pirmiausia nustatome priežastį ir ją paaiškiname. Remonto imamės tik suderinę sprendimą su jumis.</p>
-                  <ul class="job-list">
-                    <li>Silpno vandens slėgio priežasčių nustatymas</li>
-                    <li>Nesandarių jungčių ir drėgmės šaltinių paieška</li>
-                    <li>Lėto nuotėkio ir nemalonių kvapų šalinimas</li>
-                    <li>Šąlančių radiatorių ir oro sistemoje šalinimas</li>
-                    <li>Triukšmo vamzdynuose priežasčių paieška</li>
-                  </ul>
-                  <a class="btn btn-ink" href="#kontaktai" data-service="kita"><span class="btn-roll"><span>Aprašyti gedimą</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-                </div>
-              </div>
-            </article>
-          </div>
+          <article class="svc-row" id="paslauga-diagnostika">
+            <h3 class="svc-heading"><button class="svc-trigger" type="button" aria-expanded="false" aria-controls="svc-p6" id="svc-t6">
+              <span class="svc-num">06 /</span><span class="svc-name">Gedimų šalinimas</span><span class="svc-short">Silpnas slėgis, drėgmė, kvapai, triukšmas: randame priežastį.</span><span class="svc-plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+            </button></h3>
+            <div class="svc-panel" id="svc-p6" role="region" aria-labelledby="svc-t6" hidden><div class="svc-panel-inner">
+              <ul class="svc-items">
+                <li>Silpno vandens slėgio priežasčių nustatymas</li>
+                <li>Nesandarių jungčių ir drėgmės šaltinių paieška</li>
+                <li>Lėto nuotėkio ir nemalonių kvapų šalinimas</li>
+                <li>Šąlančių radiatorių ir oro sistemoje šalinimas</li>
+                <li>Triukšmo vamzdynuose priežasčių paieška</li>
+              </ul>
+              <a class="btn btn-dark" href="#kontaktai" data-service="diagnostika">Užklausa dėl gedimo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ APIE MUS ============ -->
-    <section class="section about" id="apie-mus" aria-labelledby="apie-title">
+    <!-- ============ DARBŲ PAVYZDŽIAI ============ -->
+    <section class="section projects" id="darbai" aria-labelledby="darbai-title">
       <div class="container">
-        <p class="eyebrow eyebrow-light">Apie mus</p>
-        <h2 id="apie-title" class="visually-hidden">Apie Santechnikos Meistrus</h2>
-        <p class="about-statement" data-reveal-words>Santechnika nėra vien vamzdžiai. Tai šiltas būstas, švarus vanduo ir ramybė, kad niekur neprateka. Todėl dirbame aiškiai, tvarkingai ir be staigmenų.</p>
-
-        <div class="about-grid">
-          <div class="about-media">
-            <div class="about-photo" data-parallax-wrap>
-              <img data-parallax src="https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=1000&h=1250&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=600&h=750&fit=crop&auto=format&q=70 600w, https://images.unsplash.com/photo-1676210134050-6f12c6898395?w=1000&h=1250&fit=crop&auto=format&q=70 1000w" sizes="(min-width: 960px) 40vw, 100vw" width="1000" height="1250" loading="lazy" decoding="async" alt="Meistras su darbo pirštinėmis montuoja santechnikos įrangą prie plytelėmis išklotos sienos">
-            </div>
-            <div class="about-block">
-              <p>Santechnikos Meistrai atlieka vandentiekio, kanalizacijos ir šildymo darbus namams ir butams. Jums svarbu žinoti, kas, kada ir už kiek bus padaryta, todėl tai aptariame prieš pradėdami.</p>
-            </div>
+        <div class="sec-head sec-head--split">
+          <div>
+            <p class="sec-index label"><span>03</span>Darbų pavyzdžiai</p>
+            <h2 id="darbai-title" class="sec-title">Kokius objektus tvarkome</h2>
           </div>
+          <p class="demo-note" role="note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span><strong>Iliustracinės nuotraukos.</strong> Tai pavyzdinės „Unsplash“ nuotraukos, ne įmonės atlikti darbai. Prieš skelbdami svetainę pakeiskite jas savo objektų nuotraukomis.</span></p>
+        </div>
 
-          <ul class="principles" role="list">
-            <li class="principle">
-              <span class="principle-num">01</span>
-              <h3>Aiški komunikacija</h3>
-              <p>Paaiškiname, ką darysime ir kodėl, be painių terminų. Apie pasikeitimus pranešame iš anksto.</p>
-            </li>
-            <li class="principle">
-              <span class="principle-num">02</span>
-              <h3>Individualūs sprendimai</h3>
-              <p>Sprendimą parenkame pagal jūsų būstą, esamą sistemą ir biudžetą, o ne pagal šabloną.</p>
-            </li>
-            <li class="principle">
-              <span class="principle-num">03</span>
-              <h3>Tvarkinga darbo eiga</h3>
-              <p>Suderiname laiką, saugome aplinką darbo vietoje ir po darbų paliekame tvarką.</p>
-            </li>
-            <li class="principle">
-              <span class="principle-num">04</span>
-              <h3>Dėmesys darbų kokybei</h3>
-              <p>Tikriname jungtis, sandarumą ir sistemos veikimą prieš perduodami darbą jums.</p>
-            </li>
+        <div class="showcase">
+          <figure class="shot shot-1">
+            <button class="shot-img frame" type="button" data-full="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1800&auto=format&q=80" data-title="Vonios kambario santechnika" aria-label="Padidinti: Vonios kambario santechnika">
+              <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&h=900&fit=crop&auto=format&q=72" srcset="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=700&h=525&fit=crop&auto=format&q=72 700w, https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&h=900&fit=crop&auto=format&q=72 1200w" sizes="(min-width: 1024px) 58vw, 100vw" width="1200" height="900" loading="lazy" decoding="async" alt="Šiuolaikinis vonios kambarys su dušu ir spintele po praustuvu">
+              <span class="shot-zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption><span class="label">P/01 · Pavyzdys</span><strong>Vonios kambario santechnika</strong>Potinkinis rėmas, dušo sistema, praustuvas ir jų prijungimas.</figcaption>
+          </figure>
+
+          <figure class="shot shot-2">
+            <button class="shot-img frame" type="button" data-full="https://images.unsplash.com/photo-1650551182991-b07558247564?w=1800&auto=format&q=80" data-title="Katilinės įrengimas" aria-label="Padidinti: Katilinės įrengimas">
+              <img src="https://images.unsplash.com/photo-1650551182991-b07558247564?w=800&h=1000&fit=crop&auto=format&q=72" srcset="https://images.unsplash.com/photo-1650551182991-b07558247564?w=500&h=625&fit=crop&auto=format&q=72 500w, https://images.unsplash.com/photo-1650551182991-b07558247564?w=800&h=1000&fit=crop&auto=format&q=72 800w" sizes="(min-width: 1024px) 34vw, 100vw" width="800" height="1000" loading="lazy" decoding="async" alt="Katilinės vamzdynai su ventiliais, siurbliu ir manometrais">
+              <span class="shot-zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption><span class="label">P/02 · Pavyzdys</span><strong>Katilinės įrengimas</strong>Katilo prijungimas, siurbliai, apsaugos armatūra.</figcaption>
+          </figure>
+
+          <figure class="shot shot-3">
+            <button class="shot-img frame" type="button" data-full="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=1800&auto=format&q=80" data-title="Vandentiekio renovacija" aria-label="Padidinti: Vandentiekio renovacija">
+              <img src="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=800&h=600&fit=crop&auto=format&q=72" srcset="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=500&h=375&fit=crop&auto=format&q=72 500w, https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=800&h=600&fit=crop&auto=format&q=72 800w" sizes="(min-width: 1024px) 30vw, 100vw" width="800" height="600" loading="lazy" decoding="async" alt="Nauji vandentiekio vamzdžiai renovuojamoje sienoje">
+              <span class="shot-zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption><span class="label">P/03 · Pavyzdys</span><strong>Vandentiekio renovacija</strong>Naujos trasos atviroje sienoje prieš apdailą.</figcaption>
+          </figure>
+
+          <figure class="shot shot-4">
+            <button class="shot-img frame" type="button" data-full="https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=1800&auto=format&q=80" data-title="Šildymo sistemos įrengimas" aria-label="Padidinti: Šildymo sistemos įrengimas">
+              <img src="https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=800&h=600&fit=crop&auto=format&q=72" srcset="https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=500&h=375&fit=crop&auto=format&q=72 500w, https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=800&h=600&fit=crop&auto=format&q=72 800w" sizes="(min-width: 1024px) 30vw, 100vw" width="800" height="600" loading="lazy" decoding="async" alt="Baltas radiatorius po langu su mediniu rėmu">
+              <span class="shot-zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption><span class="label">P/04 · Pavyzdys</span><strong>Šildymo sistema</strong>Radiatorių montavimas ir sistemos balansavimas.</figcaption>
+          </figure>
+
+          <figure class="shot shot-5">
+            <button class="shot-img frame" type="button" data-full="https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=1800&auto=format&q=80" data-title="Virtuvės santechnikos montavimas" aria-label="Padidinti: Virtuvės santechnikos montavimas">
+              <img src="https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=1200&h=700&fit=crop&auto=format&q=72" srcset="https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=700&h=410&fit=crop&auto=format&q=72 700w, https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=1200&h=700&fit=crop&auto=format&q=72 1200w" sizes="(min-width: 1024px) 40vw, 100vw" width="1200" height="700" loading="lazy" decoding="async" alt="Virtuvės maišytuvas virš dvigubos plautuvės">
+              <span class="shot-zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption><span class="label">P/05 · Pavyzdys</span><strong>Virtuvės santechnika</strong>Plautuvė, maišytuvas, indaplovės prijungimas.</figcaption>
+          </figure>
+
+          <figure class="shot shot-6">
+            <button class="shot-img frame" type="button" data-full="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=1800&auto=format&q=80" data-title="Kanalizacijos darbai" aria-label="Padidinti: Kanalizacijos darbai">
+              <img src="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=800&h=600&fit=crop&auto=format&q=72" srcset="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=500&h=375&fit=crop&auto=format&q=72 500w, https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=800&h=600&fit=crop&auto=format&q=72 800w" sizes="(min-width: 1024px) 30vw, 100vw" width="800" height="600" loading="lazy" decoding="async" alt="Lauko vamzdynas paklotas tranšėjoje">
+              <span class="shot-zoom" aria-hidden="true"><svg class="icon"><use href="#i-expand"/></svg></span>
+            </button>
+            <figcaption><span class="label">P/06 · Pavyzdys</span><strong>Kanalizacijos darbai</strong>Nuotekų vamzdynas su tinkamu nuolydžiu ir revizijomis.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KAIP DIRBAME (apie mus + eiga) ============ -->
+    <section class="section process" id="kaip-dirbame" aria-labelledby="procesas-title">
+      <div class="container">
+        <div class="process-top">
+          <div>
+            <p class="sec-index label"><span>04</span>Kaip dirbame</p>
+            <h2 id="procesas-title" class="sec-title">Nuo pirmo skambučio iki patikrintos sistemos</h2>
+          </div>
+          <ul class="rules" role="list">
+            <li><span class="label">Kaina</span>Darbų sąrašą ir kainą suderiname prieš pradedant. Jei paaiškėja papildomų darbų, pirmiausia juos aptariame.</li>
+            <li><span class="label">Paaiškinimas</span>Pasakome, ką darome ir kodėl, be painių terminų.</li>
+            <li><span class="label">Patikra</span>Baigę tikriname sandarumą ir sistemos veikimą, po darbų paliekame tvarką.</li>
           </ul>
         </div>
-      </div>
-    </section>
 
-    <!-- ============ ATLIKTI DARBAI ============ -->
-    <section class="section projects" id="atlikti-darbai" aria-labelledby="darbai-title">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Atlikti darbai</p>
-            <h2 id="darbai-title" class="section-title" data-split>Darbų pavyzdžiai pagal sritis</h2>
-          </div>
-          <p class="demo-note" role="note">
-            <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
-            <span><strong>Iliustracinės nuotraukos.</strong> Tai pavyzdinės „Unsplash“ nuotraukos, o ne įmonės atlikti darbai. Prieš skelbdami svetainę pakeiskite jas savo objektų nuotraukomis.</span>
-          </p>
-        </div>
-
-        <ul class="gallery" role="list">
-          <li class="gallery-item g-1">
-            <button class="gallery-btn" type="button" data-full="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1800&auto=format&q=80" data-title="Vonios kambario santechnika">
-              <span class="gallery-img"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1000&h=1100&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=660&fit=crop&auto=format&q=70 600w, https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1000&h=1100&fit=crop&auto=format&q=70 1000w" sizes="(min-width: 960px) 42vw, 100vw" width="1000" height="1100" loading="lazy" decoding="async" alt="Šiuolaikinis vonios kambarys su dušu ir spintele po praustuvu"></span>
-              <span class="gallery-meta"><span class="gallery-tag">Pavyzdys</span><span class="gallery-name">Vonios kambario santechnika</span><span class="gallery-num" aria-hidden="true">01</span></span>
-            </button>
-          </li>
-          <li class="gallery-item g-2">
-            <button class="gallery-btn" type="button" data-full="https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=1800&auto=format&q=80" data-title="Šildymo sistemos įrengimas">
-              <span class="gallery-img"><img src="https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=900&h=640&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=560&h=400&fit=crop&auto=format&q=70 560w, https://images.unsplash.com/photo-1599028274511-e02a767949a3?w=900&h=640&fit=crop&auto=format&q=70 900w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw" width="900" height="640" loading="lazy" decoding="async" alt="Baltas radiatorius po langu su mediniu rėmu"></span>
-              <span class="gallery-meta"><span class="gallery-tag">Pavyzdys</span><span class="gallery-name">Šildymo sistemos įrengimas</span><span class="gallery-num" aria-hidden="true">02</span></span>
-            </button>
-          </li>
-          <li class="gallery-item g-3">
-            <button class="gallery-btn" type="button" data-full="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=1800&auto=format&q=80" data-title="Vandentiekio renovacija">
-              <span class="gallery-img"><img src="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=900&h=640&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=560&h=400&fit=crop&auto=format&q=70 560w, https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=900&h=640&fit=crop&auto=format&q=70 900w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw" width="900" height="640" loading="lazy" decoding="async" alt="Nauji vandentiekio vamzdžiai renovuojamoje sienoje"></span>
-              <span class="gallery-meta"><span class="gallery-tag">Pavyzdys</span><span class="gallery-name">Vandentiekio renovacija</span><span class="gallery-num" aria-hidden="true">03</span></span>
-            </button>
-          </li>
-          <li class="gallery-item g-4">
-            <button class="gallery-btn" type="button" data-full="https://images.unsplash.com/photo-1650551182991-b07558247564?w=1800&auto=format&q=80" data-title="Katilinės įrengimas">
-              <span class="gallery-img"><img src="https://images.unsplash.com/photo-1650551182991-b07558247564?w=900&h=640&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1650551182991-b07558247564?w=560&h=400&fit=crop&auto=format&q=70 560w, https://images.unsplash.com/photo-1650551182991-b07558247564?w=900&h=640&fit=crop&auto=format&q=70 900w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw" width="900" height="640" loading="lazy" decoding="async" alt="Katilinės vamzdynai su ventiliais, siurbliu ir manometrais"></span>
-              <span class="gallery-meta"><span class="gallery-tag">Pavyzdys</span><span class="gallery-name">Katilinės įrengimas</span><span class="gallery-num" aria-hidden="true">04</span></span>
-            </button>
-          </li>
-          <li class="gallery-item g-5">
-            <button class="gallery-btn" type="button" data-full="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=1800&auto=format&q=80" data-title="Kanalizacijos darbai">
-              <span class="gallery-img"><img src="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=900&h=640&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=560&h=400&fit=crop&auto=format&q=70 560w, https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=900&h=640&fit=crop&auto=format&q=70 900w" sizes="(min-width: 960px) 30vw, (min-width: 640px) 50vw, 100vw" width="900" height="640" loading="lazy" decoding="async" alt="Lauko vamzdynas paklotas tranšėjoje"></span>
-              <span class="gallery-meta"><span class="gallery-tag">Pavyzdys</span><span class="gallery-name">Kanalizacijos darbai</span><span class="gallery-num" aria-hidden="true">05</span></span>
-            </button>
-          </li>
-          <li class="gallery-item g-6">
-            <button class="gallery-btn" type="button" data-full="https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=1800&auto=format&q=80" data-title="Virtuvės santechnikos montavimas">
-              <span class="gallery-img"><img src="https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=1200&h=640&fit=crop&auto=format&q=70" srcset="https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=700&h=400&fit=crop&auto=format&q=70 700w, https://images.unsplash.com/photo-1784790601912-b30717b805b8?w=1200&h=640&fit=crop&auto=format&q=70 1200w" sizes="(min-width: 960px) 58vw, 100vw" width="1200" height="640" loading="lazy" decoding="async" alt="Virtuvės maišytuvas virš dvigubos plautuvės"></span>
-              <span class="gallery-meta"><span class="gallery-tag">Pavyzdys</span><span class="gallery-name">Virtuvės santechnikos montavimas</span><span class="gallery-num" aria-hidden="true">06</span></span>
-            </button>
-          </li>
-          <li class="gallery-cta">
-            <div>
-              <h3>Planuojate panašius darbus?</h3>
-              <p>Atsiųskite kelias nuotraukas ir trumpą aprašymą, o mes pasiūlysime sprendimą.</p>
-            </div>
-            <a class="btn" href="#kontaktai"><span class="btn-roll"><span>Aptarti projektą</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up"/></svg></span></a>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============ KAIP DIRBAME ============ -->
-    <section class="section process" id="kaip-dirbame" aria-labelledby="procesas-title">
-      <div class="container process-grid">
-        <div class="process-head">
-          <p class="eyebrow">Kaip dirbame</p>
-          <h2 id="procesas-title" class="section-title" data-split>Nuo užklausos iki atlikto darbo</h2>
-          <p class="section-intro">Prieš atvykdami su įrankiais, jūs jau žinote darbų apimtį, kainą ir terminą.</p>
-          <a class="btn btn-ink" href="#kontaktai"><span class="btn-roll"><span>Pradėti nuo užklausos</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
-        </div>
-
-        <ol class="pipeline" data-pipeline>
-          <li class="pipe-track" aria-hidden="true"><span class="pipe-fill" data-pipe-fill></span><span class="pipe-drop" data-pipe-drop></span></li>
-          <li class="pipe-step" data-step>
-            <span class="valve" aria-hidden="true"><span>1</span></span>
-            <div class="pipe-card">
-              <h3>Susisiekiate su mumis</h3>
-              <p>Paskambinkite arba užpildykite užklausos formą. Trumpai aprašykite, ką reikia atlikti.</p>
-            </div>
-          </li>
-          <li class="pipe-step" data-step>
-            <span class="valve" aria-hidden="true"><span>2</span></span>
-            <div class="pipe-card">
-              <h3>Aptariame jūsų poreikius</h3>
-              <p>Patikslinsime situaciją, paprašysime nuotraukų arba suderinsime apžiūrą vietoje.</p>
-            </div>
-          </li>
-          <li class="pipe-step" data-step>
-            <span class="valve" aria-hidden="true"><span>3</span></span>
-            <div class="pipe-card">
-              <h3>Suderiname darbų apimtį ir kainą</h3>
-              <p>Pateikiame pasiūlymą su darbų sąrašu, medžiagomis, kaina ir preliminariu terminu.</p>
-            </div>
-          </li>
-          <li class="pipe-step" data-step>
-            <span class="valve" aria-hidden="true"><span>4</span></span>
-            <div class="pipe-card">
-              <h3>Atliekame darbus</h3>
-              <p>Dirbame suderintu laiku, patikriname sistemos veikimą ir paaiškiname, kas buvo padaryta.</p>
-            </div>
-          </li>
+        <ol class="steps" data-steps>
+          <li class="step-line" aria-hidden="true"><span data-step-line></span></li>
+          <li class="step"><span class="step-n">1</span><h3>Aprašote problemą</h3><p>Paskambinkite arba užpildykite užklausą. Nuotraukos labai padeda.</p></li>
+          <li class="step"><span class="step-n">2</span><h3>Patiksliname situaciją</h3><p>Paklausiame detalių, jei reikia, suderiname apžiūrą vietoje.</p></li>
+          <li class="step"><span class="step-n">3</span><h3>Suderiname kainą ir laiką</h3><p>Pateikiame darbų sąrašą, medžiagas, kainą ir preliminarų terminą.</p></li>
+          <li class="step"><span class="step-n">4</span><h3>Atliekame ir patikriname</h3><p>Dirbame suderintu laiku, patikriname sistemą ir paaiškiname, kas padaryta.</p></li>
         </ol>
       </div>
     </section>
@@ -506,326 +522,197 @@
     <section class="section faq" id="duk" aria-labelledby="duk-title">
       <div class="container faq-grid">
         <div class="faq-aside">
-          <p class="eyebrow">DUK</p>
-          <h2 id="duk-title" class="section-title" data-split>Dažniausiai užduodami klausimai</h2>
-          <p class="section-intro">Neradote atsakymo? Parašykite mums ir atsakysime į konkretų jūsų klausimą.</p>
-          <a class="btn btn-ink" href="#kontaktai"><span class="btn-roll"><span>Užduoti klausimą</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+          <p class="sec-index label"><span>05</span>DUK</p>
+          <h2 id="duk-title" class="sec-title">Dažni klausimai</h2>
+          <p class="sec-intro">Neradote atsakymo? Parašykite klausimą užklausos formoje.</p>
         </div>
 
         <div class="accordion" data-accordion>
           <div class="acc-item">
-            <h3 class="acc-heading">
-              <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-1" id="duk-1-btn">
-                <span class="acc-num" aria-hidden="true">01</span><span class="acc-q">Kiek kainuoja santechnikos darbai?</span>
-                <span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-              </button>
-            </h3>
-            <div class="acc-panel" id="duk-1" role="region" aria-labelledby="duk-1-btn" hidden>
-              <div class="acc-inner"><p>Kaina priklauso nuo darbų apimties, sudėtingumo, reikalingų medžiagų ir objekto vietos. Fiksuotų kainų iš anksto neskelbiame, nes du iš pažiūros panašūs darbai gali gerokai skirtis. Įvertinę situaciją iš nuotraukų arba apžiūrėję vietoje, pateikiame pasiūlymą, o darbus pradedame tik jam pritarus.</p></div>
-            </div>
+            <h3 class="acc-heading"><button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-1" id="duk-1-btn"><span class="acc-q">Kiek kainuoja santechnikos darbai?</span><span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc-panel" id="duk-1" role="region" aria-labelledby="duk-1-btn" hidden><div class="acc-inner"><p>Kaina priklauso nuo darbų apimties, sudėtingumo, medžiagų ir objekto vietos. Fiksuotų kainų iš anksto neskelbiame, nes iš pažiūros panašūs darbai gali gerokai skirtis. Įvertinę situaciją iš nuotraukų arba vietoje, pateikiame pasiūlymą, o darbus pradedame tik jam pritarus.</p></div></div>
           </div>
           <div class="acc-item">
-            <h3 class="acc-heading">
-              <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-2" id="duk-2-btn">
-                <span class="acc-num" aria-hidden="true">02</span><span class="acc-q">Kokiose vietovėse dirbate?</span>
-                <span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-              </button>
-            </h3>
-            <div class="acc-panel" id="duk-2" role="region" aria-labelledby="duk-2-btn" hidden>
-              <div class="acc-inner"><p>Aptarnaujamą teritoriją rasite skiltyje „Kontaktai“: <span data-config="serviceArea">[Nurodykite aptarnaujamą teritoriją]</span>. Jei jūsų vietovės nėra sąraše, vis tiek parašykite: patikslinsime, ar galime atvykti.</p></div>
-            </div>
+            <h3 class="acc-heading"><button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-2" id="duk-2-btn"><span class="acc-q">Kokiose vietovėse dirbate?</span><span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc-panel" id="duk-2" role="region" aria-labelledby="duk-2-btn" hidden><div class="acc-inner"><p>Aptarnaujama teritorija: <span data-config="serviceArea">[Nurodykite aptarnaujamą teritoriją]</span>. Jei jūsų vietovės čia nėra, vis tiek parašykite, ir patikslinsime.</p></div></div>
           </div>
           <div class="acc-item">
-            <h3 class="acc-heading">
-              <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-3" id="duk-3-btn">
-                <span class="acc-num" aria-hidden="true">03</span><span class="acc-q">Ar medžiagas perkate jūs, ar turiu jas įsigyti pats?</span>
-                <span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-              </button>
-            </h3>
-            <div class="acc-panel" id="duk-3" role="region" aria-labelledby="duk-3-btn" hidden>
-              <div class="acc-inner"><p>Galimi abu variantai. Galime parinkti ir atvežti medžiagas, o jų kainą nurodysime pasiūlyme atskirai. Jei prietaisus ar medžiagas norite įsigyti patys, prieš pirkdami pasitarkite su mumis: patikrinsime, ar jie tinka jūsų sistemai ir montavimo vietai.</p></div>
-            </div>
+            <h3 class="acc-heading"><button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-3" id="duk-3-btn"><span class="acc-q">Ar medžiagas perkate jūs, ar turiu jas įsigyti pats?</span><span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc-panel" id="duk-3" role="region" aria-labelledby="duk-3-btn" hidden><div class="acc-inner"><p>Galimi abu variantai. Galime parinkti ir atvežti medžiagas, o jų kainą nurodysime pasiūlyme atskirai. Jei prietaisus perkate patys, pasitarkite su mumis prieš pirkdami: patikrinsime, ar jie tinka jūsų sistemai.</p></div></div>
           </div>
           <div class="acc-item">
-            <h3 class="acc-heading">
-              <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-4" id="duk-4-btn">
-                <span class="acc-num" aria-hidden="true">04</span><span class="acc-q">Kiek laiko trunka darbai?</span>
-                <span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-              </button>
-            </h3>
-            <div class="acc-panel" id="duk-4" role="region" aria-labelledby="duk-4-btn" hidden>
-              <div class="acc-inner"><p>Smulkus remontas ar vieno prietaiso montavimas dažnai atliekamas per vieną apsilankymą. Vonios kambario santechnika, vamzdynų keitimas ar šildymo sistemos įrengimas gali užtrukti kelias dienas ar ilgiau. Preliminarų terminą nurodome kartu su pasiūlymu.</p></div>
-            </div>
+            <h3 class="acc-heading"><button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-4" id="duk-4-btn"><span class="acc-q">Kiek laiko trunka darbai?</span><span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc-panel" id="duk-4" role="region" aria-labelledby="duk-4-btn" hidden><div class="acc-inner"><p>Smulkus remontas ar vieno prietaiso montavimas dažnai atliekamas per vieną apsilankymą. Vonios santechnika, vamzdynų keitimas ar šildymo sistema gali užtrukti kelias dienas ar ilgiau. Preliminarų terminą nurodome pasiūlyme.</p></div></div>
           </div>
           <div class="acc-item">
-            <h3 class="acc-heading">
-              <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-5" id="duk-5-btn">
-                <span class="acc-num" aria-hidden="true">05</span><span class="acc-q">Ar atliekate skubius remontus?</span>
-                <span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-              </button>
-            </h3>
-            <div class="acc-panel" id="duk-5" role="region" aria-labelledby="duk-5-btn" hidden>
-              <div class="acc-inner"><p>Skubiais atvejais skambinkite telefonu. Galimybė atvykti greitai priklauso nuo tos dienos užimtumo, todėl ją patikslinsime pokalbio metu. Kol laukiate pagalbos, užsukite pagrindinį vandens čiaupą arba ventilį prieš pažeistą vietą, o jei vanduo pasiekė elektros instaliaciją, atjunkite elektrą.</p></div>
-            </div>
+            <h3 class="acc-heading"><button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-5" id="duk-5-btn"><span class="acc-q">Ar atliekate skubius remontus?</span><span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc-panel" id="duk-5" role="region" aria-labelledby="duk-5-btn" hidden><div class="acc-inner"><p>Skubiais atvejais skambinkite. Ar galime atvykti greitai, priklauso nuo tos dienos užimtumo, todėl tai patikslinsime pokalbio metu. Ką daryti laukiant, rasite skiltyje „Problemos“.</p></div></div>
           </div>
           <div class="acc-item">
-            <h3 class="acc-heading">
-              <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-6" id="duk-6-btn">
-                <span class="acc-num" aria-hidden="true">06</span><span class="acc-q">Kaip gauti pasiūlymą?</span>
-                <span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
-              </button>
-            </h3>
-            <div class="acc-panel" id="duk-6" role="region" aria-labelledby="duk-6-btn" hidden>
-              <div class="acc-inner"><p>Užpildykite užklausos formą arba paskambinkite. Nurodykite, kokius darbus reikia atlikti, objekto vietovę ir pageidaujamą laiką. Jei galite, el. paštu atsiųskite kelias vietos nuotraukas, nes tai padeda tiksliau įvertinti darbus.</p></div>
-            </div>
+            <h3 class="acc-heading"><button class="acc-trigger" type="button" aria-expanded="false" aria-controls="duk-6" id="duk-6-btn"><span class="acc-q">Ar dirbate su verslo klientais?</span><span class="acc-icon" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+            <div class="acc-panel" id="duk-6" role="region" aria-labelledby="duk-6-btn" hidden><div class="acc-inner"><p>Taip, užklausos formoje pasirinkite „Komercinės patalpos“ ir aprašykite objektą. Dėl sąskaitų išrašymo ir darbų organizavimo susitarsime individualiai.</p></div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ KONTAKTAI ============ -->
+    <!-- ============ UŽKLAUSA ============ -->
     <section class="section contact" id="kontaktai" aria-labelledby="kontaktai-title">
       <div class="container contact-grid">
         <div class="contact-info">
-          <p class="eyebrow eyebrow-light">Kontaktai</p>
-          <h2 id="kontaktai-title" class="section-title" data-split>Papasakokite, ką reikia sutvarkyti</h2>
-          <p class="section-intro">Atsakykite į kelis klausimus, kad iš karto suprastume situaciją. Jei klausimas skubus, geriausia skambinti.</p>
+          <p class="sec-index label"><span>06</span>Užklausa</p>
+          <h2 id="kontaktai-title" class="sec-title">Aprašykite problemą</h2>
+          <p class="sec-intro">Trys trumpi žingsniai. Jei klausimas skubus, geriausia skambinti.</p>
 
           <ul class="contact-list" role="list">
-            <li>
-              <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
-              <div><span class="contact-label">Telefonas</span><a data-config-link="phone" href="tel:+37060000000" data-config="phone">+370 600 00000</a></div>
-            </li>
-            <li>
-              <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span>
-              <div><span class="contact-label">El. paštas</span><a data-config-link="email" href="mailto:info@jusu-imone.lt" data-config="email">info@jusu-imone.lt</a></div>
-            </li>
-            <li>
-              <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg></span>
-              <div><span class="contact-label">Aptarnaujama teritorija</span><span class="contact-value" data-config="serviceArea">[Nurodykite aptarnaujamą teritoriją]</span></div>
-            </li>
-            <li>
-              <span class="contact-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
-              <div><span class="contact-label">Darbo laikas</span><span class="contact-value" data-config="workingHours">[Nurodykite darbo laiką]</span></div>
-            </li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><span class="label">Telefonas</span><a data-config-link="phone" href="tel:+37060000000" data-config="phone">+370 600 00000</a></div></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><span class="label">El. paštas</span><a data-config-link="email" href="mailto:info@jusu-imone.lt" data-config="email">info@jusu-imone.lt</a></div></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><span class="label">Aptarnaujama teritorija</span><span class="contact-value" data-config="serviceArea">[Nurodykite aptarnaujamą teritoriją]</span></div></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><span class="label">Darbo laikas</span><span class="contact-value" data-config="workingHours">[Nurodykite darbo laiką]</span></div></li>
           </ul>
 
-          <p class="demo-note demo-note--dark" data-demo-only role="note">
-            <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
-            <span>Kontaktiniai duomenys yra pavyzdiniai. Juos pakeisite faile <code>js/config.js</code>.</span>
-          </p>
+          <p class="demo-note demo-note--dark" data-demo-only role="note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Kontaktiniai duomenys yra pavyzdiniai. Juos pakeisite faile <code>js/config.js</code>.</span></p>
         </div>
 
-        <div class="form-card">
-          <div class="form-head">
-            <h3>Užklausa</h3>
-            <p class="form-explainer" data-form-explainer><strong>Kaip veikia forma:</strong> paspaudus „Paruošti laišką“, atsidarys jūsų el. pašto programa su jau užpildytu laišku. Duomenys niekur nesiunčiami, kol patys neišsiųsite laiško.</p>
-          </div>
+        <div class="wizard-card">
+          <form class="wizard" id="uzklausa" novalidate>
+            <ol class="wiz-progress" aria-label="Užklausos žingsniai">
+              <li data-progress="1" aria-current="step"><button type="button" data-goto="1" disabled><span class="wiz-dot">1</span>Problema</button></li>
+              <li data-progress="2"><button type="button" data-goto="2" disabled><span class="wiz-dot">2</span>Detalės</button></li>
+              <li data-progress="3"><button type="button" data-goto="3" disabled><span class="wiz-dot">3</span>Kontaktai</button></li>
+            </ol>
+            <p class="visually-hidden" aria-live="polite" data-wiz-announce></p>
 
-          <form class="inquiry-form" id="uzklausa" novalidate>
-            <!-- 1. Sritis -->
-            <fieldset class="step" id="f-kategorija" aria-describedby="f-kategorija-err">
-              <legend class="step-title"><span class="step-n" aria-hidden="true">1</span>Kokios pagalbos jums reikia? <span class="req" aria-hidden="true">*</span></legend>
-              <div class="choice-grid">
-                <label class="choice"><input type="radio" name="kategorija" value="vandentiekis" data-label="Vandentiekio remontas ar įrengimas" required><span><svg class="icon" aria-hidden="true"><use href="#i-tap"/></svg>Vandentiekio remontas</span></label>
-                <label class="choice"><input type="radio" name="kategorija" value="kanalizacija" data-label="Kanalizacijos darbai"><span><svg class="icon" aria-hidden="true"><use href="#i-drain"/></svg>Kanalizacijos darbai</span></label>
-                <label class="choice"><input type="radio" name="kategorija" value="sildymas" data-label="Šildymo sistemos"><span><svg class="icon" aria-hidden="true"><use href="#i-heat"/></svg>Šildymo sistemos</span></label>
-                <label class="choice"><input type="radio" name="kategorija" value="montavimas" data-label="Santechnikos montavimas"><span><svg class="icon" aria-hidden="true"><use href="#i-sink"/></svg>Santechnikos montavimas</span></label>
-                <label class="choice"><input type="radio" name="kategorija" value="kita" data-label="Kita"><span><svg class="icon" aria-hidden="true"><use href="#i-gauge"/></svg>Kita / nežinau</span></label>
+            <!-- 1 -->
+            <fieldset class="wiz-step" data-step="1">
+              <legend class="wiz-title" tabindex="-1">Kas atsitiko? <span class="req" aria-hidden="true">*</span></legend>
+              <p class="wiz-service" data-wiz-service hidden></p>
+              <div class="opt-grid" id="f-problema" aria-describedby="f-problema-err">
+                <label class="opt"><input type="radio" name="problema" value="pratekejimas" data-label="Prateka vamzdis" required><span><b>A</b>Prateka vamzdis</span></label>
+                <label class="opt"><input type="radio" name="problema" value="uzsikimsimas" data-label="Užsikimšo kanalizacija"><span><b>B</b>Užsikimšo kanalizacija</span></label>
+                <label class="opt"><input type="radio" name="problema" value="radiatoriai" data-label="Nešyla radiatoriai"><span><b>C</b>Nešyla radiatoriai</span></label>
+                <label class="opt"><input type="radio" name="problema" value="nauja" data-label="Reikia naujos santechnikos"><span><b>D</b>Reikia naujos santechnikos</span></label>
+                <label class="opt"><input type="radio" name="problema" value="renovacija" data-label="Planuoju renovaciją"><span><b>E</b>Planuoju renovaciją</span></label>
+                <label class="opt"><input type="radio" name="problema" value="kita" data-label="Kita problema ar paslauga"><span><b>F</b>Kita problema ar paslauga</span></label>
               </div>
-              <p class="field-error" id="f-kategorija-err" aria-live="polite"></p>
+              <p class="field-error" id="f-problema-err" aria-live="polite"></p>
             </fieldset>
 
-            <!-- 2. Patikslinimas pagal sritį -->
-            <div class="followups">
-              <fieldset class="step followup" data-for="vandentiekis" hidden>
-                <legend class="step-title"><span class="step-n" aria-hidden="true">2</span>Patikslinkite</legend>
-                <div class="field">
-                  <label for="f-v-darbas">Kas reikalinga?</label>
-                  <div class="select-wrap">
-                    <select id="f-v-darbas" name="v_darbas" data-q="Kas reikalinga">
-                      <option value="">Pasirinkite</option>
-                      <option value="pratekejimas">Prateka vamzdis ar varva jungtis</option>
-                      <option value="slegis">Silpnas vandens slėgis</option>
-                      <option value="vamzdynai">Senų vamzdynų keitimas</option>
-                      <option value="naujas">Naujo vandentiekio įrengimas</option>
-                      <option value="kita">Kita</option>
-                    </select>
-                  </div>
-                  <span class="field-line" aria-hidden="true"></span>
+            <!-- 2 -->
+            <fieldset class="wiz-step" data-step="2" hidden>
+              <legend class="wiz-title" tabindex="-1">Detalės</legend>
+              <div class="field">
+                <span class="field-label" id="f-objektas-l">Objektas <span class="req" aria-hidden="true">*</span></span>
+                <div class="pill-group" role="radiogroup" aria-labelledby="f-objektas-l" aria-describedby="f-objektas-err" id="f-objektas">
+                  <label class="opt opt-pill"><input type="radio" name="objektas" value="Butas" required><span>Butas</span></label>
+                  <label class="opt opt-pill"><input type="radio" name="objektas" value="Namas"><span>Namas</span></label>
+                  <label class="opt opt-pill"><input type="radio" name="objektas" value="Komercinės patalpos"><span>Komercinės patalpos</span></label>
                 </div>
-              </fieldset>
-
-              <fieldset class="step followup" data-for="kanalizacija" hidden>
-                <legend class="step-title"><span class="step-n" aria-hidden="true">2</span>Patikslinkite</legend>
-                <div class="field">
-                  <label for="f-k-darbas">Kokia situacija?</label>
-                  <div class="select-wrap">
-                    <select id="f-k-darbas" name="k_darbas" data-q="Situacija">
-                      <option value="">Pasirinkite</option>
-                      <option value="uzsikimsimas">Užsikimšo vamzdis, lėtai nuteka</option>
-                      <option value="kvapas">Jaučiamas nemalonus kvapas</option>
-                      <option value="naujas">Nauja kanalizacija ar pertvarkymas</option>
-                      <option value="kita">Kita</option>
-                    </select>
-                  </div>
-                  <span class="field-line" aria-hidden="true"></span>
-                </div>
-              </fieldset>
-
-              <fieldset class="step followup" data-for="sildymas" hidden>
-                <legend class="step-title"><span class="step-n" aria-hidden="true">2</span>Patikslinkite</legend>
-                <div class="field">
-                  <label for="f-s-darbas">Kokių darbų reikia?</label>
-                  <div class="select-wrap">
-                    <select id="f-s-darbas" name="s_darbas" data-q="Darbai">
-                      <option value="">Pasirinkite</option>
-                      <option value="radiatoriai">Radiatorių montavimas ar keitimas</option>
-                      <option value="grindinis">Grindinis šildymas</option>
-                      <option value="katilas">Katilo ar šilumos siurblio prijungimas</option>
-                      <option value="netolygiai">Sistema šildo netolygiai</option>
-                      <option value="kita">Kita</option>
-                    </select>
-                  </div>
-                  <span class="field-line" aria-hidden="true"></span>
-                </div>
-                <div class="pill-field" role="radiogroup" aria-labelledby="f-s-obj-l" data-q="Objektas">
-                  <span class="pill-label" id="f-s-obj-l">Objektas</span>
-                  <div class="pill-group">
-                    <label class="choice choice-pill"><input type="radio" name="s_objektas" value="Butas"><span>Butas</span></label>
-                    <label class="choice choice-pill"><input type="radio" name="s_objektas" value="Namas"><span>Namas</span></label>
-                    <label class="choice choice-pill"><input type="radio" name="s_objektas" value="Kita patalpa"><span>Kita patalpa</span></label>
-                  </div>
-                </div>
-              </fieldset>
-
-              <fieldset class="step followup" data-for="montavimas" hidden>
-                <legend class="step-title"><span class="step-n" aria-hidden="true">2</span>Patikslinkite</legend>
-                <div class="pill-field" role="group" aria-labelledby="f-m-pr-l" data-q="Ką sumontuoti">
-                  <span class="pill-label" id="f-m-pr-l">Ką reikia sumontuoti? <span class="optional">(galima keli)</span></span>
-                  <div class="pill-group">
-                    <label class="choice choice-pill"><input type="checkbox" name="m_prietaisai" value="Klozetas ar potinkinis rėmas"><span>Klozetas ar rėmas</span></label>
-                    <label class="choice choice-pill"><input type="checkbox" name="m_prietaisai" value="Praustuvas ar plautuvė"><span>Praustuvas ar plautuvė</span></label>
-                    <label class="choice choice-pill"><input type="checkbox" name="m_prietaisai" value="Dušas ar vonia"><span>Dušas ar vonia</span></label>
-                    <label class="choice choice-pill"><input type="checkbox" name="m_prietaisai" value="Vandens šildytuvas"><span>Vandens šildytuvas</span></label>
-                    <label class="choice choice-pill"><input type="checkbox" name="m_prietaisai" value="Skalbimo ar indaplovė mašina"><span>Skalbimo ar indaplovė</span></label>
-                  </div>
-                </div>
-                <div class="pill-field" role="radiogroup" aria-labelledby="f-m-is-l" data-q="Prietaisai įsigyti">
-                  <span class="pill-label" id="f-m-is-l">Ar prietaisai jau įsigyti?</span>
-                  <div class="pill-group">
-                    <label class="choice choice-pill"><input type="radio" name="m_isigyta" value="Taip"><span>Taip</span></label>
-                    <label class="choice choice-pill"><input type="radio" name="m_isigyta" value="Dar ne"><span>Dar ne</span></label>
-                    <label class="choice choice-pill"><input type="radio" name="m_isigyta" value="Reikia patarimo"><span>Reikia patarimo</span></label>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-
-            <!-- 3. Kada ir kur -->
-            <fieldset class="step">
-              <legend class="step-title"><span class="step-n" aria-hidden="true" data-step-n>2</span>Kada ir kur?</legend>
-              <div class="pill-field" role="radiogroup" aria-labelledby="f-sk-l" data-q="Skubumas">
-                <span class="pill-label" id="f-sk-l">Kaip skubu?</span>
-                <div class="pill-group">
-                  <label class="choice choice-pill"><input type="radio" name="skubumas" value="Skubu, gedimas dabar"><span>Skubu, gedimas dabar</span></label>
-                  <label class="choice choice-pill"><input type="radio" name="skubumas" value="Per artimiausias dienas"><span>Per artimiausias dienas</span></label>
-                  <label class="choice choice-pill"><input type="radio" name="skubumas" value="Planuoju iš anksto"><span>Planuoju iš anksto</span></label>
-                </div>
-                <p class="pill-hint" data-urgent-hint hidden>Jei prateka dabar, greičiausia paskambinti: <a data-config-link="phone" href="tel:+37060000000" data-config="phone">+370 600 00000</a>.</p>
+                <p class="field-error" id="f-objektas-err" aria-live="polite"></p>
               </div>
               <div class="field">
-                <label for="f-vietove">Objekto vietovė <span class="optional">(miestas ar rajonas)</span></label>
-                <input id="f-vietove" name="vietove" type="text" autocomplete="address-level2" enterkeyhint="next" data-q="Vietovė">
-                <span class="field-line" aria-hidden="true"></span>
+                <label class="field-label" for="f-aprasymas">Problemos aprašymas <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="f-aprasymas" name="aprasymas" rows="4" required aria-describedby="f-aprasymas-hint f-aprasymas-err" placeholder="Kas vyksta, kur ir nuo kada?"></textarea>
+                <p class="field-hint" id="f-aprasymas-hint" data-desc-hint>Kuo tiksliau aprašysite, tuo tiksliau įvertinsime darbus.</p>
+                <p class="field-error" id="f-aprasymas-err" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-laikas">Pageidaujamas laikas <span class="optional">(nebūtina)</span></label>
+                <div class="select-wrap">
+                  <select id="f-laikas" name="laikas">
+                    <option value="">Nesvarbu</option>
+                    <option>Kuo greičiau</option>
+                    <option>Šią savaitę</option>
+                    <option>Per artimiausią mėnesį</option>
+                    <option>Planuoju vėliau</option>
+                  </select>
+                </div>
               </div>
             </fieldset>
 
-            <!-- 4. Kontaktai -->
-            <fieldset class="step">
-              <legend class="step-title"><span class="step-n" aria-hidden="true" data-step-n2>3</span>Kaip su jumis susisiekti?</legend>
+            <!-- 3 -->
+            <fieldset class="wiz-step" data-step="3" hidden>
+              <legend class="wiz-title" tabindex="-1">Kaip su jumis susisiekti?</legend>
+              <dl class="wiz-summary" data-wiz-summary></dl>
               <div class="form-row">
                 <div class="field">
-                  <label for="f-vardas">Vardas <span class="req" aria-hidden="true">*</span></label>
+                  <label class="field-label" for="f-vardas">Vardas <span class="req" aria-hidden="true">*</span></label>
                   <input id="f-vardas" name="vardas" type="text" autocomplete="given-name" autocapitalize="words" enterkeyhint="next" required aria-describedby="f-vardas-err">
-                  <span class="field-line" aria-hidden="true"></span>
                   <p class="field-error" id="f-vardas-err" aria-live="polite"></p>
                 </div>
                 <div class="field">
-                  <label for="f-telefonas">Telefono numeris <span class="req" aria-hidden="true">*</span></label>
+                  <label class="field-label" for="f-telefonas">Telefonas <span class="req" aria-hidden="true">*</span></label>
                   <input id="f-telefonas" name="telefonas" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="+370 6xx xxxxx" required aria-describedby="f-telefonas-err">
-                  <span class="field-line" aria-hidden="true"></span>
                   <p class="field-error" id="f-telefonas-err" aria-live="polite"></p>
                 </div>
               </div>
-              <div class="field">
-                <label for="f-elpastas">El. paštas <span class="optional">(nebūtina)</span></label>
-                <input id="f-elpastas" name="elpastas" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" placeholder="vardas@pavyzdys.lt" aria-describedby="f-elpastas-err">
-                <span class="field-line" aria-hidden="true"></span>
-                <p class="field-error" id="f-elpastas-err" aria-live="polite"></p>
+              <div class="form-row">
+                <div class="field">
+                  <label class="field-label" for="f-elpastas">El. paštas <span class="optional">(nebūtina)</span></label>
+                  <input id="f-elpastas" name="elpastas" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" aria-describedby="f-elpastas-err">
+                  <p class="field-error" id="f-elpastas-err" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="f-vietove">Miestas ar vietovė <span class="req" aria-hidden="true">*</span></label>
+                  <input id="f-vietove" name="vietove" type="text" autocomplete="address-level2" enterkeyhint="done" required aria-describedby="f-vietove-err">
+                  <p class="field-error" id="f-vietove-err" aria-live="polite"></p>
+                </div>
               </div>
-              <div class="field">
-                <label for="f-zinute">Papildoma informacija <span class="optional" data-msg-optional>(nebūtina)</span><span class="req" data-msg-required hidden aria-hidden="true">*</span></label>
-                <textarea id="f-zinute" name="zinute" rows="4" placeholder="Pavyzdžiui: kur yra gedimas, kada pastebėjote, kokie prietaisai" aria-describedby="f-zinute-hint f-zinute-err"></textarea>
-                <span class="field-line" aria-hidden="true"></span>
-                <p class="field-hint" id="f-zinute-hint">Nuotraukas galėsite pridėti laiške arba atsiųsti vėliau.</p>
-                <p class="field-error" id="f-zinute-err" aria-live="polite"></p>
+              <div class="field field-check">
+                <input id="f-sutikimas" name="sutikimas" type="checkbox" required aria-describedby="f-sutikimas-err">
+                <label for="f-sutikimas">Sutinku, kad mano duomenys būtų naudojami tik atsakant į šią užklausą. Plačiau: <a href="privatumo-politika.html">privatumo politika</a>.</label>
+                <p class="field-error" id="f-sutikimas-err" aria-live="polite"></p>
               </div>
+              <p class="form-explainer" data-form-explainer><strong>Kaip tai veikia:</strong> paspaudus „Paruošti laišką“, atsidarys jūsų el. pašto programa su užpildytu laišku. Užklausa pasieks mus tik jums išsiuntus laišką.</p>
             </fieldset>
 
-            <div class="field field-check">
-              <input id="f-sutikimas" name="sutikimas" type="checkbox" required aria-describedby="f-sutikimas-err">
-              <label for="f-sutikimas">Sutinku, kad mano pateikti duomenys būtų naudojami tik atsakant į šią užklausą. Plačiau: <a href="privatumo-politika.html">privatumo politika</a>.</label>
-              <p class="field-error" id="f-sutikimas-err" aria-live="polite"></p>
+            <div class="wiz-nav">
+              <button class="btn btn-line-dark" type="button" data-prev hidden><svg class="icon icon-left" aria-hidden="true"><use href="#i-arrow"/></svg>Atgal</button>
+              <button class="btn btn-accent" type="button" data-next>Toliau <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+              <button class="btn btn-accent" type="submit" data-submit hidden><span data-submit-label>Paruošti laišką</span> <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
             </div>
-
-            <p class="form-required-note"><span aria-hidden="true">*</span> Privalomi laukai</p>
-
-            <button class="btn btn-blue btn-lg btn-block btn-magnetic" type="submit" data-submit><span class="btn-roll"><span data-submit-label>Paruošti laišką</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></span></button>
 
             <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
           </form>
         </div>
       </div>
     </section>
-
   </main>
 
   <!-- ============ PORAŠTĖ ============ -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <p class="footer-claim">Vandentiekio, kanalizacijos ir šildymo sistemų montavimo bei remonto darbai namams ir butams.</p>
-        <a class="btn btn-blue" href="#kontaktai"><span class="btn-roll"><span>Gauti pasiūlymą</span></span><span class="btn-dot" aria-hidden="true"><svg class="icon"><use href="#i-arrow-up"/></svg></span></a>
+        <a class="logo logo--light" href="#pradzia" aria-label="Santechnikos Meistrai — į pradžią">
+          <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 7h10a8 8 0 0 1 8 8v12"/><path d="M5 13h9a3 3 0 0 1 3 3v11"/></svg></span>
+          <span class="logo-text">Santechnikos <strong>Meistrai</strong></span>
+        </a>
+        <p>Vandentiekis, kanalizacija ir šildymas: montavimas, remontas, renovacija.</p>
       </div>
-
       <nav class="footer-col" aria-label="Svetainės navigacija">
-        <h2 class="footer-title">Navigacija</h2>
+        <h2 class="footer-title label">Svetainė</h2>
         <ul>
-          <li><a href="#pradzia">Pradžia</a></li>
+          <li><a href="#problema">Problemos</a></li>
           <li><a href="#paslaugos">Paslaugos</a></li>
-          <li><a href="#apie-mus">Apie mus</a></li>
-          <li><a href="#atlikti-darbai">Atlikti darbai</a></li>
+          <li><a href="#darbai">Darbų pavyzdžiai</a></li>
           <li><a href="#kaip-dirbame">Kaip dirbame</a></li>
           <li><a href="#duk">DUK</a></li>
-          <li><a href="#kontaktai">Kontaktai</a></li>
+          <li><a href="#kontaktai">Užklausa</a></li>
         </ul>
       </nav>
-
       <nav class="footer-col" aria-label="Paslaugos">
-        <h2 class="footer-title">Paslaugos</h2>
+        <h2 class="footer-title label">Paslaugos</h2>
         <ul>
-          <li><a href="#paslauga-vandentiekis">Vandentiekis</a></li>
-          <li><a href="#paslauga-kanalizacija">Kanalizacija</a></li>
-          <li><a href="#paslauga-sildymas">Šildymo sistemos</a></li>
-          <li><a href="#paslauga-prietaisai">Prietaisų montavimas</a></li>
-          <li><a href="#paslauga-vamzdynai">Vamzdynų keitimas</a></li>
-          <li><a href="#paslauga-diagnostika">Gedimų diagnostika</a></li>
+          <li><a href="#paslauga-vandentiekis">01 / Vandentiekis</a></li>
+          <li><a href="#paslauga-kanalizacija">02 / Kanalizacija</a></li>
+          <li><a href="#paslauga-sildymas">03 / Šildymo sistemos</a></li>
+          <li><a href="#paslauga-prietaisai">04 / Santechnikos montavimas</a></li>
+          <li><a href="#paslauga-vamzdynai">05 / Vamzdynų renovacija</a></li>
+          <li><a href="#paslauga-diagnostika">06 / Gedimų šalinimas</a></li>
         </ul>
       </nav>
-
       <div class="footer-col">
-        <h2 class="footer-title">Kontaktai</h2>
+        <h2 class="footer-title label">Kontaktai</h2>
         <ul class="footer-contacts">
           <li><a data-config-link="phone" href="tel:+37060000000" data-config="phone">+370 600 00000</a></li>
           <li><a data-config-link="email" href="mailto:info@jusu-imone.lt" data-config="email">info@jusu-imone.lt</a></li>
@@ -834,22 +721,13 @@
         </ul>
       </div>
     </div>
-
-    <div class="footer-mark" aria-hidden="true"><span data-footer-mark>Santechnikos Meistrai</span></div>
-
     <div class="container footer-bottom">
-      <p>© <span id="metai">2026</span> Santechnikos Meistrai. Visos teisės saugomos.</p>
+      <p>© <span id="metai">2026</span> Santechnikos Meistrai</p>
       <p><a href="privatumo-politika.html">Privatumo politika</a></p>
-      <a class="to-top" href="#pradzia">Į viršų <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
-      <p class="credits">Nuotraukos: <a href="https://unsplash.com/?utm_source=santechnikos_meistrai&amp;utm_medium=referral" rel="noopener" target="_blank">Unsplash</a> (Timur Shakerzianov, bhagya laxmi, Rose Galloway Green, e24, Franco Debartolo, Olek Buzunov, Gabriel Vasiliu, Lotus Design N Print, Julian Hochgesang, Immo Wegmann, Maverick Frame).</p>
+      <p class="credits">Nuotraukos: <a href="https://unsplash.com/?utm_source=santechnikos_meistrai&amp;utm_medium=referral" rel="noopener" target="_blank">Unsplash</a> (Timur Shakerzianov, Lotus Design N Print, Immo Wegmann, Olek Buzunov, Julian Hochgesang, Maverick Frame, Rose Galloway Green).</p>
     </div>
   </footer>
 
-  <!-- Žymeklis galerijai (tik pelei) -->
-  <div class="cursor" aria-hidden="true"><span>Peržiūrėti</span></div>
-
-
-  <!-- ============ LIGHTBOX ============ -->
   <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
     <div class="lightbox-inner">
       <div class="lightbox-bar">
@@ -857,9 +735,7 @@
         <p class="lightbox-count" aria-live="polite"></p>
         <button class="lb-btn lb-close" type="button" aria-label="Uždaryti"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       </div>
-      <figure class="lightbox-figure">
-        <img class="lightbox-img" alt="">
-      </figure>
+      <figure class="lightbox-figure"><img class="lightbox-img" alt=""></figure>
       <button class="lb-btn lb-prev" type="button" aria-label="Ankstesnė nuotrauka"><svg class="icon" aria-hidden="true"><use href="#i-left"/></svg></button>
       <button class="lb-btn lb-next" type="button" aria-label="Kita nuotrauka"><svg class="icon" aria-hidden="true"><use href="#i-right"/></svg></button>
       <p class="lightbox-note">Iliustracinė nuotrauka, ne įmonės atliktas darbas.</p>

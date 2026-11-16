@@ -11,7 +11,7 @@ privatumo-politika.html  Privatumo politikos šablonas
 404.html                 Klaidos puslapis (GitHub Pages jį naudoja automatiškai)
 css/styles.css           Visi stiliai; spalvos ir tarpai — :root kintamieji
 js/config.js             ĮMONĖS DUOMENYS: telefonas, el. paštas, teritorija, darbo laikas, rekvizitai
-js/main.js               Meniu, paslaugų sąrašas, DUK, galerija, užklausos asistentas, animacijos
+js/main.js               Meniu, problemų pasirinkimas, paslaugų katalogas, 3 žingsnių užklausa, DUK, galerija
 assets/favicon.svg       Svetainės ikona
 .nojekyll, robots.txt    GitHub Pages ir paieškos sistemų failai
 ```
@@ -40,13 +40,26 @@ Tada atidarykite <http://localhost:8000>.
 4. **Privatumo politika** — užpildykite laukelius `[...]` faile `privatumo-politika.html`.
 5. **Tekstai** — paslaugų aprašymai ir DUK atsakymai yra realistiški, bet bendro pobūdžio. Pritaikykite juos savo veiklai ir neskelbkite to, ko negalite patvirtinti.
 
-## Užklausos forma (asistentas)
+## Svetainės struktūra
 
-Forma veikia kaip trumpas asistentas: lankytojas pasirenka sritį (vandentiekis, kanalizacija, šildymas, montavimas, kita), atsako į 1–2 tai sričiai skirtus klausimus, nurodo skubumą ir vietovę, tada kontaktus. Iš atsakymų suformuojama struktūrizuota užklausa.
+1. **Hero** — žinutė „Vamzdžiai, šildymas, vandentiekis. Sutvarkysime.“, veiksmo mygtukai.
+2. **Problemos** — pasirinkimas pagal realią situaciją (prateka vamzdis, užsikimšo kanalizacija ir kt.): ką padaryti dabar, ką paprastai atliekame, susijusios paslaugos ir mygtukas, kuris perkelia į užklausą su jau pažymėta problema.
+3. **Paslaugos** — vienas numeruotas katalogas (01–06), eilutės išsiskleidžia.
+4. **Darbų pavyzdžiai** — redakcinis nuotraukų išdėstymas su peržiūra; nuotraukos pažymėtos kaip iliustracinės.
+5. **Kaip dirbame** — principai ir 4 žingsnių eiga (sujungta buvusi „Apie mus“ ir „Kaip dirbame“).
+6. **DUK** ir **Užklausa** — 3 žingsnių forma.
 
-**Numatytasis režimas (be serverio):** forma **nesiunčia** duomenų pati. Patikrinusi laukus, ji atidaro lankytojo el. pašto programą su užpildytu laišku adresu iš `js/config.js` ir pasiūlo laišką atidaryti dar kartą arba nukopijuoti tekstą. Tai aiškiai parašyta formos viršuje.
+## Užklausos forma (3 žingsniai)
 
-**Tiesioginis siuntimas (neprivaloma):** `js/config.js` lauke `formEndpoint` įrašykite formų paslaugos adresą (pvz., Formspree). Tada forma siųs užklausą `POST` (JSON) ir sėkmės pranešimą rodys **tik** gavusi sėkmingą serverio atsakymą; nepavykus pasiūlys el. laiško alternatyvą. Prieš įjungdami atnaujinkite privatumo politiką.
+1. **Problema** — pasirinkimas iš šešių situacijų.
+2. **Detalės** — objektas (butas / namas / komercinės patalpos), aprašymas (užuomina keičiasi pagal problemą), pageidaujamas laikas.
+3. **Kontaktai** — vardas, telefonas, el. paštas (nebūtina), vietovė, sutikimas; rodoma pasirinkimų suvestinė.
+
+Viršuje — eigos juosta; galima grįžti atgal, įvesti duomenys išlieka. Laukai tikrinami kiekviename žingsnyje.
+
+**Numatytasis režimas (be serverio):** forma **nesiunčia** duomenų pati. Ji paruošia laišką lankytojo el. pašto programoje adresu iš `js/config.js` ir aiškiai parašo, kad laiškas dar neišsiųstas; galima jį atidaryti dar kartą arba nukopijuoti tekstą.
+
+**Tiesioginis siuntimas (neprivaloma):** `js/config.js` lauke `formEndpoint` įrašykite formų paslaugos adresą (pvz., Formspree). Tada forma siųs užklausą `POST` (JSON) ir sėkmės pranešimą rodys **tik** gavusi sėkmingą serverio atsakymą. Prieš įjungdami atnaujinkite privatumo politiką ir CSP `connect-src`.
 
 ## Paskelbimas GitHub Pages
 
@@ -88,7 +101,8 @@ Visi keliai santykiniai, todėl svetainė veikia ir pakatalogyje, ir savame dome
 - Semantinis HTML, viena `h1`, logiška antraščių hierarchija, „Pereiti prie turinio“ nuoroda.
 - Pasiekiamumas: matomas fokusas, `aria-expanded` meniu ir DUK, klaviatūra valdomas lightbox (`Esc`, `←`/`→`), DUK rodyklių klavišai, klaidos susietos su laukais (`aria-describedby`, `aria-invalid`).
 - `prefers-reduced-motion`: išjungiamos animacijos ir sklandus slinkimas.
-- Animacijos — [GSAP](https://gsap.com/) 3.13 (ScrollTrigger, SplitText), laikomas `js/vendor/`: trumpa hero įžanga, antraščių eilutės, paslaugų nuotraukos keitimas, „vanduo vamzdyje“, galerijos atsivėrimas, bėganti juosta. Slinkimas — natūralus naršyklės. Kai įjungtas `prefers-reduced-motion` arba GSAP neužsikrauna, viskas rodoma statiškai ir veikia.
+- Dizainas: grafitas, šilta balta ir varinis-oranžinis akcentas; siaura Archivo antraštė, techninės linijos ir kampų žymės.
+- Animacijos — [GSAP](https://gsap.com/) 3.13 su ScrollTrigger, laikomas `js/vendor/`: trumpa hero įžanga, išskleidžiami blokai, perėjimai tarp formos žingsnių, vienkartinis nuotraukų atsivėrimas. Jokių nuolat judančių elementų. Kai įjungtas `prefers-reduced-motion` arba GSAP neužsikrauna, viskas veikia be animacijų.
 - Atsakingi paveikslėliai (`srcset`, `sizes`, `loading="lazy"`), hero vaizdas su `fetchpriority="high"`.
 - SEO: `title`, `description`, `canonical`, Open Graph, JSON-LD (`Plumber`).
 - Šriftai: Archivo ir Figtree, laikomi `assets/fonts/` (lotynų ir lietuviškos raidės), todėl nesikreipiama į „Google Fonts“.
