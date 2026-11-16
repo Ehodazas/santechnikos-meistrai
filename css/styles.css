@@ -239,7 +239,7 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
 .hero-text { container-type: inline-size; min-width: 0; }
 .hero-title {
   font-family: var(--font-head); font-stretch: 75%; font-weight: 850; text-transform: uppercase;
-  font-size: 13vw; font-size: clamp(2rem, 14cqi, 9.6rem);
+  font-size: 13vw; font-size: clamp(2rem, min(14cqi, 12.5vh), 9.6rem);
   line-height: .86; letter-spacing: -0.01em; color: var(--graphite);
 }
 .hl { display: block; overflow-y: clip; overflow-x: visible; padding-top: .06em; }
@@ -256,7 +256,7 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
 /* „Pradėkite nuo problemos“ — iškart po mygtukais, vamzdžio linija veda žemyn */
 .hero-start {
   display: inline-flex; align-items: flex-end; gap: 10px; align-self: start; justify-self: start;
-  min-height: 44px; color: var(--graphite); text-decoration: none;
+  width: 100%; min-height: 44px; margin-top: 4px; color: var(--graphite); text-decoration: none;
 }
 .hero-start .hero-pipe { width: 56px; height: 26px; flex-shrink: 0; overflow: visible; fill: none; stroke: var(--accent-bright); stroke-width: 2; }
 .hero-start .label { margin-bottom: -4px; }
@@ -288,12 +288,10 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
   .hero-text { grid-column: 1 / 9; grid-row: 2; }
   .hero-photo { grid-column: 9 / 13; grid-row: 1 / 4; align-self: stretch; }
   .hero-photo img { height: 100%; aspect-ratio: auto; min-height: 520px; }
-  .hero-side { grid-column: 1 / 9; grid-row: 3; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-start { grid-column: 1 / -1; }
-}
-@media (min-width: 1280px) {
-  .hero-actions { flex-direction: row; }
+  /* Aprašymas viršuje, mygtukai vienoje eilutėje, „Pradėkite nuo problemos“ iškart po jais */
+  .hero-side { grid-column: 1 / 9; grid-row: 3; gap: 20px; }
+  .hero-lead { max-width: 46ch; }
+  .hero-photo img { min-height: 0; }
 }
 
 /* ---------- Problemų pasirinkimas ---------- */
