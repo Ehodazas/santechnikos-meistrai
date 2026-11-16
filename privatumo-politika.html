@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="lt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privatumo politika — Santechnikos Meistrai</title>
+  <meta name="description" content="Kaip Santechnikos Meistrai tvarko užklausose pateiktus asmens duomenis.">
+  <meta name="theme-color" content="#0f2438">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/config.js" defer></script>
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+      var cfg = window.SITE_CONFIG || {};
+      document.querySelectorAll("[data-config]").forEach(function (el) {
+        var k = el.getAttribute("data-config"); if (cfg[k]) el.textContent = cfg[k];
+      });
+      document.querySelectorAll("[data-config-link='email']").forEach(function (el) {
+        if (cfg.email) el.href = "mailto:" + cfg.email;
+      });
+      document.getElementById("metai").textContent = new Date().getFullYear();
+    });
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#turinys">Pereiti prie turinio</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Santechnikos Meistrai — į pradžią">
+        <span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 6h9a7 7 0 0 1 7 7v13"/><path d="M6 12h8a2 2 0 0 1 2 2v12"/></svg></span>
+        <span class="logo-text">Santechnikos<strong>Meistrai</strong></span>
+      </a>
+      <a class="btn btn-primary" href="index.html#kontaktai">Gauti pasiūlymą</a>
+    </div>
+  </header>
+
+  <main id="turinys" class="legal">
+    <div class="container legal-inner">
+      <a class="back-link" href="index.html"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>Grįžti į pradžią</a>
+
+      <h1>Privatumo politika</h1>
+      <p class="demo-note demo-note--light" role="note" style="margin:0 0 24px">
+        <span><strong>Šablonas.</strong> Šį tekstą prieš paskelbdami pritaikykite savo veiklai ir, jei reikia, pasitarkite su teisininku. Laukeliai laužtiniuose skliaustuose turi būti pakeisti tikrais duomenimis.</span>
+      </p>
+
+      <h2>1. Duomenų valdytojas</h2>
+      <p><span data-config="legalLine">[Įmonės pavadinimas], įm. k. [000000000]</span>, buveinės adresas: [adresas]. Kontaktai: <a data-config-link="email" data-config="email" href="mailto:info@jusu-imone.lt">info@jusu-imone.lt</a>.</p>
+
+      <h2>2. Kokius duomenis renkame</h2>
+      <p>Kai kreipiatės į mus el. paštu ar telefonu (įskaitant laišką, paruoštą svetainės užklausos formoje), galime gauti:</p>
+      <ul>
+        <li>vardą;</li>
+        <li>telefono numerį;</li>
+        <li>el. pašto adresą;</li>
+        <li>informaciją apie reikalingus darbus, objekto vietovę ir jūsų atsiųstas nuotraukas.</li>
+      </ul>
+      <p>Svetainės užklausos forma pati duomenų nesiunčia ir nesaugo: ji tik paruošia laišką jūsų el. pašto programoje.</p>
+
+      <h2>3. Kokiais tikslais ir pagrindu naudojame duomenis</h2>
+      <p>Duomenis naudojame tik tam, kad atsakytume į jūsų užklausą, parengtume pasiūlymą ir, jums sutikus, suderintume bei atliktume darbus. Teisinis pagrindas — jūsų sutikimas ir veiksmai prieš sudarant sutartį (BDAR 6 str. 1 d. a ir b punktai).</p>
+
+      <h2>4. Kiek laiko saugome duomenis</h2>
+      <p>Užklausų duomenis saugome [nurodykite terminą, pvz., ne ilgiau kaip 12 mėnesių] nuo paskutinio bendravimo, nebent teisės aktai reikalauja juos saugoti ilgiau (pvz., buhalterinės apskaitos dokumentai).</p>
+
+      <h2>5. Kam perduodame duomenis</h2>
+      <p>Jūsų duomenų neparduodame. Jie gali būti prieinami tik paslaugų teikėjams, be kurių negalėtume vykdyti veiklos (pvz., el. pašto paslaugų teikėjui), ir valstybės institucijoms, kai to reikalauja įstatymai.</p>
+
+      <h2>6. Slapukai ir trečiųjų šalių turinys</h2>
+      <p>Svetainė nenaudoja analitikos ar reklaminių slapukų. Šriftai įkeliami iš „Google Fonts“, nuotraukos — iš „Unsplash“, o animacijų biblioteka — iš „cdnjs“ (Cloudflare). Šios paslaugos, kaip ir bet kuris serveris, gali matyti jūsų IP adresą.</p>
+
+      <h2>7. Jūsų teisės</h2>
+      <p>Turite teisę susipažinti su savo duomenimis, juos ištaisyti, ištrinti, apriboti jų tvarkymą, atšaukti sutikimą ir pateikti skundą Valstybinei duomenų apsaugos inspekcijai (<a href="https://vdai.lrv.lt/" rel="noopener" target="_blank">vdai.lrv.lt</a>). Norėdami pasinaudoti teisėmis, rašykite <a data-config-link="email" data-config="email" href="mailto:info@jusu-imone.lt">info@jusu-imone.lt</a>.</p>
+
+      <p style="margin-top:40px">Paskutinį kartą atnaujinta: [data].</p>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="padding-top:0">
+    <div class="container footer-bottom">
+      <p>© <span id="metai">2026</span> Santechnikos Meistrai. Visos teisės saugomos.</p>
+      <p><a href="index.html">Pradžia</a></p>
+    </div>
+  </footer>
+</body>
+</html>
