@@ -231,7 +231,7 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
 }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; padding-top: 28px; }
+.hero { position: relative; padding-top: 28px; padding-bottom: 56px; }
 .hero-grid { position: relative; display: grid; gap: 24px; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; color: var(--muted); }
 .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
@@ -253,10 +253,16 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .hero-actions .btn { flex: 1 1 220px; }
 
-.hero-link { display: flex; align-items: flex-end; gap: 0; height: 96px; margin-top: 24px; }
-.hero-pipe { width: 160px; height: 100%; flex-shrink: 0; overflow: visible; fill: none; stroke: var(--accent-bright); stroke-width: 2; vector-effect: non-scaling-stroke; }
-.hero-pipe path { vector-effect: non-scaling-stroke; }
-.hero-link .label { margin: 0 0 -6px 14px; color: var(--muted); white-space: nowrap; }
+/* „Pradėkite nuo problemos“ — iškart po mygtukais, vamzdžio linija veda žemyn */
+.hero-start {
+  display: inline-flex; align-items: flex-end; gap: 10px; align-self: start; justify-self: start;
+  min-height: 44px; color: var(--graphite); text-decoration: none;
+}
+.hero-start .hero-pipe { width: 56px; height: 26px; flex-shrink: 0; overflow: visible; fill: none; stroke: var(--accent-bright); stroke-width: 2; }
+.hero-start .label { margin-bottom: -4px; }
+.hero-start .icon { width: 1rem; height: 1rem; margin-bottom: -3px; color: var(--accent-text); transition: transform .3s var(--ease); }
+.hero-start:hover { color: var(--accent-text); }
+.hero-start:hover .icon { transform: translateY(3px); }
 
 @media (max-width: 1023px) {
   /* Telefone: tekstas ir mygtukai pirmiau, nuotrauka po jų */
@@ -268,7 +274,7 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
   .hero-actions .btn { flex: 0 0 auto; }
 }
 @media (min-width: 1024px) {
-  .hero { padding-top: 40px; }
+  .hero { padding-top: 40px; padding-bottom: 72px; }
   .hero-grid {
     grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 28px;
     align-items: end;
@@ -284,7 +290,7 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
   .hero-photo img { height: 100%; aspect-ratio: auto; min-height: 520px; }
   .hero-side { grid-column: 1 / 9; grid-row: 3; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px; }
   .hero-actions { flex-direction: column; align-items: stretch; }
-  .hero-link { margin-top: 0; }
+  .hero-start { grid-column: 1 / -1; }
 }
 @media (min-width: 1280px) {
   .hero-actions { flex-direction: row; }
