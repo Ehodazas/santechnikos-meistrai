@@ -27,5 +27,7 @@ window.SITE_CONFIG = {
   // Įrašius formų paslaugos adresą (pvz., „https://formspree.io/f/xxxxxxx“), forma siųs užklausą
   // tiesiogiai (POST, JSON) ir sėkmės pranešimą rodys TIK gavusi sėkmingą serverio atsakymą.
   // Prieš įjungdami atnaujinkite privatumo politiką (duomenis tvarkys ir ta paslauga).
+  // Saugumo politika (CSP) HTML <head> dalyje leidžia jungtis tik prie https://formspree.io —
+  // naudodami kitą paslaugą, jos adresą įrašykite į „connect-src“ visuose trijuose HTML failuose.
   formEndpoint: ""
 };

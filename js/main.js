@@ -1,6 +1,6 @@
 /* ==========================================================================
    Santechnikos Meistrai — sąsaja ir animacijos (v3)
-   Viskas veikia ir be GSAP / Lenis: bibliotekos tik prideda judesį.
+   Viskas veikia ir be GSAP (js/vendor): biblioteka tik prideda judesį.
    ========================================================================== */
 (function () {
   "use strict";
@@ -12,7 +12,6 @@
   var gsap = window.gsap;
   var ST = window.ScrollTrigger;
   var Split = window.SplitText;
-  var lenis = null;
   var motion = !!(gsap && !reduce);
 
   function $(sel, ctx) { return (ctx || doc).querySelector(sel); }
@@ -38,34 +37,14 @@
   });
   if (cfg.demo === false) $$("[data-demo-only]").forEach(function (el) { el.remove(); });
 
-  /* ---------- Sklandus slinkimas (Lenis) ---------- */
-  if (window.Lenis && !reduce) {
-    lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, syncTouch: false });
-    if (gsap && ST) {
-      ST.config({ ignoreMobileResize: true });
-      lenis.on("scroll", ST.update);
-      gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
-    }
-  }
-  function lockScroll(on) {
-    doc.body.classList.toggle("is-locked", on);
-    if (lenis) { if (on) lenis.stop(); else lenis.start(); }
-  }
+  /* ---------- Slinkimas: naršyklės natūralus (be papildomo „sklandaus“ sluoksnio — jis sukeldavo atsilikimą) ---------- */
+  if (gsap && ST) ST.config({ ignoreMobileResize: true });
+  function lockScroll(on) { doc.body.classList.toggle("is-locked", on); }
   function scrollToEl(el, done, instant) {
     if (!el) return;
-    // Absoliuti pozicija pagal tikrą window.scrollY (Lenis būsena gali atsilikti po naršyklės šuolio)
     var y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - (headerH() + 8));
-    if (lenis) {
-      if (instant) { lenis.scrollTo(y, { immediate: true, force: true }); if (done) done(); }
-      else lenis.scrollTo(y, { duration: 1.2, onComplete: done });
-    } else {
-      window.scrollTo({ top: y, behavior: reduce || instant ? "auto" : "smooth" });
-      if (done) setTimeout(done, reduce || instant ? 0 : 700);
-    }
+    window.scrollTo({ top: y, behavior: reduce || instant ? "auto" : "smooth" });
+    if (done) setTimeout(done, reduce || instant ? 0 : 700);
   }
 
   /* ---------- Antraštė: fonas, slėpimas, progreso juosta ---------- */
@@ -667,16 +646,15 @@
     endIntro();
     var intro = gsap.timeline({ defaults: { ease: "expo.out" } });
     intro
-      .from(".hero-photo", { clipPath: "inset(0% 0% 0% 100%)", duration: 1.4, ease: "expo.inOut" }, 0)
-      .from(".hero-photo img", { scale: 1.25, duration: 2, ease: "expo.out" }, 0.1)
-      .to(heroItems[0], { autoAlpha: 1, y: 0, duration: 0.9 }, 0.2)
-      .to(heroLines.slice(0, 2), { yPercent: 0, duration: 1.1, stagger: 0.12 }, 0.3)
-      .to(heroLines.slice(2), { yPercent: 0, duration: 1.3 }, 0.75)
-      .to(pipePath, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, 1.25)
-      .to(heroItems.slice(1), { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1 }, 1.0)
-      .from("[data-hero-tip]", { y: 40, autoAlpha: 0, duration: 1 }, 1.2)
-      .from(".site-header .logo, .site-header .header-cta, .site-header .menu-toggle, .nav-list li",
-        { y: -24, opacity: 0, duration: 0.9, stagger: 0.04, clearProps: "transform,opacity" }, 0.3)
+      // Visa įžanga trunka ~1,3 s — mygtukai matomi beveik iš karto
+      .from(".hero-photo", { clipPath: "inset(0% 0% 0% 100%)", duration: 1, ease: "expo.inOut" }, 0)
+      .from(".hero-photo img", { scale: 1.15, duration: 1.4, ease: "expo.out" }, 0.05)
+      .to(heroItems[0], { autoAlpha: 1, y: 0, duration: 0.6 }, 0)
+      .to(heroLines.slice(0, 2), { yPercent: 0, duration: 0.85, stagger: 0.08 }, 0.05)
+      .to(heroLines.slice(2), { yPercent: 0, duration: 0.95 }, 0.3)
+      .to(pipePath, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.7)
+      .to(heroItems.slice(1), { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.06 }, 0.45)
+      .from("[data-hero-tip]", { y: 24, autoAlpha: 0, duration: 0.7 }, 0.6)
       .add(function () { gsap.set(".hero-photo", { clearProps: "clipPath" }); });
 
     // Nuotrauka slenkant juda lėčiau už puslapį
@@ -691,10 +669,6 @@
         yPercent: 110, duration: 1.1, ease: "expo.out", stagger: 0.08,
         scrollTrigger: { trigger: el, start: "top 88%", once: true }
       });
-    });
-    $$(".eyebrow, .section-intro").forEach(function (el) {
-      if (el.closest(".hero")) return;
-      gsap.from(el, { y: 18, autoAlpha: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%", once: true } });
     });
 
     /* --- Paslaugos --- */
@@ -783,14 +757,6 @@
     }
 
     /* --- DUK, kontaktai, poraštė --- */
-    ST.batch(".acc-item", {
-      start: "top 92%", once: true,
-      onEnter: function (els) { gsap.from(els, { y: 30, autoAlpha: 0, duration: 0.8, ease: "expo.out", stagger: 0.06 }); }
-    });
-    gsap.from(".form-card", {
-      y: 80, autoAlpha: 0, duration: 1.2, ease: "expo.out",
-      scrollTrigger: { trigger: ".form-card", start: "top 90%", once: true }
-    });
     var mark = $("[data-footer-mark]");
     if (mark && Split) {
       Split.create(mark, {

@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://images.unsplash.com data:; font-src 'self'; connect-src 'self' https://formspree.io; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Santechnikos Meistrai — vandentiekio, kanalizacijos ir šildymo darbai</title>
   <meta name="description" content="Vandentiekio, kanalizacijos, šildymo sistemų ir santechnikos prietaisų montavimo bei remonto darbai. Aiški komunikacija, suderinta kaina ir tvarkinga darbo eiga.">
   <meta name="theme-color" content="#0b1320">
@@ -19,27 +21,16 @@
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Figtree:wght@400..700&display=swap" rel="stylesheet">
-
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
 
-  <script>
-    (function (d) {
-      var h = d.documentElement; h.classList.add("js");
-      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        h.classList.add("intro");
-        setTimeout(function () { h.classList.remove("intro"); }, 3500);
-      }
-    })(document);
-  </script>
+  <script src="js/intro.js"></script>
   <script src="js/config.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/SplitText.min.js" defer></script>
   <script src="js/main.js" defer></script>
 
   <script type="application/ld+json">
@@ -95,7 +86,7 @@
         <span class="logo-text">Santechnikos <strong>Meistrai</strong></span>
       </a>
 
-      <nav class="main-nav" id="pagrindinis-meniu" aria-label="Pagrindinė navigacija" data-lenis-prevent>
+      <nav class="main-nav" id="pagrindinis-meniu" aria-label="Pagrindinė navigacija">
         <ul class="nav-list">
           <li><a href="#pradzia"><span class="nav-idx" aria-hidden="true">01</span>Pradžia</a></li>
           <li><a href="#paslaugos"><span class="nav-idx" aria-hidden="true">02</span>Paslaugos</a></li>
@@ -198,10 +189,10 @@
           <div class="svc-visual" aria-hidden="true">
             <div class="svc-frame">
               <img class="svc-img is-active" src="https://images.unsplash.com/photo-1676210133055-eab6ef033ce3?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
+              <img class="svc-img" src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
               <img class="svc-img" src="https://images.unsplash.com/photo-1669725341213-7379ff6c90d5?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
               <img class="svc-img" src="https://images.unsplash.com/photo-1775359924006-557dba8c862b?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
-              <img class="svc-img" src="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
+              <img class="svc-img" src="https://images.unsplash.com/photo-1768321918210-a775e4c88f08?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
               <img class="svc-img" src="https://images.unsplash.com/photo-1761758674188-2b8e4c89c5e2?w=900&h=1100&fit=crop&auto=format&q=70" width="900" height="1100" loading="lazy" decoding="async" alt="">
             </div>
             <p class="svc-counter"><span data-svc-count>01</span> / 06</p>
@@ -244,7 +235,7 @@
               </h3>
               <div class="svc-panel" id="svc-p2" role="region" aria-labelledby="svc-t2" hidden>
                 <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1693907986952-3cd372e4c9d8?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Paklotas mėlynas vamzdynas atkastoje tranšėjoje">
+                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1749532125405-70950966b0e5?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Santechnikas remontuoja vamzdyną vonios kambaryje">
                   <p class="svc-desc">Vidaus kanalizacija, kuri veikia tyliai ir be kvapų: tinkami nuolydžiai, sandarios jungtys ir revizijos vėlesnei priežiūrai.</p>
                   <ul class="job-list">
                     <li>Vidaus kanalizacijos vamzdynų įrengimas</li>
@@ -319,7 +310,7 @@
               </h3>
               <div class="svc-panel" id="svc-p5" role="region" aria-labelledby="svc-t5" hidden>
                 <div class="svc-panel-inner">
-                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1768321913920-d3ac011e0683?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Atviri vandentiekio ir kanalizacijos vamzdynai renovuojamoje sienoje">
+                  <img class="svc-panel-img" src="https://images.unsplash.com/photo-1768321918210-a775e4c88f08?w=800&h=500&fit=crop&auto=format&q=70" width="800" height="500" loading="lazy" decoding="async" alt="Nauji vamzdynai atviroje sienoje renovacijos metu">
                   <p class="svc-desc">Kai gedimai kartojasi arba vyksta renovacija, senus vamzdynus keičiame naujais. Medžiagas parenkame pagal sistemą ir montavimo sąlygas.</p>
                   <ul class="job-list">
                     <li>Esamos vamzdynų būklės įvertinimas</li>
@@ -850,7 +841,7 @@
       <p>© <span id="metai">2026</span> Santechnikos Meistrai. Visos teisės saugomos.</p>
       <p><a href="privatumo-politika.html">Privatumo politika</a></p>
       <a class="to-top" href="#pradzia">Į viršų <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"/></svg></a>
-      <p class="credits">Nuotraukos: <a href="https://unsplash.com/?utm_source=santechnikos_meistrai&amp;utm_medium=referral" rel="noopener" target="_blank">Unsplash</a> (Timur Shakerzianov, Rose Galloway Green, e24, Franco Debartolo, Olek Buzunov, Gabriel Vasiliu, Lotus Design N Print, Julian Hochgesang, Immo Wegmann, Maverick Frame).</p>
+      <p class="credits">Nuotraukos: <a href="https://unsplash.com/?utm_source=santechnikos_meistrai&amp;utm_medium=referral" rel="noopener" target="_blank">Unsplash</a> (Timur Shakerzianov, bhagya laxmi, Rose Galloway Green, e24, Franco Debartolo, Olek Buzunov, Gabriel Vasiliu, Lotus Design N Print, Julian Hochgesang, Immo Wegmann, Maverick Frame).</p>
     </div>
   </footer>
 

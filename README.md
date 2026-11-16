@@ -88,10 +88,11 @@ Visi keliai santykiniai, todėl svetainė veikia ir pakatalogyje, ir savame dome
 - Semantinis HTML, viena `h1`, logiška antraščių hierarchija, „Pereiti prie turinio“ nuoroda.
 - Pasiekiamumas: matomas fokusas, `aria-expanded` meniu ir DUK, klaviatūra valdomas lightbox (`Esc`, `←`/`→`), DUK rodyklių klavišai, klaidos susietos su laukais (`aria-describedby`, `aria-invalid`).
 - `prefers-reduced-motion`: išjungiamos animacijos ir sklandus slinkimas.
-- Animacijos — [GSAP](https://gsap.com/) 3.13 su ScrollTrigger ir SplitText (cdnjs) bei [Lenis](https://lenis.darkroom.engineering/) sklandžiam slinkimui (jsDelivr): hero įžanga ir rėmo išsiplėtimas, antraščių eilutės iš kaukės, horizontali paslaugų juosta (≥1100 px), žodžių ryškėjimas, galerijos atsivėrimas, „vanduo vamzdyje“ darbo eigoje, magnetiniai mygtukai, žymeklis galerijoje, bėganti juosta. Kai įjungtas `prefers-reduced-motion` arba bibliotekos neužsikrauna, viskas rodoma statiškai ir veikia.
+- Animacijos — [GSAP](https://gsap.com/) 3.13 (ScrollTrigger, SplitText), laikomas `js/vendor/`: trumpa hero įžanga, antraščių eilutės, paslaugų nuotraukos keitimas, „vanduo vamzdyje“, galerijos atsivėrimas, bėganti juosta. Slinkimas — natūralus naršyklės. Kai įjungtas `prefers-reduced-motion` arba GSAP neužsikrauna, viskas rodoma statiškai ir veikia.
 - Atsakingi paveikslėliai (`srcset`, `sizes`, `loading="lazy"`), hero vaizdas su `fetchpriority="high"`.
 - SEO: `title`, `description`, `canonical`, Open Graph, JSON-LD (`Plumber`).
-- Šriftai: Archivo (kintamo pločio antraštės) ir Figtree (Google Fonts, palaiko lietuviškas raides).
+- Šriftai: Archivo ir Figtree, laikomi `assets/fonts/` (lotynų ir lietuviškos raidės), todėl nesikreipiama į „Google Fonts“.
+- Saugumas: turinio saugumo politika (CSP) `<meta>` žyme — skriptai, stiliai ir šriftai tik iš savo svetainės, nuotraukos tik iš `images.unsplash.com`; jokių įterptų skriptų.
 
 ## Nuotraukų licencija
 
