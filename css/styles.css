@@ -745,3 +745,105 @@ html:not(.js) .wiz-nav [data-submit] { display: inline-flex !important; }
 @media (min-width: 640px) { .prob-more > summary { pointer-events: none; } }
 
 .legal-demo { display: flex; align-items: center; gap: 10px; margin: 0 0 24px; color: var(--muted); }
+
+/* ==========================================================================
+   v6 — grafitas kaip pagrindinė spalva
+   Sekcijos keičiasi trimis grafito atspalviais; šviesios lieka tik formų kortelės.
+   ========================================================================== */
+:root { --ink-light: #ece9e3; --soft: #a4a8ae; --g1: #1d1f22; --g2: #25282c; --g0: #141517; }
+body { background: var(--g1); color: var(--ink-light); }
+.sec-title, .hero-title { color: #fff; }
+.sec-index { color: var(--soft); }
+.sec-index span { color: var(--accent-bright); }
+.sec-intro { color: var(--soft); }
+.demo-badge { color: var(--accent-bright); }
+
+/* Antraštė */
+.site-header { background: var(--g0); border-bottom-color: var(--line-dark); }
+.logo, .site-header .logo { color: #fff; }
+.logo-mark { background: var(--accent); color: #fff; }
+.menu-toggle { color: #fff; }
+.menu-toggle-bars { background: var(--g2); border: 1px solid var(--line-dark); }
+.header-call { --bg: var(--accent); --bd: var(--accent); --hbg: var(--accent-hover); --hbd: var(--accent-hover); }
+@media (min-width: 1100px) {
+  .nav-list a, .nav-list a:hover, .nav-list a[aria-current="true"] { color: var(--ink-light); }
+}
+
+/* Hero */
+.hero { background: var(--g1); }
+.hl-accent { color: var(--accent-bright); }
+.hero-lead { color: var(--ink-light); }
+@media (min-width: 1024px) {
+  .hero-grid::before { background: repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px calc((100% + 24px) / 12)); }
+}
+.path { border-color: rgba(255,255,255,.35); color: #fff; }
+.path-desc { color: var(--soft); }
+.path--plan:hover { background: #fff; color: var(--g1); border-color: #fff; }
+.path--plan:hover .path-desc { color: var(--muted); }
+.contact-strip { border-top-color: rgba(255,255,255,.5); }
+.contact-strip li { border-bottom-color: var(--line-dark); }
+.contact-strip .icon { color: var(--accent-bright); }
+.contact-strip .label { color: var(--soft); }
+.cs-value { color: #fff; }
+
+/* Sekcijų fonai */
+.fault { background: var(--g0); }
+.plan { background: var(--g2); color: var(--ink-light); }
+.services { background: var(--g1); }
+.projects { background: var(--g0); color: var(--ink-light); }
+.process { background: var(--g2); }
+.faq { background: var(--g1); }
+
+/* Įrengimas */
+.plan-sub { color: var(--accent-bright); }
+.plan-list { border-top-color: rgba(255,255,255,.5); }
+.plan-list li { border-bottom-color: var(--line-dark); }
+
+/* Paslaugos */
+.svc-list { border-top-color: rgba(255,255,255,.5); }
+.svc-row { border-bottom-color: var(--line-dark); transition: background-color .3s; }
+.svc-row:hover { background: rgba(255,255,255,.025); }
+.svc-trigger { color: #fff; }
+.svc-num { color: var(--accent-bright); }
+.svc-short { color: var(--soft); }
+.svc-plus { border-color: rgba(255,255,255,.45); }
+.svc-trigger:hover .svc-name { color: var(--accent-bright); }
+.svc-trigger[aria-expanded="true"] .svc-plus { background: var(--accent); border-color: var(--accent); }
+.svc-items li { border-bottom-color: var(--line-dark); color: var(--ink-light); }
+.services .btn-dark { --bg: transparent; --fg: #fff; --bd: rgba(255,255,255,.45); --hbg: var(--accent); --hbd: var(--accent); }
+
+/* Darbų pavyzdžiai */
+.projects .sec-index { color: var(--soft); }
+.projects .sec-index span { color: var(--accent-bright); }
+.shot-img { background: var(--g2); }
+.shot figcaption { color: var(--soft); }
+.shot figcaption .label { color: var(--accent-bright); }
+.shot figcaption strong { color: #fff; }
+
+/* Eiga */
+.rules { border-top-color: rgba(255,255,255,.5); }
+.rules li { border-bottom-color: var(--line-dark); }
+.rules .label { color: var(--accent-bright); }
+.step-line { background: var(--line-dark); }
+.step-n { background: var(--g2); border-color: rgba(255,255,255,.6); color: #fff; }
+.step p { color: var(--soft); }
+
+/* DUK */
+.accordion { border-top-color: rgba(255,255,255,.5); }
+.acc-item { border-bottom-color: var(--line-dark); }
+.acc-trigger { color: #fff; }
+.acc-trigger:hover .acc-q { color: var(--accent-bright); }
+.acc-icon { border-color: rgba(255,255,255,.45); }
+.acc-trigger[aria-expanded="true"] .acc-icon { background: var(--accent); border-color: var(--accent); }
+.acc-inner { color: var(--soft); }
+
+/* Formų kortelės lieka šviesios — lengviau pildyti */
+.quick-card, .wizard-card { color: var(--text); }
+.quick-card .sec-title, .wizard-card .wiz-title { color: var(--graphite); }
+
+/* Privatumo politika ir 404 tamsiame fone */
+.legal h1, .legal h2 { color: #fff; }
+.legal p, .legal li, .legal-demo { color: var(--soft); }
+.legal .back-link { color: #fff; }
+.legal a { color: var(--ink-light); }
+.btn-primary { --bg: var(--accent); --bd: var(--accent); --hbg: var(--accent-hover); --hbd: var(--accent-hover); }

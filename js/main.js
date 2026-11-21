@@ -376,8 +376,8 @@
   var wiz = wizEl ? new Form(wizEl, "f-") : null;
   var step = 1, maxReached = 1, chosenService = "";
   var serviceNames = {
-    vandentiekis: "01 / Vandentiekis", kanalizacija: "02 / Kanalizacija", sildymas: "03 / Šildymo sistemos",
-    prietaisai: "04 / Santechnikos montavimas", vamzdynai: "05 / Vamzdynų renovacija"
+    vandentiekis: "1 / Vandentiekis", kanalizacija: "2 / Kanalizacija", sildymas: "3 / Šildymo sistemos",
+    prietaisai: "4 / Santechnikos montavimas", vamzdynai: "5 / Vamzdynų renovacija"
   };
   var serviceToWork = { vandentiekis: "vandentiekis", kanalizacija: "vandentiekis", sildymas: "sildymas", prietaisai: "santechnika", vamzdynai: "renovacija" };
   var hints = {
@@ -590,10 +590,24 @@
       .from("[data-hero-photo]", { clipPath: "inset(0 0 100% 0)", duration: 0.8, ease: "power3.inOut", clearProps: "clipPath" }, 0.05)
       .from(".hero [data-hero-item]", { autoAlpha: 0, y: 14, duration: 0.5, stagger: 0.06, clearProps: "transform,opacity,visibility" }, 0.25);
 
-    ST.batch(".shot", {
-      start: "top 88%", once: true,
-      onEnter: function (els) { gsap.from(els, { autoAlpha: 0, y: 24, duration: 0.7, ease: "power3.out", stagger: 0.08, clearProps: "transform" }); }
-    });
+    // Vietomis — vienkartiniai, trumpi įėjimai (tik transform/opacity)
+    function reveal(selector, vars) {
+      if (!$(selector)) return;
+      ST.batch(selector, {
+        start: "top 88%", once: true,
+        onEnter: function (els) {
+          gsap.from(els, Object.assign({ autoAlpha: 0, y: 24, duration: 0.6, ease: "power3.out", stagger: 0.07, clearProps: "transform,opacity,visibility" }, vars || {}));
+        }
+      });
+    }
+    reveal(".sec-head, .process-top > div:first-child, .faq-aside, .plan-info > .sec-index, .plan-info > .sec-title");
+    reveal(".prob-list, .quick-card, .wizard-card", { y: 32, duration: 0.7 });
+    reveal(".plan-list li", { x: -16, y: 0, stagger: 0.06 });
+    reveal(".svc-row", { y: 18, stagger: 0.05 });
+    reveal(".shot", { y: 28, duration: 0.7, stagger: 0.08 });
+    reveal(".rules li", { y: 14, stagger: 0.08 });
+    reveal(".step", { y: 20, stagger: 0.12, delay: 0.2 });
+    reveal(".acc-item", { y: 14, stagger: 0.05 });
     var line = $("[data-step-line]");
     if (line) {
       var vertical = window.innerWidth < 1024;
