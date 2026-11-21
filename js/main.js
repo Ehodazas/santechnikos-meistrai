@@ -323,7 +323,8 @@
     if (quickEl) quickEl.elements.gedimas.value = tab.getAttribute("data-problem-key");
     var panel = doc.getElementById(tab.getAttribute("aria-controls"));
     if (motion && panel && opts.animate !== false) {
-      gsap.fromTo(panel.children, { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.35, stagger: 0.04, ease: "power2.out", overwrite: true });
+      gsap.fromTo(panel.children, { x: 40, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.6, stagger: 0.07, ease: "expo.out", overwrite: true, clearProps: "transform" });
+      gsap.fromTo($$(".prob-steps li", panel), { x: 24, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.5, stagger: 0.07, delay: 0.15, ease: "power3.out", clearProps: "transform" });
     }
     if (opts.focus) tab.focus();
   }
@@ -585,29 +586,44 @@
     var lines = $$(".hero-title .hl > span");
     gsap.set(lines, { yPercent: 105 });
     endIntro();
-    gsap.timeline({ defaults: { ease: "power3.out" } })
-      .to(lines, { yPercent: 0, duration: 0.7, stagger: 0.06 }, 0)
-      .from("[data-hero-photo]", { clipPath: "inset(0 0 100% 0)", duration: 0.8, ease: "power3.inOut", clearProps: "clipPath" }, 0.05)
-      .from(".hero [data-hero-item]", { autoAlpha: 0, y: 14, duration: 0.5, stagger: 0.06, clearProps: "transform,opacity,visibility" }, 0.25);
+    gsap.timeline({ defaults: { ease: "expo.out" } })
+      .to(lines, { yPercent: 0, duration: 1, stagger: 0.09 }, 0)
+      .from("[data-hero-photo]", { clipPath: "inset(0 0 100% 0)", duration: 1.1, ease: "expo.inOut", clearProps: "clipPath" }, 0.05)
+      .from("[data-hero-photo] img", { scale: 1.25, duration: 1.6 }, 0.1)
+      .from(".paths .path", { autoAlpha: 0, x: -40, duration: 0.8, stagger: 0.1, clearProps: "transform,opacity,visibility" }, 0.45)
+      .from(".hero-lead", { autoAlpha: 0, y: 24, duration: 0.8, clearProps: "transform,opacity,visibility" }, 0.35)
+      .from(".contact-strip li", { autoAlpha: 0, y: 28, duration: 0.7, stagger: 0.08, clearProps: "transform,opacity,visibility" }, 0.6);
 
-    // Vietomis — vienkartiniai, trumpi įėjimai (tik transform/opacity)
+    // Hero nuotrauka slenkant juda lėčiau — gylio pojūtis
+    gsap.to("[data-hero-photo] img", {
+      yPercent: 10, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+    });
+
+    // Vienkartiniai įėjimai slenkant (tik transform/opacity/clip-path)
     function reveal(selector, vars) {
       if (!$(selector)) return;
       ST.batch(selector, {
-        start: "top 88%", once: true,
+        start: "top 90%", once: true,
         onEnter: function (els) {
-          gsap.from(els, Object.assign({ autoAlpha: 0, y: 24, duration: 0.6, ease: "power3.out", stagger: 0.07, clearProps: "transform,opacity,visibility" }, vars || {}));
+          gsap.from(els, Object.assign({ autoAlpha: 0, y: 56, duration: 1, ease: "expo.out", stagger: 0.1, clearProps: "transform,opacity,visibility,clipPath" }, vars || {}));
         }
       });
     }
-    reveal(".sec-head, .process-top > div:first-child, .faq-aside, .plan-info > .sec-index, .plan-info > .sec-title");
-    reveal(".prob-list, .quick-card, .wizard-card", { y: 32, duration: 0.7 });
-    reveal(".plan-list li", { x: -16, y: 0, stagger: 0.06 });
-    reveal(".svc-row", { y: 18, stagger: 0.05 });
-    reveal(".shot", { y: 28, duration: 0.7, stagger: 0.08 });
-    reveal(".rules li", { y: 14, stagger: 0.08 });
-    reveal(".step", { y: 20, stagger: 0.12, delay: 0.2 });
-    reveal(".acc-item", { y: 14, stagger: 0.05 });
+    // Antraštės iškyla iš „kaukės“
+    reveal(".sec-title", { y: 60, clipPath: "inset(0 0 100% 0)", duration: 1.1 });
+    reveal(".sec-index, .sec-intro", { y: 24, duration: 0.8 });
+    reveal(".prob-list .prob-tab", { y: 30, stagger: 0.07, duration: 0.8 });
+    reveal(".prob-panels", { y: 50, duration: 1 });
+    reveal(".quick-card, .wizard-card", { y: 90, duration: 1.1 });
+    reveal(".plan-list li", { x: -50, y: 0, stagger: 0.08, duration: 0.8 });
+    reveal(".svc-row", { x: -60, y: 0, stagger: 0.08, duration: 0.9 });
+    reveal(".shot", { y: 90, clipPath: "inset(20% 0 0 0)", duration: 1.2, stagger: 0.12 });
+    reveal(".rules li", { x: 40, y: 0, stagger: 0.1 });
+    reveal(".step", { y: 40, stagger: 0.15, delay: 0.25 });
+    reveal(".step-n", { scale: 0.3, y: 0, rotate: -90, stagger: 0.15, delay: 0.3, ease: "back.out(2)", duration: 0.8 });
+    reveal(".acc-item", { x: 40, y: 0, stagger: 0.07, duration: 0.8 });
+    reveal(".footer-grid > *", { y: 40, stagger: 0.1, duration: 0.9 });
     var line = $("[data-step-line]");
     if (line) {
       var vertical = window.innerWidth < 1024;
