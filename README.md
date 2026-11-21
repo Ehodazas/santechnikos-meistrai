@@ -42,24 +42,21 @@ Tada atidarykite <http://localhost:8000>.
 
 ## Svetainės struktūra
 
-1. **Hero** — žinutė „Vamzdžiai, šildymas, vandentiekis. Sutvarkysime.“, veiksmo mygtukai.
-2. **Problemos** — pasirinkimas pagal realią situaciją (prateka vamzdis, užsikimšo kanalizacija ir kt.): ką padaryti dabar, ką paprastai atliekame, susijusios paslaugos ir mygtukas, kuris perkelia į užklausą su jau pažymėta problema.
-3. **Paslaugos** — vienas numeruotas katalogas (01–06), eilutės išsiskleidžia.
-4. **Darbų pavyzdžiai** — redakcinis nuotraukų išdėstymas su peržiūra; nuotraukos pažymėtos kaip iliustracinės.
-5. **Kaip dirbame** — principai ir 4 žingsnių eiga (sujungta buvusi „Apie mus“ ir „Kaip dirbame“).
-6. **DUK** ir **Užklausa** — 3 žingsnių forma.
+Svetainė sukurta aplink du lankytojo kelius:
 
-## Užklausos forma (3 žingsniai)
+1. **Hero** — antraštė (didžiausia puslapyje), du keliai „Turiu gedimą“ ir „Planuoju įrengimą“, telefonas, aptarnaujama teritorija ir darbo laikas.
+2. **A. Turiu gedimą** — pagrindinis turinys: gedimo pasirinkimas (prateka, užsikimšo, nešyla, kita) su patarimais, ką daryti dabar, ir **greitas kontaktas** — skambinimo mygtukas bei trumpa forma (gedimas, vardas, telefonas, adresas).
+3. **B. Planuoju įrengimą** — išsami 3 žingsnių forma: darbų tipas → detalės (objektas, darbų etapas, aprašymas, pradžia) → kontaktai, su eigos juosta, grįžimu atgal ir suvestine.
+4. **Paslaugos** (01–06), **Darbų pavyzdžiai** (pažymėti „Demo“), **Kaip vyksta darbas**, **DUK**, poraštė su kontaktais.
+5. Telefone ekrano apačioje — juosta „Skambinti / Gedimas / Įrengimas“.
 
-1. **Problema** — pasirinkimas iš šešių situacijų.
-2. **Detalės** — objektas (butas / namas / komercinės patalpos), aprašymas (užuomina keičiasi pagal problemą), pageidaujamas laikas.
-3. **Kontaktai** — vardas, telefonas, el. paštas (nebūtina), vietovė, sutikimas; rodoma pasirinkimų suvestinė.
+## Pavyzdiniai duomenys
 
-Viršuje — eigos juosta; galima grįžti atgal, įvesti duomenys išlieka. Laukai tikrinami kiekviename žingsnyje.
+`js/config.js` reikšmės (telefonas, el. paštas, teritorija, darbo laikas, rekvizitai) yra pavyzdinės. Kol `demo: true`, šalia jų rodoma žymė **Demo**. Įrašę tikrus duomenis, nustatykite `demo: false` — žymės dings. Darbų nuotraukos pažymėtos „Demo“ HTML faile; pakeitę jas savo nuotraukomis, žymes pašalinkite.
 
-**Numatytasis režimas (be serverio):** forma **nesiunčia** duomenų pati. Ji paruošia laišką lankytojo el. pašto programoje adresu iš `js/config.js` ir aiškiai parašo, kad laiškas dar neišsiųstas; galima jį atidaryti dar kartą arba nukopijuoti tekstą.
+## Užklausų siuntimas
 
-**Tiesioginis siuntimas (neprivaloma):** `js/config.js` lauke `formEndpoint` įrašykite formų paslaugos adresą (pvz., Formspree). Tada forma siųs užklausą `POST` (JSON) ir sėkmės pranešimą rodys **tik** gavusi sėkmingą serverio atsakymą. Prieš įjungdami atnaujinkite privatumo politiką ir CSP `connect-src`.
+Abi formos (greitas kontaktas ir išsami forma) be serverio **nesiunčia** duomenų pačios: jos paruošia laišką lankytojo el. pašto programoje ir aiškiai parašo, kad laiškas dar neišsiųstas. Įrašius `formEndpoint` (`js/config.js`), formos siųs `POST` (JSON) ir sėkmę rodys tik gavusios sėkmingą serverio atsakymą. Prieš įjungdami atnaujinkite privatumo politiką ir CSP `connect-src`.
 
 ## Paskelbimas GitHub Pages
 

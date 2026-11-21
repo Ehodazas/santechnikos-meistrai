@@ -216,7 +216,6 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
 
 @media (min-width: 1100px) {
   .menu-toggle, .nav-mobile-foot { display: none; }
-  .header-cta { display: inline-flex; }
   .main-nav { position: static; z-index: auto; display: block; padding: 0; background: none; color: inherit; overflow: visible; clip-path: none; visibility: visible; transition: none; margin-left: auto; }
   .nav-list { display: flex; gap: 4px; }
   .nav-list li { border: 0; }
@@ -231,129 +230,176 @@ code { font-size: .88em; background: rgba(127,127,127,.18); padding: .1em .35em;
 }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; padding-top: 28px; padding-bottom: 56px; }
-.hero-grid { position: relative; display: grid; gap: 24px; }
-.hero-meta { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; color: var(--muted); }
-.hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
-.hero-meta span::before { content: ""; width: 6px; height: 6px; background: var(--accent-bright); }
+/* Kompaktiškas pirmas ekranas: antraštė (didžiausia puslapyje), du keliai, kontaktai. */
+.hero { position: relative; padding-top: 24px; padding-bottom: 40px; }
+.hero-grid { position: relative; display: grid; gap: 20px; }
 .hero-text { container-type: inline-size; min-width: 0; }
 .hero-title {
   font-family: var(--font-head); font-stretch: 75%; font-weight: 850; text-transform: uppercase;
-  font-size: 13vw; font-size: clamp(2rem, min(14cqi, 12.5vh), 9.6rem);
-  line-height: .86; letter-spacing: -0.01em; color: var(--graphite);
+  font-size: 12vw; font-size: clamp(2.4rem, min(12cqi, 9vh), 6.4rem);
+  line-height: .88; letter-spacing: -0.01em; color: var(--graphite);
 }
 .hl { display: block; overflow-y: clip; overflow-x: visible; padding-top: .06em; }
 .hl > span { display: inline-block; }
 .hl-accent { color: var(--accent); }
-.hero-photo { margin: 0; position: relative; background: var(--graphite-2); }
-.hero-photo img { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 30%; filter: saturate(.85) contrast(1.04); }
-.frame-tag { position: absolute; left: 0; bottom: 0; z-index: 1; margin: 0; padding: 8px 12px; background: var(--graphite); color: #fff; }
-.hero-side { display: grid; gap: 24px; }
-.hero-lead { margin: 0; font-size: clamp(1.1rem, 1rem + .45vw, 1.35rem); line-height: 1.45; max-width: 34ch; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.hero-actions .btn { flex: 1 1 220px; }
+.hero-lead { margin: 0; font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem); line-height: 1.45; max-width: 44ch; }
 
-/* „Pradėkite nuo problemos“ — iškart po mygtukais, vamzdžio linija veda žemyn */
-.hero-start {
-  display: inline-flex; align-items: flex-end; gap: 10px; align-self: start; justify-self: start;
-  width: 100%; min-height: 44px; margin-top: 4px; color: var(--graphite); text-decoration: none;
+/* Du keliai */
+.paths { display: grid; gap: 10px; }
+.path {
+  position: relative; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: 14px; align-items: center;
+  min-height: 76px; padding: 14px 16px; text-decoration: none;
+  border: 1.5px solid var(--graphite); color: var(--graphite); background: transparent;
+  transition: background-color .25s, color .25s, border-color .25s;
 }
-.hero-start .hero-pipe { width: 56px; height: 26px; flex-shrink: 0; overflow: visible; fill: none; stroke: var(--accent-bright); stroke-width: 2; }
-.hero-start .label { margin-bottom: -4px; }
-.hero-start .icon { width: 1rem; height: 1rem; margin-bottom: -3px; color: var(--accent-text); transition: transform .3s var(--ease); }
-.hero-start:hover { color: var(--accent-text); }
-.hero-start:hover .icon { transform: translateY(3px); }
+.path-k { grid-row: 1 / span 2; display: grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid currentColor; }
+.path-title { font-family: var(--font-head); font-stretch: 88%; font-weight: 800; font-size: 1.25rem; line-height: 1.1; }
+.path-desc { grid-column: 2; font-size: .92rem; color: var(--muted); line-height: 1.35; }
+.path .icon { grid-column: 3; grid-row: 1 / span 2; width: 1.4em; height: 1.4em; stroke-width: 2; transition: transform .3s var(--ease); }
+.path:hover .icon { transform: translateX(4px); }
+.path--fault { background: var(--accent); border-color: var(--accent); color: #fff; }
+.path--fault .path-desc { color: rgba(255,255,255,.85); }
+.path--fault:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+.path--plan:hover { background: var(--graphite); color: #fff; }
+.path--plan:hover .path-desc { color: var(--muted-dark); }
+
+.hero-photo { margin: 0; position: relative; background: var(--graphite-2); }
+.hero-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: 50% 30%; filter: saturate(.85) contrast(1.04); }
+
+/* Kontaktų juosta */
+.contact-strip { list-style: none; display: grid; gap: 0; border-top: 2px solid var(--line-strong); }
+.contact-strip li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.contact-strip li.cs-phone { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px 0; }
+.contact-strip .cs-phone .btn { flex: 1 1 auto; font-size: 1.1rem; letter-spacing: .02em; }
+.contact-strip .icon { color: var(--accent-text); margin-top: 2px; }
+.contact-strip .label { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+.cs-value { display: block; font-weight: 600; font-size: 1.02rem; }
+
+.demo-badge {
+  display: inline-block; padding: 2px 6px; vertical-align: middle;
+  font-family: var(--font-head); font-stretch: 85%; font-weight: 700; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; line-height: 1.3;
+  color: var(--accent-text); border: 1px solid currentColor;
+}
+.demo-badge--dark { color: var(--accent-bright); }
 
 @media (max-width: 1023px) {
-  /* Telefone: tekstas ir mygtukai pirmiau, nuotrauka po jų */
-  .hero-side { order: 3; }
-  .hero-photo { order: 4; margin-top: 8px; }
-  .hero-photo img { aspect-ratio: 16 / 11; }
+  .hero-photo { order: 9; }
 }
 @media (min-width: 640px) {
-  .hero-actions .btn { flex: 0 0 auto; }
+  .paths { grid-template-columns: 1fr 1fr; }
+  .contact-strip { grid-template-columns: auto 1fr 1fr; column-gap: 28px; }
+  .contact-strip li { border-bottom: 0; }
+  .contact-strip li.cs-phone .btn { flex: 0 0 auto; }
 }
 @media (min-width: 1024px) {
-  .hero { padding-top: 40px; padding-bottom: 72px; }
-  .hero-grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 28px;
-    align-items: end;
-  }
-  /* Technines brėžinio kolonas primenantis tinklelis */
+  .hero { padding-top: 32px; padding-bottom: 48px; }
+  .hero-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; row-gap: 22px; }
   .hero-grid::before {
-    content: ""; position: absolute; inset: -40px var(--gutter) -120px; z-index: -1; pointer-events: none;
+    content: ""; position: absolute; inset: -32px var(--gutter) -48px; z-index: -1; pointer-events: none;
     background: repeating-linear-gradient(90deg, rgba(29,31,34,.055) 0 1px, transparent 1px calc((100% + 24px) / 12));
   }
-  .hero-meta { grid-column: 1 / 9; grid-row: 1; align-self: start; }
-  .hero-text { grid-column: 1 / 9; grid-row: 2; }
-  .hero-photo { grid-column: 9 / 13; grid-row: 1 / 4; align-self: stretch; }
-  .hero-photo img { height: 100%; aspect-ratio: auto; min-height: 520px; }
-  /* Aprašymas viršuje, mygtukai vienoje eilutėje, „Pradėkite nuo problemos“ iškart po jais */
-  .hero-side { grid-column: 1 / 9; grid-row: 3; gap: 20px; }
-  .hero-lead { max-width: 46ch; }
-  .hero-photo img { min-height: 0; }
+  .hero-text { grid-column: 1 / 9; grid-row: 1; }
+  .hero-lead { grid-column: 1 / 8; grid-row: 2; }
+  .paths { grid-column: 1 / 9; grid-row: 3; }
+  .hero-photo { grid-column: 9 / 13; grid-row: 1 / 4; }
+  .hero-photo img { height: 100%; aspect-ratio: auto; }
+  .contact-strip { grid-column: 1 / 13; grid-row: 4; }
 }
 
-/* ---------- Problemų pasirinkimas ---------- */
-.problems { background: var(--graphite); color: #fff; }
-.problems .sec-index { color: var(--muted-dark); }
-.problems .sec-index span { color: var(--accent-bright); }
-.problems .sec-intro { color: var(--muted-dark); }
-.prob-grid { display: grid; gap: 24px; }
-.prob-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); }
+/* ---------- A. Gedimas (problemų pasirinkimas + greitas kontaktas) ---------- */
+.fault { background: var(--graphite); color: #fff; }
+.fault .sec-index { color: var(--muted-dark); }
+.fault .sec-index span { color: var(--accent-bright); }
+.fault .sec-intro { color: var(--muted-dark); }
+.fault-grid { display: grid; gap: 28px; }
+.fault-main { min-width: 0; }
+.prob-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); border-bottom: 0; }
 .prob-tab {
   display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 10px;
-  min-height: 64px; padding: 12px 14px; text-align: left; cursor: pointer;
+  min-height: 60px; padding: 10px 14px; text-align: left; cursor: pointer;
   background: var(--graphite); color: var(--muted-dark); border: 0;
-  font-family: var(--font-head); font-stretch: 85%; font-weight: 700; font-size: 1rem; line-height: 1.15;
+  font-family: var(--font-head); font-stretch: 88%; font-weight: 700; font-size: 1rem; line-height: 1.15;
   transition: background-color .25s, color .25s;
 }
-.prob-tab .icon { display: none; }
-.prob-n {
-  display: grid; place-items: center; width: 28px; height: 28px;
-  border: 1px solid var(--line-dark); font-size: .8rem; color: var(--muted-dark);
-  transition: background-color .25s, border-color .25s, color .25s;
-}
+.prob-n { display: grid; place-items: center; width: 26px; height: 26px; border: 1px solid var(--line-dark); font-size: .8rem; transition: background-color .25s, border-color .25s, color .25s; }
 .prob-tab:hover { color: #fff; background: var(--graphite-2); }
-.prob-tab[aria-selected="true"] { color: #fff; background: var(--graphite-3); box-shadow: inset 3px 0 0 var(--accent-bright); }
+.prob-tab[aria-selected="true"] { color: #fff; background: var(--graphite-2); box-shadow: inset 0 -3px 0 var(--accent-bright); }
 .prob-tab[aria-selected="true"] .prob-n { background: var(--accent); border-color: var(--accent); color: #fff; }
-
 .prob-panel { padding: 24px 18px 26px; background: var(--graphite-2); border: 1px solid var(--line-dark); }
 .prob-panel:focus-visible { outline-offset: -3px; }
-.prob-title { font-stretch: 78%; text-transform: uppercase; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.6rem); line-height: .95; margin-bottom: 22px; }
-.prob-cols { display: grid; gap: 24px; }
+.prob-title { font-stretch: 90%; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem); line-height: 1.05; margin-bottom: 20px; }
+.prob-cols { display: grid; gap: 22px; }
 .prob-sub { color: var(--accent-bright); margin-bottom: 12px; }
 .prob-steps { list-style: none; counter-reset: s; display: grid; gap: 12px; }
 .prob-steps li { counter-increment: s; position: relative; padding-left: 34px; color: #e9e6e0; }
 .prob-steps li::before {
-  content: counter(s); position: absolute; left: 0; top: .1em;
-  width: 22px; height: 22px; display: grid; place-items: center;
+  content: counter(s); position: absolute; left: 0; top: .1em; width: 22px; height: 22px; display: grid; place-items: center;
   font-family: var(--font-head); font-weight: 700; font-size: .78rem; color: var(--graphite); background: var(--accent-bright);
 }
 .prob-work { list-style: none; display: grid; gap: 10px; }
 .prob-work li { position: relative; padding-left: 22px; color: var(--muted-dark); }
 .prob-work li::before { content: ""; position: absolute; left: 0; top: .72em; width: 12px; height: 2px; background: var(--muted-dark); }
-.prob-foot { display: grid; gap: 18px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line-dark); }
-.prob-related { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0; }
+.prob-foot { display: grid; gap: 16px; margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line-dark); }
+.prob-related { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; margin: 0; }
 .prob-related .label { color: var(--muted-dark); width: 100%; }
-.prob-related a { font-family: var(--font-head); font-stretch: 85%; font-weight: 700; color: #fff; text-decoration: underline; text-decoration-color: var(--accent-bright); text-underline-offset: .25em; min-height: 32px; display: inline-flex; align-items: center; }
+.prob-related a { font-family: var(--font-head); font-stretch: 88%; font-weight: 700; color: #fff; text-decoration: underline; text-decoration-color: var(--accent-bright); text-underline-offset: .25em; min-height: 32px; display: inline-flex; align-items: center; }
 .prob-related a:hover { color: var(--accent-bright); }
 .prob-foot .btn { justify-self: start; }
 
+.quick-card { background: var(--white); color: var(--text); border-top: 4px solid var(--accent-bright); padding: 22px 18px 24px; scroll-margin-top: calc(var(--header-h) + 12px); }
+.quick-title { font-stretch: 90%; font-size: 1.6rem; line-height: 1.05; margin-bottom: 16px; color: var(--graphite); }
+.quick-card > .btn { font-size: 1rem; }
+.quick-or { display: flex; align-items: center; gap: 12px; margin: 18px 0 14px; color: var(--muted); font-size: .9rem; }
+.quick-or::before, .quick-or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.quick-form { display: grid; gap: 14px; }
+.quick-form .field input, .quick-form .field select { min-height: 48px; }
+
 @media (min-width: 640px) {
-  .prob-panel { padding: 32px 32px 34px; }
-  .prob-cols { grid-template-columns: 1fr 1fr; gap: 36px; }
-}
-@media (min-width: 1024px) {
-  .prob-grid { grid-template-columns: 4fr 8fr; gap: 0; align-items: stretch; }
-  .prob-list { grid-template-columns: 1fr; align-content: start; border-right: 0; }
-  .prob-tab { grid-template-columns: auto 1fr auto; min-height: 76px; padding: 16px 20px; font-size: 1.15rem; }
-  .prob-tab .icon { display: block; opacity: 0; transform: translateX(-6px); transition: opacity .25s, transform .3s var(--ease); color: var(--accent-bright); }
-  .prob-tab[aria-selected="true"] .icon, .prob-tab:hover .icon { opacity: 1; transform: none; }
-  .prob-panel { height: 100%; padding: 40px 44px; }
+  .prob-list { grid-template-columns: repeat(4, 1fr); }
+  .prob-panel { padding: 30px 30px 32px; }
+  .prob-cols { grid-template-columns: 1fr 1fr; gap: 32px; }
   .prob-foot { grid-template-columns: 1fr auto; align-items: end; }
   .prob-foot .btn { justify-self: end; }
+  .quick-card { padding: 28px 28px 30px; }
 }
+@media (min-width: 1100px) {
+  .fault-grid { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 24px; align-items: start; }
+  .quick-card { position: sticky; top: calc(var(--header-h) + 20px); }
+}
+
+/* ---------- B. Įrengimas (išsami forma) ---------- */
+.plan { background: var(--paper-2); }
+.plan-grid { display: grid; gap: 36px; }
+.plan-sub { margin: 32px 0 12px; color: var(--accent-text); }
+.plan-list { list-style: none; border-top: 2px solid var(--line-strong); }
+.plan-list li { position: relative; padding: 12px 0 12px 22px; border-bottom: 1px solid var(--line); }
+.plan-list li::before { content: ""; position: absolute; left: 0; top: 1.2em; width: 10px; height: 2px; background: var(--accent-bright); }
+@media (min-width: 1024px) {
+  .plan-grid { grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; }
+  .plan-info { position: sticky; top: calc(var(--header-h) + 28px); }
+}
+
+/* ---------- Telefono juosta ekrano apačioje (tik telefonuose) ---------- */
+.callbar { display: none; }
+@media (max-width: 767px) {
+  .callbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 6px;
+    padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+    background: var(--graphite); border-top: 1px solid var(--line-dark);
+  }
+  .callbar .btn { min-height: 48px; padding: 0 8px; font-size: .82rem; gap: 6px; }
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  body.is-locked .callbar { display: none; }
+}
+.btn-line-light { --bg: transparent; --fg: #fff; --bd: rgba(255,255,255,.4); --hbg: #fff; --hbd: #fff; --hfg: var(--graphite); }
+
+/* Antraštėje — telefonas vietoj bendro mygtuko */
+.header-call { display: none; min-height: 44px; letter-spacing: .03em; }
+.nav-mobile-note { margin: 0; color: var(--muted-dark); font-size: .95rem; }
+.nav-mobile-note .demo-badge { color: var(--accent-bright); }
+.footer-call { margin-top: 18px; }
+@media (min-width: 1100px) { .header-call { display: inline-flex; } }
 
 /* ---------- Paslaugų katalogas ---------- */
 .svc-list { border-top: 2px solid var(--line-strong); }
@@ -644,7 +690,7 @@ html:not(.js) .prob-panel + .prob-panel { margin-top: 16px; }
 html:not(.js) .svc-plus, html:not(.js) .acc-icon, html:not(.js) .prob-list, html:not(.js) .wiz-progress, html:not(.js) .wiz-nav [data-next] { display: none; }
 html:not(.js) .wiz-step[hidden] { display: grid !important; margin-top: 28px; }
 html:not(.js) .wiz-nav [data-submit] { display: inline-flex !important; }
-.intro .hero-text, .intro .hero-photo, .intro [data-hero-item] { opacity: 0; }
+.intro .hero-text, .intro .hero-photo { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
@@ -657,7 +703,7 @@ html:not(.js) .wiz-nav [data-submit] { display: inline-flex !important; }
    ========================================================================== */
 .sec-title {
   text-transform: none; font-stretch: 88%; font-weight: 800;
-  font-size: clamp(2.1rem, 1.2rem + 3.4vw, 4.1rem); line-height: 1; letter-spacing: -0.025em;
+  font-size: clamp(1.85rem, 1.1rem + 2.6vw, 3.3rem); line-height: 1.02; letter-spacing: -0.025em;
 }
 .prob-title, .svc-name, .step h3, .shot figcaption strong, .wiz-title, .lightbox-title, .legal h1 {
   text-transform: none; font-stretch: 90%; letter-spacing: -0.02em;
@@ -697,3 +743,5 @@ html:not(.js) .wiz-nav [data-submit] { display: inline-flex !important; }
   .prob-more[open] > summary { margin-bottom: 10px; }
 }
 @media (min-width: 640px) { .prob-more > summary { pointer-events: none; } }
+
+.legal-demo { display: flex; align-items: center; gap: 10px; margin: 0 0 24px; color: var(--muted); }

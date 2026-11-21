@@ -6,7 +6,7 @@
  * (numatytosios reikšmės ten rodomos, jei JavaScript išjungtas).
  */
 window.SITE_CONFIG = {
-  // true — rodomi įspėjimai, kad kontaktai yra pavyzdiniai. Įrašę tikrus duomenis, nustatykite false.
+  // true — prie pavyzdinių duomenų rodoma žymė „Demo“. Įrašę tikrus duomenis, nustatykite false.
   demo: true,
 
   // Telefonas: rodomas tekstas ir numeris tel: nuorodai (be tarpų, su +370).
@@ -16,11 +16,11 @@ window.SITE_CONFIG = {
   // El. paštas — juo bus adresuojami formos laiškai.
   email: "info@jusu-imone.lt",
 
-  serviceArea: "[Nurodykite aptarnaujamą teritoriją]",
-  workingHours: "[Nurodykite darbo laiką]",
+  serviceArea: "Vilnius ir Vilniaus r.",
+  workingHours: "I–V 8–18 val.",
 
   // Rekvizitai poraštėje.
-  legalLine: "[Įmonės pavadinimas], įm. k. [000000000]",
+  legalLine: "UAB „Pavyzdys“, įm. k. 000000000",
 
   // Užklausų siuntimas.
   // Tuščia reikšmė — forma paruošia laišką lankytojo el. pašto programoje (mailto), nieko nesiunčia pati.
